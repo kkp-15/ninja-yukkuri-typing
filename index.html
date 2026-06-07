@@ -985,14 +985,9 @@ function renderTokens() {
       }
       rEl.innerHTML = guideHtml;
     } else {
+      // 未入力：メインの1パターンだけ表示（高さを揃える）
       div.classList.add('pend');
-      if (tok.opts.length > 1) {
-        // 1行目: メイン、2行目以降: サブ（縦積み）
-        rEl.innerHTML = tok.opts[0]
-          + tok.opts.slice(1).map(o => '<span class="rg-sub">' + o + '</span>').join('');
-      } else {
-        rEl.textContent = tok.opts[0];
-      }
+      rEl.textContent = tok.opts[0];
     }
 
     div.appendChild(kEl);
