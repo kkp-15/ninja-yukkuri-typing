@@ -305,6 +305,28 @@ main {
 }
 .miss-count { font-size: 0.9rem; color: #f44336; min-width: 80px; }
 
+/* ローマ字進捗バー */
+.romaji-bar.err {
+  animation: shake 0.28s;
+  background: #fff0ee;
+  border-radius: 8px;
+}
+.romaji-bar {
+  margin-top: 16px;
+  font-family: 'Courier New', monospace;
+  font-size: 1.25rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: center;
+  padding: 10px 8px 4px;
+  border-top: 1px solid #f5ece0;
+  word-break: break-all;
+  line-height: 1.6;
+}
+.rb-done { color: #4CAF50; }
+.rb-curr { color: #FF6B35; border-bottom: 3px solid #FF6B35; padding-bottom: 1px; }
+.rb-rest { color: #ccc; }
+
 .btn-next-wrap { text-align: center; }
 .btn-next {
   display: inline-block;
@@ -464,10 +486,11 @@ footer a:hover { color: white; }
     <div class="sentence-card">
       <div class="card-hint">キーボードで入力してください（ローマ字入力）</div>
       <div class="tokens-row" id="tokens-row"></div>
+      <div class="romaji-bar" id="romaji-bar"></div>
     </div>
 
     <div class="input-row">
-      <div class="input-box" id="input-box">_</div>
+      <div class="input-box" id="input-box" style="display:none"></div>
       <span class="miss-count" id="miss-count"></span>
     </div>
 
@@ -681,6 +704,7 @@ let sentIdx = 0;
 let tokens = [];
 let tokIdx = 0;
 let typed = '';
+let typedHistory = ''; // 完了済みの実際の入力文字列
 let totalMiss = 0;
 let sentMiss = 0;
 let totalKeys = 0;
@@ -704,6 +728,7 @@ function loadSentence() {
   tokIdx = 0;
   typed = '';
   sentMiss = 0;
+  typedHistory = '';
   document.getElementById('btn-next').disabled = true;
   document.getElementById('btn-next').classList.remove('ready');
   document.getElementById('enter-hint').classList.remove('show');
@@ -711,7 +736,7 @@ function loadSentence() {
   document.getElementById('praise').style.animation = 'none';
   updateProgress();
   renderTokens();
-  updateInputBox();
+  updateRomajiBar();
   updateMissCount();
 }
 
@@ -723,10 +748,10 @@ function processKey(key) {
 
   // っ double-consonant shortcut: single consonant completes っ and seeds next token
   if (tok.smallTsu && tok.opts.includes(k) && k.length === 1 && !'aiueo'.includes(k)) {
+    typedHistory += k;
     typed = '';
     tokIdx++;
     totalKeys++;
-    // seed next token if the same consonant is its prefix
     if (tokIdx < tokens.length) {
       const nextTok = tokens[tokIdx];
       if (nextTok.opts.some(o => o.startsWith(k))) {
@@ -734,7 +759,7 @@ function processKey(key) {
       }
     }
     renderTokens();
-    updateInputBox();
+    updateRomajiBar();
     if (tokIdx >= tokens.length) onDone();
     return;
   }
@@ -742,11 +767,12 @@ function processKey(key) {
   // Check complete match
   for (const opt of tok.opts) {
     if (opt === attempt) {
+      typedHistory += attempt;
       typed = '';
       tokIdx++;
       totalKeys++;
       renderTokens();
-      updateInputBox();
+      updateRomajiBar();
       if (tokIdx >= tokens.length) onDone();
       return;
     }
@@ -758,7 +784,7 @@ function processKey(key) {
       typed = attempt;
       totalKeys++;
       renderTokens();
-      updateInputBox();
+      updateRomajiBar();
       return;
     }
   }
@@ -767,11 +793,11 @@ function processKey(key) {
   totalMiss++;
   sentMiss++;
   updateMissCount();
-  const box = document.getElementById('input-box');
-  box.classList.remove('err');
-  void box.offsetWidth; // reflow
-  box.classList.add('err');
-  setTimeout(() => box.classList.remove('err'), 280);
+  const bar = document.getElementById('romaji-bar');
+  bar.classList.remove('err');
+  void bar.offsetWidth;
+  bar.classList.add('err');
+  setTimeout(() => bar.classList.remove('err'), 280);
 }
 
 function onDone() {
@@ -858,8 +884,27 @@ function renderTokens() {
   });
 }
 
+function updateRomajiBar() {
+  // 完了済み（実際に打った文字）
+  const done = typedHistory;
+  // 現在打っている途中
+  const curr = typed;
+  // 現在トークンの残り
+  const currTok = tokIdx < tokens.length ? tokens[tokIdx] : null;
+  const currLeft = currTok
+    ? (currTok.opts.find(o => o.startsWith(typed)) || currTok.opts[0]).slice(typed.length)
+    : '';
+  // 未来トークンの期待ローマ字
+  const future = tokens.slice(tokIdx + 1).map(t => t.opts[0]).join('');
+
+  document.getElementById('romaji-bar').innerHTML =
+    '<span class="rb-done">' + done + '</span>' +
+    '<span class="rb-curr">' + curr + '</span>' +
+    '<span class="rb-rest">' + currLeft + future + '</span>';
+}
+
 function updateInputBox() {
-  document.getElementById('input-box').textContent = typed || '_';
+  // エラー表示用（非表示だが関数は残す）
 }
 
 function updateMissCount() {
