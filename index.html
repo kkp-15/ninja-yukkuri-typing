@@ -294,21 +294,34 @@ main {
 }
 .miss-count { font-size: 0.9rem; color: #f44336; min-width: 80px; }
 
+.btn-next-wrap { text-align: center; }
 .btn-next {
-  display: block;
-  margin: 0 auto;
-  padding: 14px 44px;
+  display: inline-block;
+  padding: 16px 52px;
   background: #FF6B35;
   color: white;
   border: none;
   border-radius: 40px;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.12s, box-shadow 0.12s, opacity 0.2s;
 }
 .btn-next:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 5px 14px rgba(255,107,53,0.3); }
 .btn-next:disabled { background: #ddd; color: #aaa; cursor: default; }
+.btn-next.ready { animation: pulse 0.5s ease; }
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.08); box-shadow: 0 6px 20px rgba(255,107,53,0.45); }
+  100% { transform: scale(1); }
+}
+.enter-hint {
+  margin-top: 8px;
+  font-size: 0.82rem;
+  color: #bbb;
+  display: none;
+}
+.enter-hint.show { display: block; }
 
 /* ===== RESULT SCREEN ===== */
 .result-wrap { text-align: center; }
@@ -447,9 +460,12 @@ footer a:hover { color: white; }
       <span class="miss-count" id="miss-count"></span>
     </div>
 
-    <button class="btn-next" id="btn-next" disabled onclick="nextSentence()">
-      つぎへ →
-    </button>
+    <div class="btn-next-wrap">
+      <button class="btn-next" id="btn-next" disabled onclick="nextSentence()">
+        つぎへ →
+      </button>
+      <div class="enter-hint" id="enter-hint">Enterキーでも次へ進めます</div>
+    </div>
   </div>
 
   <!-- ======= RESULT SCREEN ======= -->
@@ -678,6 +694,8 @@ function loadSentence() {
   typed = '';
   sentMiss = 0;
   document.getElementById('btn-next').disabled = true;
+  document.getElementById('btn-next').classList.remove('ready');
+  document.getElementById('enter-hint').classList.remove('show');
   document.getElementById('praise').textContent = '';
   document.getElementById('praise').style.animation = 'none';
   updateProgress();
@@ -753,7 +771,11 @@ function onDone() {
   el.textContent = PRAISE_LIST[Math.floor(Math.random() * PRAISE_LIST.length)];
   const btn = document.getElementById('btn-next');
   btn.disabled = false;
+  btn.classList.remove('ready');
+  void btn.offsetWidth;
+  btn.classList.add('ready');
   btn.focus();
+  document.getElementById('enter-hint').classList.add('show');
 }
 
 function nextSentence() {
