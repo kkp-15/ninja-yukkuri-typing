@@ -239,15 +239,15 @@ main {
   transition: border-color 0.1s;
 }
 .tok .kana {
-  font-size: 2rem;
+  font-size: 2.6rem;
   line-height: 1.1;
   font-weight: bold;
   transition: color 0.1s;
 }
 .tok .rguide {
-  font-size: 0.72rem;
+  font-size: 0.95rem;
   font-family: 'Courier New', monospace;
-  min-height: 16px;
+  min-height: 20px;
   letter-spacing: 0.5px;
 }
 /* states */
@@ -259,6 +259,7 @@ main {
 .tok.pend .rguide { color: #bbb; }
 .rg-done  { color: #4CAF50; font-weight: bold; }
 .rg-left  { color: #bbb; }
+.rg-alt   { color: #ddd; font-size: 0.82rem; }
 
 /* input area */
 .input-row {
@@ -821,13 +822,21 @@ function renderTokens() {
       rEl.textContent = tok.opts[0];
     } else if (idx === tokIdx) {
       div.classList.add('curr');
-      const display = tok.opts[0];
+      // どのoptionを入力中か特定
+      const activeOpt = tok.opts.find(o => o.startsWith(typed)) || tok.opts[0];
       const done = typed;
-      const left = display.slice(done.length);
-      rEl.innerHTML = '<span class="rg-done">' + done + '</span><span class="rg-left">' + left + '</span>';
+      const left = activeOpt.slice(done.length);
+      // 残りのoption一覧（現在入力中以外）
+      const others = tok.opts.filter(o => o !== activeOpt);
+      let guideHtml = '<span class="rg-done">' + done + '</span><span class="rg-left">' + left + '</span>';
+      if (!typed && others.length) {
+        guideHtml += '<span class="rg-alt"> / ' + others.join(' / ') + '</span>';
+      }
+      rEl.innerHTML = guideHtml;
     } else {
       div.classList.add('pend');
-      rEl.textContent = tok.opts[0];
+      // 複数ある場合は「si / shi」形式で表示
+      rEl.textContent = tok.opts.length > 1 ? tok.opts.join(' / ') : tok.opts[0];
     }
 
     div.appendChild(kEl);
