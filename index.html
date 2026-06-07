@@ -225,18 +225,21 @@ main {
 .tokens-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 8px;
+  gap: 8px 12px;
   justify-content: center;
-  align-items: flex-end;
+  align-items: stretch;
   width: 100%;
+  padding: 12px 0 8px;
 }
 .tok {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 4px 2px;
+  justify-content: flex-end;
+  padding: 6px 4px 8px;
   border-bottom: 3px solid transparent;
   transition: border-color 0.1s;
+  min-height: 90px;
 }
 .tok .kana {
   font-size: 2.6rem;
@@ -248,10 +251,14 @@ main {
   font-size: 0.95rem;
   font-family: 'Courier New', monospace;
   font-weight: bold;
-  min-height: 20px;
+  height: 36px;
   letter-spacing: 0.5px;
   line-height: 1.5;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 .rg-sub {
   display: block;
