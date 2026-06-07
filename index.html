@@ -410,6 +410,75 @@ footer {
 footer a { color: #ddd; }
 footer a:hover { color: white; }
 
+/* ===== ROMAJI CHART ===== */
+.chart-wrap {
+  margin-top: 20px;
+  border: 1px solid #FFCC80;
+  border-radius: 12px;
+  background: #FFF3E0;
+  overflow: hidden;
+}
+.chart-wrap summary {
+  padding: 14px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #FF6B35;
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+}
+.chart-wrap summary::before {
+  content: '▶ ';
+  font-size: 0.8rem;
+}
+.chart-wrap[open] summary::before { content: '▼ '; }
+.chart-inner {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-x: auto;
+}
+.romaji-chart {
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  width: 100%;
+  min-width: 500px;
+}
+.romaji-chart caption {
+  text-align: left;
+  font-size: 0.82rem;
+  font-weight: bold;
+  color: #888;
+  margin-bottom: 4px;
+  caption-side: top;
+}
+.romaji-chart th {
+  background: #FF6B35;
+  color: white;
+  padding: 6px 10px;
+  text-align: center;
+  font-size: 0.8rem;
+}
+.romaji-chart td {
+  padding: 6px 10px;
+  text-align: center;
+  border-bottom: 1px solid #f0e0cc;
+}
+.romaji-chart td:nth-child(odd) {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #444;
+  background: #fff;
+}
+.romaji-chart td:nth-child(even) {
+  font-family: 'Courier New', monospace;
+  color: #FF6B35;
+  font-weight: bold;
+  background: #fffaf5;
+}
+.romaji-chart tr:last-child td { border-bottom: none; }
+
 /* ===== UTILS ===== */
 .hidden { display: none !important; }
 </style>
@@ -469,6 +538,54 @@ footer a:hover { color: white; }
         <strong>「しゃ」「ちょ」</strong> などは 2文字まとめて入力します。（例：しょ → sho）
       </p>
     </div>
+
+    <details class="chart-wrap">
+      <summary>ローマ字一覧表を見る</summary>
+      <div class="chart-inner">
+        <table class="romaji-chart">
+          <thead><tr><th>かな</th><th>入力</th><th>かな</th><th>入力</th><th>かな</th><th>入力</th><th>かな</th><th>入力</th><th>かな</th><th>入力</th></tr></thead>
+          <tbody>
+            <tr><td>あ</td><td>a</td><td>か</td><td>ka</td><td>さ</td><td>sa</td><td>た</td><td>ta</td><td>な</td><td>na</td></tr>
+            <tr><td>い</td><td>i</td><td>き</td><td>ki</td><td>し</td><td>si / shi</td><td>ち</td><td>ti / chi</td><td>に</td><td>ni</td></tr>
+            <tr><td>う</td><td>u</td><td>く</td><td>ku</td><td>す</td><td>su</td><td>つ</td><td>tu / tsu</td><td>ぬ</td><td>nu</td></tr>
+            <tr><td>え</td><td>e</td><td>け</td><td>ke</td><td>せ</td><td>se</td><td>て</td><td>te</td><td>ね</td><td>ne</td></tr>
+            <tr><td>お</td><td>o</td><td>こ</td><td>ko</td><td>そ</td><td>so</td><td>と</td><td>to</td><td>の</td><td>no</td></tr>
+          </tbody>
+        </table>
+        <table class="romaji-chart">
+          <thead><tr><th>かな</th><th>入力</th><th>かな</th><th>入力</th><th>かな</th><th>入力</th><th>かな</th><th>入力</th><th>かな</th><th>入力</th></tr></thead>
+          <tbody>
+            <tr><td>は</td><td>ha</td><td>ま</td><td>ma</td><td>や</td><td>ya</td><td>ら</td><td>ra</td><td>わ</td><td>wa</td></tr>
+            <tr><td>ひ</td><td>hi</td><td>み</td><td>mi</td><td>　</td><td>　</td><td>り</td><td>ri</td><td>を</td><td>wo</td></tr>
+            <tr><td>ふ</td><td>fu</td><td>む</td><td>mu</td><td>ゆ</td><td>yu</td><td>る</td><td>ru</td><td>ん</td><td>n / nn</td></tr>
+            <tr><td>へ</td><td>he</td><td>め</td><td>me</td><td>　</td><td>　</td><td>れ</td><td>re</td><td>っ</td><td>xtu / ltu</td></tr>
+            <tr><td>ほ</td><td>ho</td><td>も</td><td>mo</td><td>よ</td><td>yo</td><td>ろ</td><td>ro</td><td>　</td><td>　</td></tr>
+          </tbody>
+        </table>
+        <table class="romaji-chart">
+          <thead><tr><th>かな</th><th>入力</th><th>かな</th><th>入力</th><th>かな</th><th>入力</th><th>かな</th><th>入力</th><th>かな</th><th>入力</th></tr></thead>
+          <tbody>
+            <tr><td>が</td><td>ga</td><td>ざ</td><td>za</td><td>だ</td><td>da</td><td>ば</td><td>ba</td><td>ぱ</td><td>pa</td></tr>
+            <tr><td>ぎ</td><td>gi</td><td>じ</td><td>ji / zi</td><td>ぢ</td><td>di</td><td>び</td><td>bi</td><td>ぴ</td><td>pi</td></tr>
+            <tr><td>ぐ</td><td>gu</td><td>ず</td><td>zu</td><td>づ</td><td>du</td><td>ぶ</td><td>bu</td><td>ぷ</td><td>pu</td></tr>
+            <tr><td>げ</td><td>ge</td><td>ぜ</td><td>ze</td><td>で</td><td>de</td><td>べ</td><td>be</td><td>ぺ</td><td>pe</td></tr>
+            <tr><td>ご</td><td>go</td><td>ぞ</td><td>zo</td><td>ど</td><td>do</td><td>ぼ</td><td>bo</td><td>ぽ</td><td>po</td></tr>
+          </tbody>
+        </table>
+        <table class="romaji-chart">
+          <caption>拗音（2文字まとめて入力）</caption>
+          <thead><tr><th>かな</th><th>入力</th><th>かな</th><th>入力</th><th>かな</th><th>入力</th><th>かな</th><th>入力</th></tr></thead>
+          <tbody>
+            <tr><td>きゃ</td><td>kya</td><td>しゃ</td><td>sha / sya</td><td>ちゃ</td><td>cha / tya</td><td>にゃ</td><td>nya</td></tr>
+            <tr><td>きゅ</td><td>kyu</td><td>しゅ</td><td>shu / syu</td><td>ちゅ</td><td>chu / tyu</td><td>にゅ</td><td>nyu</td></tr>
+            <tr><td>きょ</td><td>kyo</td><td>しょ</td><td>sho / syo</td><td>ちょ</td><td>cho / tyo</td><td>にょ</td><td>nyo</td></tr>
+            <tr><td>じゃ</td><td>ja / jya</td><td>りゃ</td><td>rya</td><td>ひゃ</td><td>hya</td><td>みゃ</td><td>mya</td></tr>
+            <tr><td>じゅ</td><td>ju / jyu</td><td>りゅ</td><td>ryu</td><td>ひゅ</td><td>hyu</td><td>みゅ</td><td>myu</td></tr>
+            <tr><td>じょ</td><td>jo / jyo</td><td>りょ</td><td>ryo</td><td>ひょ</td><td>hyo</td><td>みょ</td><td>myo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
   </div>
 
   <!-- ======= PRACTICE SCREEN ======= -->
