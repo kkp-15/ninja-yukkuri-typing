@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ゆっくりタイピング｜中高年・初心者向けタイピング練習｜無料・登録不要</title>
+<meta name="description" content="時間制限なし！焦らずゆっくり練習できる、パソコン初心者・中高年の方向けの無料タイピング練習サイト。ローマ字ガイド付きで3段階の難易度から選べます。">
+<meta name="theme-color" content="#FF6B35">
+<link rel="canonical" href="https://yukkuri-typing.kkpwebninja.com/">
+<!-- WEBNINJA_UNIFIED_FAVICON -->
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+<meta property="og:title" content="ゆっくりタイピング｜中高年・初心者向け">
+<meta property="og:description" content="時間制限なし！焦らずゆっくり練習できる無料タイピングサイト。中高年・初心者向け。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yukkuri-typing.kkpwebninja.com/">
+<meta property="og:site_name" content="ゆっくりタイピング">
+<meta property="og:image" content="https://yukkuri-typing.kkpwebninja.com/ogp.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://yukkuri-typing.kkpwebninja.com/ogp.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "ゆっくりタイピング",
+  "url": "https://yukkuri-typing.kkpwebninja.com/",
+  "description": "時間制限なし！焦らずゆっくり練習できる、パソコン初心者・中高年向けの無料タイピング練習サイト",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type":"Offer","price":"0","priceCurrency":"JPY"},
+  "author": {"@type":"Organization","name":"web忍者の砦"}
+}
+</script>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LM85GJN0L"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LM85GJN0L');
+</script>
+
+<!-- AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1298304917726270" crossorigin="anonymous"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Hiragino Maru Gothic ProN', 'BIZ UDPGothic', 'Meiryo', sans-serif;
+  background: #FFF8F0;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+a { color: inherit; text-decoration: none; }
+
+/* ===== HEADER ===== */
+header {
+  background: #FF6B35;
+  color: white;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+header .site-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+}
+
+/* ===== MAIN ===== */
+main {
+  flex: 1;
+  padding: 28px 16px 40px;
+  max-width: 860px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ===== START SCREEN ===== */
+.hero-title {
+  font-size: 2.4rem;
+  color: #FF6B35;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.hero-sub {
+  font-size: 1.05rem;
+  color: #666;
+  text-align: center;
+  line-height: 1.9;
+  margin-bottom: 32px;
+}
+.feature-row {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+.feature-item {
+  background: white;
+  border-radius: 12px;
+  padding: 16px 22px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  text-align: center;
+  min-width: 160px;
+}
+.feature-item .fi-icon { font-size: 2rem; margin-bottom: 6px; }
+.feature-item .fi-text { font-size: 0.9rem; color: #555; font-weight: bold; }
+.level-heading {
+  text-align: center;
+  font-size: 1.15rem;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 18px;
+}
+.level-btns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.btn-lv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 28px;
+  border-radius: 40px;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  min-width: 140px;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.btn-lv:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.15); }
+.btn-lv:active { transform: translateY(0); }
+.btn-lv .lv-name { font-size: 1.1rem; }
+.btn-lv .lv-desc { font-size: 0.8rem; margin-top: 4px; opacity: 0.85; }
+.lv-easy  { background: #4CAF50; color: white; }
+.lv-normal{ background: #FF6B35; color: white; }
+.lv-hard  { background: #7B52A6; color: white; }
+
+/* ===== RULES BOX ===== */
+.rules-box {
+  background: #FFF3E0;
+  border: 1px solid #FFCC80;
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.8;
+}
+.rules-box strong { color: #FF6B35; }
+.rules-box h3 { font-size: 0.95rem; margin-bottom: 8px; color: #444; }
+
+/* ===== PRACTICE SCREEN ===== */
+.prac-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.prog-text { font-size: 0.95rem; color: #666; }
+.prog-bar-outer {
+  flex: 1;
+  max-width: 240px;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.prog-bar-inner {
+  height: 100%;
+  background: #FF6B35;
+  border-radius: 10px;
+  transition: width 0.35s;
+}
+.btn-change {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.btn-change:hover { color: #666; }
+
+.praise {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #FF6B35;
+  min-height: 42px;
+  margin-bottom: 10px;
+  animation: popIn 0.35s;
+}
+@keyframes popIn {
+  from { opacity:0; transform:scale(0.85); }
+  to   { opacity:1; transform:scale(1); }
+}
+
+.sentence-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px 16px 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  margin-bottom: 18px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.card-hint { font-size: 0.8rem; color: #bbb; align-self: flex-start; }
+.tokens-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+}
+.tok {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 2px;
+  border-bottom: 3px solid transparent;
+  transition: border-color 0.1s;
+}
+.tok .kana {
+  font-size: 2rem;
+  line-height: 1.1;
+  font-weight: bold;
+  transition: color 0.1s;
+}
+.tok .rguide {
+  font-size: 0.72rem;
+  font-family: 'Courier New', monospace;
+  min-height: 16px;
+  letter-spacing: 0.5px;
+}
+/* states */
+.tok.done .kana  { color: #ccc; }
+.tok.done .rguide { color: #ccc; }
+.tok.curr .kana  { color: #FF6B35; }
+.tok.curr        { border-bottom-color: #FF6B35; }
+.tok.pend .kana  { color: #444; }
+.tok.pend .rguide { color: #bbb; }
+.rg-done  { color: #4CAF50; font-weight: bold; }
+.rg-left  { color: #bbb; }
+
+/* input area */
+.input-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.input-box {
+  font-family: 'Courier New', monospace;
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 8px 24px;
+  min-width: 160px;
+  text-align: center;
+  color: #333;
+  transition: border-color 0.15s, background 0.15s;
+}
+.input-box.err {
+  border-color: #f44336;
+  background: #fff3f3;
+  animation: shake 0.28s;
+}
+@keyframes shake {
+  0%,100% { transform:translateX(0); }
+  25% { transform:translateX(-6px); }
+  75% { transform:translateX(6px); }
+}
+.miss-count { font-size: 0.9rem; color: #f44336; min-width: 80px; }
+
+.btn-next {
+  display: block;
+  margin: 0 auto;
+  padding: 14px 44px;
+  background: #FF6B35;
+  color: white;
+  border: none;
+  border-radius: 40px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.12s, box-shadow 0.12s, opacity 0.2s;
+}
+.btn-next:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 5px 14px rgba(255,107,53,0.3); }
+.btn-next:disabled { background: #ddd; color: #aaa; cursor: default; }
+
+/* ===== RESULT SCREEN ===== */
+.result-wrap { text-align: center; }
+.result-title { font-size: 2rem; font-weight: bold; color: #FF6B35; margin-bottom: 6px; }
+.result-sub { font-size: 1rem; color: #777; margin-bottom: 28px; }
+.result-cards {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.rc {
+  background: white;
+  border-radius: 12px;
+  padding: 18px 28px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  min-width: 140px;
+}
+.rc .rc-label { font-size: 0.85rem; color: #999; margin-bottom: 4px; }
+.rc .rc-val   { font-size: 2.2rem; font-weight: bold; color: #FF6B35; }
+.rc .rc-unit  { font-size: 0.8rem; color: #999; }
+.result-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn-retry {
+  padding: 13px 32px;
+  background: #FF6B35;
+  color: white;
+  border: none;
+  border-radius: 40px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn-back {
+  padding: 13px 32px;
+  background: white;
+  color: #FF6B35;
+  border: 2px solid #FF6B35;
+  border-radius: 40px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: #444;
+  color: #aaa;
+  text-align: center;
+  padding: 16px;
+  font-size: 0.82rem;
+}
+footer a { color: #ddd; }
+footer a:hover { color: white; }
+
+/* ===== UTILS ===== */
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="site-name">ゆっくりタイピング</span>
+</header>
+
+<main>
+
+  <!-- ======= START SCREEN ======= -->
+  <div id="scr-start">
+    <h1 class="hero-title">ゆっくりタイピング</h1>
+    <p class="hero-sub">
+      時間制限なし。焦らず自分のペースで練習できる<br>
+      パソコン初心者・中高年の方向けの無料タイピングサイトです。
+    </p>
+    <div class="feature-row">
+      <div class="feature-item">
+        <div class="fi-icon">⏰</div>
+        <div class="fi-text">時間制限なし</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon">📖</div>
+        <div class="fi-text">ローマ字ガイド付き</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon">🎯</div>
+        <div class="fi-text">3段階の難しさ</div>
+      </div>
+    </div>
+
+    <p class="level-heading">難しさを選んでください</p>
+    <div class="level-btns">
+      <button class="btn-lv lv-easy" onclick="startGame('easy')">
+        <span class="lv-name">やさしい</span>
+        <span class="lv-desc">短い単語から始める</span>
+      </button>
+      <button class="btn-lv lv-normal" onclick="startGame('normal')">
+        <span class="lv-name">ふつう</span>
+        <span class="lv-desc">日常のあいさつ文</span>
+      </button>
+      <button class="btn-lv lv-hard" onclick="startGame('hard')">
+        <span class="lv-name">むずかしい</span>
+        <span class="lv-desc">ことわざ・長い文章</span>
+      </button>
+    </div>
+
+    <div class="rules-box">
+      <h3>入力ルール</h3>
+      <p>
+        ローマ字入力で打ちます。画面に表示されたひらがなをキーボードで入力してください。<br>
+        <strong>「っ」</strong> は <strong>xtu</strong> または <strong>ltu</strong> と入力します。（例：きって → ki xtu te）<br>
+        <strong>「ん」</strong> は <strong>nn</strong> と入力します（次が母音のとき）。それ以外は <strong>n</strong> 1つでもOK。<br>
+        <strong>「しゃ」「ちょ」</strong> などは 2文字まとめて入力します。（例：しょ → sho）
+      </p>
+    </div>
+  </div>
+
+  <!-- ======= PRACTICE SCREEN ======= -->
+  <div id="scr-prac" class="hidden">
+    <div class="prac-header">
+      <span class="prog-text" id="prog-text">1 / 10</span>
+      <div class="prog-bar-outer">
+        <div class="prog-bar-inner" id="prog-bar" style="width:0%"></div>
+      </div>
+      <button class="btn-change" onclick="goStart()">レベル変更</button>
+    </div>
+
+    <div class="praise" id="praise"></div>
+
+    <div class="sentence-card">
+      <div class="card-hint">キーボードで入力してください（ローマ字入力）</div>
+      <div class="tokens-row" id="tokens-row"></div>
+    </div>
+
+    <div class="input-row">
+      <div class="input-box" id="input-box">_</div>
+      <span class="miss-count" id="miss-count"></span>
+    </div>
+
+    <button class="btn-next" id="btn-next" disabled onclick="nextSentence()">
+      つぎへ →
+    </button>
+  </div>
+
+  <!-- ======= RESULT SCREEN ======= -->
+  <div id="scr-result" class="hidden">
+    <div class="result-wrap">
+      <div class="result-title">おつかれさまでした！</div>
+      <p class="result-sub" id="result-sub">全10問完了しました！</p>
+      <div class="result-cards">
+        <div class="rc">
+          <div class="rc-label">かかった時間</div>
+          <div class="rc-val" id="r-time">0</div>
+          <div class="rc-unit">秒</div>
+        </div>
+        <div class="rc">
+          <div class="rc-label">ミスの回数</div>
+          <div class="rc-val" id="r-miss">0</div>
+          <div class="rc-unit">回</div>
+        </div>
+        <div class="rc">
+          <div class="rc-label">せいかくさ</div>
+          <div class="rc-val" id="r-acc">100</div>
+          <div class="rc-unit">%</div>
+        </div>
+      </div>
+      <div class="result-btns">
+        <button class="btn-retry" onclick="retryGame()">もういちど</button>
+        <button class="btn-back" onclick="goStart()">レベルをかえる</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- WEBNINJA_UNIFIED_FOOTER -->
+<footer style="text-align:center;padding:2rem 1rem 2.5rem;font-size:0.78rem;color:#94a3b8;line-height:2;border-top:1px solid #f0e6d2;margin-top:2.5rem;background:#fffcf7;">
+  <div style="font-weight:800;color:#8b6b3d;font-size:0.85rem;margin-bottom:0.4rem;">web忍者の砦</div>
+  <div>
+    <a href="https://kkpwebninja.com/" target="_blank" rel="noopener" style="color:#8b6b3d;text-decoration:none;margin:0 0.5rem;">本丸トップ</a>·
+    <a href="https://privacypolicy.kkpwebninja.com/" target="_blank" rel="noopener" style="color:#8b6b3d;text-decoration:none;margin:0 0.5rem;">プライバシーポリシー</a>·
+    <a href="https://kkpwebninja.com/otoiawase" target="_blank" rel="noopener" style="color:#8b6b3d;text-decoration:none;margin:0 0.5rem;">お問い合わせ</a>·
+    <a href="https://x.com/kkp_webninja" target="_blank" rel="noopener" style="color:#8b6b3d;text-decoration:none;margin:0 0.5rem;">@kkp_webninja</a>
+  </div>
+  <div style="margin-top:0.5rem;color:#bfa97a;">© 2025-2026 web忍者の砦</div>
+</footer>
+
+<script>
+// ==================== SENTENCE DATA ====================
+const SENTENCES = {
+  easy: [
+    'あさひ',
+    'きれい',
+    'おそら',
+    'たのしい',
+    'やさしい',
+    'あたたかい',
+    'しずかなよる',
+    'あおいうみ',
+    'たかいやま',
+    'さわやかなかぜ',
+  ],
+  normal: [
+    'おはようございます',
+    'ありがとうございます',
+    'よろしくおねがいします',
+    'おつかれさまでした',
+    'きょうはいいてんきですね',
+    'ほんをよむのがすきです',
+    'まいにちすこしずつれんしゅうします',
+    'がんばることがたいせつです',
+    'こんにちはよいおてんきですね',
+    'ともだちとたのしくあそびました',
+  ],
+  hard: [
+    'いしのうえにもさんねん',
+    'ちりもつもればやまとなる',
+    'はやおきはさんもんのとく',
+    'のどもとすぎればあつさをわすれる',
+    'あしたはあしたのかぜがふく',
+    'はじめのいっぽがいちばんたいへん',
+    'けいぞくはちからなり',
+    'ひとのふりみてわがふりなおせ',
+    'なせばなるなさねばならぬなにごとも',
+    'まいにちすこしずつがんばっています',
+  ],
+};
+
+const PRAISE_LIST = [
+  'すばらしい！', 'よくできました！', 'かんぺき！',
+  'その調子！', 'じょうず！', 'がんばってます！',
+  'すごい！', 'いいですね！', 'ナイス！',
+  'どんどん上手になっています！',
+];
+
+// ==================== ROMAJI ENGINE ====================
+const COMPOUND = {
+  'きゃ':['kya'],'きゅ':['kyu'],'きょ':['kyo'],
+  'しゃ':['sha','sya'],'しゅ':['shu','syu'],'しょ':['sho','syo'],
+  'ちゃ':['cha','cya','tya'],'ちゅ':['chu','cyu','tyu'],'ちょ':['cho','cyo','tyo'],
+  'にゃ':['nya'],'にゅ':['nyu'],'にょ':['nyo'],
+  'ひゃ':['hya'],'ひゅ':['hyu'],'ひょ':['hyo'],
+  'みゃ':['mya'],'みゅ':['myu'],'みょ':['myo'],
+  'りゃ':['rya'],'りゅ':['ryu'],'りょ':['ryo'],
+  'ぎゃ':['gya'],'ぎゅ':['gyu'],'ぎょ':['gyo'],
+  'じゃ':['ja','zya','jya'],'じゅ':['ju','zyu','jyu'],'じょ':['jo','zyo','jyo'],
+  'びゃ':['bya'],'びゅ':['byu'],'びょ':['byo'],
+  'ぴゃ':['pya'],'ぴゅ':['pyu'],'ぴょ':['pyo'],
+};
+const SINGLE = {
+  'あ':['a'],'い':['i'],'う':['u'],'え':['e'],'お':['o'],
+  'か':['ka'],'き':['ki'],'く':['ku'],'け':['ke'],'こ':['ko'],
+  'さ':['sa'],'し':['si','shi'],'す':['su'],'せ':['se'],'そ':['so'],
+  'た':['ta'],'ち':['ti','chi'],'つ':['tu','tsu'],'て':['te'],'と':['to'],
+  'な':['na'],'に':['ni'],'ぬ':['nu'],'ね':['ne'],'の':['no'],
+  'は':['ha'],'ひ':['hi'],'ふ':['fu','hu'],'へ':['he'],'ほ':['ho'],
+  'ま':['ma'],'み':['mi'],'む':['mu'],'め':['me'],'も':['mo'],
+  'や':['ya'],'ゆ':['yu'],'よ':['yo'],
+  'ら':['ra'],'り':['ri'],'る':['ru'],'れ':['re'],'ろ':['ro'],
+  'わ':['wa'],'を':['wo'],'ん':['nn'],
+  'が':['ga'],'ぎ':['gi'],'ぐ':['gu'],'げ':['ge'],'ご':['go'],
+  'ざ':['za'],'じ':['zi','ji'],'ず':['zu'],'ぜ':['ze'],'ぞ':['zo'],
+  'だ':['da'],'ぢ':['di'],'づ':['du','dzu'],'で':['de'],'ど':['do'],
+  'ば':['ba'],'び':['bi'],'ぶ':['bu'],'べ':['be'],'ぼ':['bo'],
+  'ぱ':['pa'],'ぴ':['pi'],'ぷ':['pu'],'ぺ':['pe'],'ぽ':['po'],
+  'ー':['-'],'、':[','],'。':['.'],'！':['!'],'？':['?'],
+};
+const SMALL_KANA = new Set(['ぁ','ぃ','ぅ','ぇ','ぉ','っ','ゃ','ゅ','ょ','ゎ']);
+const VOWELS = new Set(['あ','い','う','え','お','ぁ','ぃ','ぅ','ぇ','ぉ']);
+const NA_ROW = new Set(['な','に','ぬ','ね','の']);
+const YA_ROW = new Set(['や','ゆ','よ']);
+const WA_ROW = new Set(['わ','を','ん']);
+
+function needDoubleN(nextKana) {
+  if (!nextKana) return true;
+  if (VOWELS.has(nextKana)) return true;
+  if (NA_ROW.has(nextKana)) return true;
+  if (YA_ROW.has(nextKana)) return true;
+  if (WA_ROW.has(nextKana)) return true;
+  return false;
+}
+
+function getNextOpts(text, i) {
+  if (i >= text.length) return null;
+  const ch = text[i];
+  const n = i + 1 < text.length ? text[i+1] : '';
+  if (n && SMALL_KANA.has(n) && COMPOUND[ch + n]) return COMPOUND[ch + n];
+  return SINGLE[ch] || null;
+}
+
+function tokenize(text) {
+  const tokens = [];
+  let i = 0;
+  while (i < text.length) {
+    const ch = text[i];
+    const next = i + 1 < text.length ? text[i + 1] : '';
+
+    // 拗音（compound kana）
+    if (next && SMALL_KANA.has(next) && COMPOUND[ch + next]) {
+      tokens.push({ kana: ch + next, opts: COMPOUND[ch + next].slice() });
+      i += 2;
+      continue;
+    }
+
+    // っ
+    if (ch === 'っ') {
+      let opts = ['xtu', 'ltu'];
+      const nextOpts = getNextOpts(text, i + 1);
+      if (nextOpts) {
+        const doubled = [...new Set(
+          nextOpts.map(o => o[0]).filter(c => !'aiueo'.includes(c)).map(c => c + c)
+        )];
+        if (doubled.length) opts = [...doubled, 'xtu', 'ltu'];
+      }
+      tokens.push({ kana: 'っ', opts, smallTsu: true });
+      i++;
+      continue;
+    }
+
+    // ん
+    if (ch === 'ん') {
+      const double = needDoubleN(next);
+      tokens.push({ kana: 'ん', opts: double ? ['nn'] : ['nn', 'n'] });
+      i++;
+      continue;
+    }
+
+    // 通常のかな
+    if (SINGLE[ch]) {
+      tokens.push({ kana: ch, opts: SINGLE[ch].slice() });
+    } else {
+      // 数字・スペース等はそのまま
+      tokens.push({ kana: ch, opts: [ch === '　' ? ' ' : ch.toLowerCase()] });
+    }
+    i++;
+  }
+  return tokens;
+}
+
+// ==================== GAME STATE ====================
+let curLevel = 'normal';
+let sentences = [];
+let sentIdx = 0;
+let tokens = [];
+let tokIdx = 0;
+let typed = '';
+let totalMiss = 0;
+let sentMiss = 0;
+let totalKeys = 0;
+let startTime = null;
+
+// ==================== GAME LOGIC ====================
+function startGame(level) {
+  curLevel = level;
+  const src = SENTENCES[level];
+  sentences = src.slice().sort(() => Math.random() - 0.5);
+  sentIdx = 0;
+  totalMiss = 0;
+  totalKeys = 0;
+  startTime = Date.now();
+  showScreen('prac');
+  loadSentence();
+}
+
+function loadSentence() {
+  tokens = tokenize(sentences[sentIdx]);
+  tokIdx = 0;
+  typed = '';
+  sentMiss = 0;
+  document.getElementById('btn-next').disabled = true;
+  document.getElementById('praise').textContent = '';
+  document.getElementById('praise').style.animation = 'none';
+  updateProgress();
+  renderTokens();
+  updateInputBox();
+  updateMissCount();
+}
+
+function processKey(key) {
+  if (tokIdx >= tokens.length) return;
+  const k = key.toLowerCase();
+  const tok = tokens[tokIdx];
+  const attempt = typed + k;
+
+  // っ double-consonant shortcut: single consonant completes っ and seeds next token
+  if (tok.smallTsu && tok.opts.includes(k) && k.length === 1 && !'aiueo'.includes(k)) {
+    typed = '';
+    tokIdx++;
+    totalKeys++;
+    // seed next token if the same consonant is its prefix
+    if (tokIdx < tokens.length) {
+      const nextTok = tokens[tokIdx];
+      if (nextTok.opts.some(o => o.startsWith(k))) {
+        typed = k;
+      }
+    }
+    renderTokens();
+    updateInputBox();
+    if (tokIdx >= tokens.length) onDone();
+    return;
+  }
+
+  // Check complete match
+  for (const opt of tok.opts) {
+    if (opt === attempt) {
+      typed = '';
+      tokIdx++;
+      totalKeys++;
+      renderTokens();
+      updateInputBox();
+      if (tokIdx >= tokens.length) onDone();
+      return;
+    }
+  }
+
+  // Check prefix match
+  for (const opt of tok.opts) {
+    if (opt.startsWith(attempt)) {
+      typed = attempt;
+      totalKeys++;
+      renderTokens();
+      updateInputBox();
+      return;
+    }
+  }
+
+  // Miss
+  totalMiss++;
+  sentMiss++;
+  updateMissCount();
+  const box = document.getElementById('input-box');
+  box.classList.remove('err');
+  void box.offsetWidth; // reflow
+  box.classList.add('err');
+  setTimeout(() => box.classList.remove('err'), 280);
+}
+
+function onDone() {
+  const el = document.getElementById('praise');
+  el.style.animation = 'none';
+  void el.offsetWidth;
+  el.style.animation = 'popIn 0.35s';
+  el.textContent = PRAISE_LIST[Math.floor(Math.random() * PRAISE_LIST.length)];
+  const btn = document.getElementById('btn-next');
+  btn.disabled = false;
+  btn.focus();
+}
+
+function nextSentence() {
+  sentIdx++;
+  if (sentIdx >= sentences.length) {
+    showResult();
+  } else {
+    loadSentence();
+  }
+}
+
+function retryGame() { startGame(curLevel); }
+function goStart()   { showScreen('start'); }
+
+// ==================== UI ====================
+function showScreen(name) {
+  document.getElementById('scr-start').classList.toggle('hidden', name !== 'start');
+  document.getElementById('scr-prac').classList.toggle('hidden', name !== 'prac');
+  document.getElementById('scr-result').classList.toggle('hidden', name !== 'result');
+}
+
+function updateProgress() {
+  const total = sentences.length;
+  const cur = sentIdx + 1;
+  document.getElementById('prog-text').textContent = cur + ' / ' + total;
+  document.getElementById('prog-bar').style.width = ((cur - 1) / total * 100) + '%';
+}
+
+function renderTokens() {
+  const row = document.getElementById('tokens-row');
+  row.innerHTML = '';
+  tokens.forEach((tok, idx) => {
+    const div = document.createElement('div');
+    div.className = 'tok';
+    const kEl = document.createElement('div');
+    kEl.className = 'kana';
+    kEl.textContent = tok.kana;
+    const rEl = document.createElement('div');
+    rEl.className = 'rguide';
+
+    if (idx < tokIdx) {
+      div.classList.add('done');
+      rEl.textContent = tok.opts[0];
+    } else if (idx === tokIdx) {
+      div.classList.add('curr');
+      const display = tok.opts[0];
+      const done = typed;
+      const left = display.slice(done.length);
+      rEl.innerHTML = '<span class="rg-done">' + done + '</span><span class="rg-left">' + left + '</span>';
+    } else {
+      div.classList.add('pend');
+      rEl.textContent = tok.opts[0];
+    }
+
+    div.appendChild(kEl);
+    div.appendChild(rEl);
+    row.appendChild(div);
+  });
+}
+
+function updateInputBox() {
+  document.getElementById('input-box').textContent = typed || '_';
+}
+
+function updateMissCount() {
+  document.getElementById('miss-count').textContent = sentMiss > 0 ? 'ミス: ' + sentMiss + '回' : '';
+}
+
+function showResult() {
+  const sec = Math.round((Date.now() - startTime) / 1000);
+  const acc = totalKeys > 0
+    ? Math.min(100, Math.round(totalKeys / (totalKeys + totalMiss) * 100))
+    : 100;
+  document.getElementById('r-time').textContent = sec;
+  document.getElementById('r-miss').textContent = totalMiss;
+  document.getElementById('r-acc').textContent = acc;
+  document.getElementById('result-sub').textContent = '全' + sentences.length + '問完了しました！';
+  showScreen('result');
+}
+
+// ==================== KEY EVENTS ====================
+document.addEventListener('keydown', e => {
+  const prac = document.getElementById('scr-prac');
+  if (prac.classList.contains('hidden')) return;
+  if (e.key.length !== 1) {
+    if (e.key === 'Enter' && tokIdx >= tokens.length) nextSentence();
+    return;
+  }
+  if (e.ctrlKey || e.altKey || e.metaKey) return;
+  processKey(e.key);
+});
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "ゆっくりタイピング",
+  "description": "時間制限なし！焦らずゆっくり練習できる、パソコン初心者・中高年向けの無料タイピング練習サイト",
+  "url": "https://yukkuri-typing.kkpwebninja.com/",
+  "applicationCategory": "Game",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+  "author": { "@type": "Organization", "name": "web忍者の砦" }
+}
+</script>
+</body>
+</html>
