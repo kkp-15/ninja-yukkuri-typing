@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>無料タイピング練習｜初心者・シニア向け ゆっくりタイピング</title>
-<meta name="description" content="初心者・シニア向けの無料タイピング練習。登録不要・時間制限なしで、ローマ字ガイドを見ながら5問から自分のペースで練習できます。成績は端末に保存されます。">
+<title>シニア向け無料タイピング練習｜大きな文字でゆっくり練習</title>
+<meta name="description" content="シニア・中高年のパソコン初心者向け無料タイピング練習。大きな文字とローマ字ガイドで、時間制限なし・登録不要。5問からゆっくり自分のペースで練習できます。">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="keywords" content="タイピング練習,無料,初心者,シニア,中高年,ローマ字入力,パソコン練習">
 <meta name="theme-color" content="#FF6B35">
@@ -14,8 +14,8 @@
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-<meta property="og:title" content="ゆっくりタイピング｜中高年・初心者向け">
-<meta property="og:description" content="時間制限なし！焦らずゆっくり練習できる無料タイピングサイト。中高年・初心者向け。">
+<meta property="og:title" content="シニア向け無料タイピング練習｜ゆっくりタイピング">
+<meta property="og:description" content="大きな文字とローマ字ガイドで、時間制限なし。シニア・中高年のパソコン初心者向け無料練習。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://yukkuri-typing.kkpwebninja.com/">
 <meta property="og:site_name" content="ゆっくりタイピング">
@@ -39,7 +39,7 @@
       "@id": "https://yukkuri-typing.kkpwebninja.com/#app",
       "name": "ゆっくりタイピング",
       "url": "https://yukkuri-typing.kkpwebninja.com/",
-      "description": "初心者・シニア向けの無料タイピング練習。登録不要・時間制限なしでローマ字入力を練習できます。",
+      "description": "シニア・中高年のパソコン初心者向け無料タイピング練習。大きな文字とローマ字ガイドで時間制限なく練習できます。",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "Web",
       "browserRequirements": "JavaScript対応ブラウザ",
@@ -98,6 +98,12 @@ header .site-name {
   font-weight: bold;
   color: white;
 }
+.header-note{font-size:.82rem;opacity:.92}
+.header-tools{margin-left:auto}
+.text-size-btn{background:#fff;color:#9a3f20;border:2px solid rgba(255,255,255,.85);border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;white-space:nowrap}
+body.large-text{font-size:118%}
+body.large-text .hero-sub,body.large-text .seo-guide p,body.large-text .seo-guide li,body.large-text .yt-info p{font-size:1.08rem}
+body.large-text .btn-lv .lv-name{font-size:1.25rem}
 
 /* ===== MAIN ===== */
 main {
@@ -546,6 +552,21 @@ footer a:hover { color: white; }
 .seo-guide h3{font-size:1.05rem;color:#444;margin:20px 0 6px}
 .seo-guide p,.seo-guide li{font-size:.95rem;color:#555}
 .seo-guide ol,.seo-guide ul{padding-left:1.4rem}
+.senior-support{max-width:760px;margin:20px auto 0;padding:24px 22px;background:#f7fff8;border:2px solid #b9dec1;border-radius:16px}
+.senior-support h2{font-size:1.25rem;color:#356f43;margin-bottom:6px}
+.senior-support>p{font-size:.9rem;color:#52675a;line-height:1.75;margin-bottom:12px}
+.support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.support-card{background:#fff;border:1px solid #d7eadb;border-radius:12px;padding:16px}
+.support-card h3{font-size:1rem;color:#333;margin-bottom:6px}
+.support-card p{font-size:.86rem;color:#666;line-height:1.7;margin-bottom:10px}
+.support-links{display:flex;gap:8px;flex-wrap:wrap}
+.support-links a{display:inline-block;background:#397b49;color:#fff!important;border-radius:999px;padding:8px 13px;font-size:.82rem;font-weight:800}
+.support-pr{font-size:.75rem;color:#718177;margin-top:12px}
+.seal-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:-18px 0 24px}
+.seal{background:#fff;border:1px solid #efc8b8;color:#88452d;border-radius:999px;padding:7px 12px;font-size:.84rem;font-weight:700}
+.seo-guide ol li{margin-bottom:5px}
+.seo-guide strong{color:#a84422}
+.skip-link
 .skip-link{position:absolute;left:-9999px;top:8px;background:#fff;color:#b94e27;padding:10px;z-index:10}
 .skip-link:focus{left:8px}
 @media(max-width:600px){
@@ -556,6 +577,9 @@ footer a:hover { color: white; }
   .tok .kana{font-size:2.15rem}
   .sentence-card{padding-left:10px;padding-right:10px}
   .rc{min-width:42%;padding:14px 16px}
+  header{padding:12px;flex-wrap:wrap}
+  .header-note{order:3;width:100%}
+  .support-grid{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 </style>
@@ -565,6 +589,8 @@ footer a:hover { color: white; }
 
 <header>
   <span class="site-name">ゆっくりタイピング</span>
+  <span class="header-note">シニア・中高年のパソコン初心者向け</span>
+  <div class="header-tools"><button class="text-size-btn" type="button" id="text-size-btn" onclick="toggleLargeText()" aria-pressed="false">文字を大きく</button></div>
 </header>
 
 <main id="main-content">
@@ -574,8 +600,11 @@ footer a:hover { color: white; }
     <h1 class="hero-title">ゆっくりタイピング</h1>
     <p class="hero-sub">
       時間制限なし。焦らず自分のペースで練習できる<br>
-      パソコン初心者・中高年の方向けの無料タイピングサイトです。
+      シニア・中高年のパソコン初心者向け無料タイピングサイトです。
     </p>
+    <div class="seal-row" aria-label="このサイトの特徴">
+      <span class="seal">登録不要</span><span class="seal">ずっと無料</span><span class="seal">大きな文字</span><span class="seal">時間制限なし</span>
+    </div>
     <div class="feature-row">
       <div class="feature-item">
         <div class="fi-icon">⏰</div>
@@ -604,8 +633,8 @@ footer a:hover { color: white; }
     <p class="level-heading">難しさを選んでください</p>
     <div class="level-btns">
       <button class="btn-lv lv-easy" onclick="startGame('easy')">
-        <span class="lv-name">やさしい</span>
-        <span class="lv-desc">短い単語から始める</span>
+        <span class="lv-name">はじめて</span>
+        <span class="lv-desc">短い単語・大きな文字</span>
       </button>
       <button class="btn-lv lv-normal" onclick="startGame('normal')">
         <span class="lv-name">ふつう</span>
@@ -766,8 +795,8 @@ footer a:hover { color: white; }
 
 
 <section class="seo-guide" aria-labelledby="guide-heading">
-  <h2 id="guide-heading">初心者向けタイピング練習の進め方</h2>
-  <p>「ゆっくりタイピング」は、キーボード操作に慣れていない初心者やシニア・中高年の方が、時間に追われずローマ字入力を練習できる無料サイトです。登録は必要ありません。</p>
+  <h2 id="guide-heading">シニア・中高年向けタイピング練習の進め方</h2>
+  <p>「ゆっくりタイピング」は、<strong>シニア・中高年のパソコン初心者</strong>が、時間に追われずローマ字入力を練習できる無料サイトです。登録は必要ありません。画面右上の「文字を大きく」を押すと、説明や練習文字をさらに見やすくできます。</p>
   <h3>毎日5問から始めましょう</h3>
   <ol>
     <li>最初は「やさしい・5問」を選び、ローマ字ガイドを見ながら入力します。</li>
@@ -782,6 +811,30 @@ footer a:hover { color: white; }
     <li>時間制限のあるタイピングゲームでは焦ってしまう方</li>
     <li>シニア・中高年向けの見やすく簡単な練習を探している方</li>
   </ul>
+</section>
+
+<section class="senior-support" aria-labelledby="support-heading">
+  <h2 id="support-heading">パソコン初心者の練習を助ける道具</h2>
+  <p>キーが見えにくい、指や手首が疲れやすいと感じる方に向いた道具を探せます。購入は必須ではありません。まずは無料練習を続け、必要を感じたときだけご覧ください。</p>
+  <div class="support-grid">
+    <article class="support-card">
+      <h3>大きな文字の日本語キーボード</h3>
+      <p>キーの文字が大きく、かな・英字を確認しやすいタイプです。</p>
+      <div class="support-links">
+        <a href="https://www.amazon.co.jp/s?k=%E5%A4%A7%E3%81%8D%E3%81%AA%E6%96%87%E5%AD%97+%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89+%E6%97%A5%E6%9C%AC%E8%AA%9E&tag=kkp15-22" target="_blank" rel="nofollow sponsored noopener">Amazonで探す</a>
+        <a href="https://search.rakuten.co.jp/search/mall/%E5%A4%A7%E3%81%8D%E3%81%AA%E6%96%87%E5%AD%97+%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89+%E6%97%A5%E6%9C%AC%E8%AA%9E/" target="_blank" rel="nofollow sponsored noopener">楽天で探す</a>
+      </div>
+    </article>
+    <article class="support-card">
+      <h3>キーボード用の大文字シール</h3>
+      <p>今のキーボードに貼り、英字を大きく見やすくする方法です。</p>
+      <div class="support-links">
+        <a href="https://www.amazon.co.jp/s?k=%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89+%E5%A4%A7%E6%96%87%E5%AD%97+%E3%82%B7%E3%83%BC%E3%83%AB&tag=kkp15-22" target="_blank" rel="nofollow sponsored noopener">Amazonで探す</a>
+        <a href="https://search.rakuten.co.jp/search/mall/%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89+%E5%A4%A7%E6%96%87%E5%AD%97+%E3%82%B7%E3%83%BC%E3%83%AB/" target="_blank" rel="nofollow sponsored noopener">楽天で探す</a>
+      </div>
+    </article>
+  </div>
+  <p class="support-pr">PR：商品リンクにはAmazonアソシエイト等の広告リンクを含みます。</p>
 </section>
 
 <section class="yt-info">
@@ -993,6 +1046,25 @@ let startTime = null;
 let practiceCount = 10;
 let lastResultText = '';
 const HISTORY_KEY = 'yukkuriTypingHistoryV2';
+const LARGE_TEXT_KEY = 'yukkuriTypingLargeText';
+
+function toggleLargeText() {
+  const enabled = !document.body.classList.contains('large-text');
+  document.body.classList.toggle('large-text', enabled);
+  localStorage.setItem(LARGE_TEXT_KEY, enabled ? '1' : '0');
+  const btn = document.getElementById('text-size-btn');
+  btn.setAttribute('aria-pressed', String(enabled));
+  btn.textContent = enabled ? '標準の文字に戻す' : '文字を大きく';
+}
+function restoreTextSize() {
+  const enabled = localStorage.getItem(LARGE_TEXT_KEY) === '1';
+  document.body.classList.toggle('large-text', enabled);
+  const btn = document.getElementById('text-size-btn');
+  if (btn) {
+    btn.setAttribute('aria-pressed', String(enabled));
+    btn.textContent = enabled ? '標準の文字に戻す' : '文字を大きく';
+  }
+}
 
 function setPracticeCount(count, button) {
   practiceCount = count;
@@ -1251,6 +1323,7 @@ document.addEventListener('keydown', e => {
   if (e.ctrlKey || e.altKey || e.metaKey) return;
   processKey(e.key);
 });
+restoreTextSize();
 renderStartStats();
 </script>
 </body>
