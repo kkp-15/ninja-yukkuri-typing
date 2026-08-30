@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ゆっくりタイピング｜中高年・初心者向けタイピング練習｜無料・登録不要</title>
-<meta name="description" content="時間制限なし！焦らずゆっくり練習できる、パソコン初心者・中高年の方向けの無料タイピング練習サイト。ローマ字ガイド付きで3段階の難易度から選べます。">
+<title>無料タイピング練習｜初心者・シニア向け ゆっくりタイピング</title>
+<meta name="description" content="初心者・シニア向けの無料タイピング練習。登録不要・時間制限なしで、ローマ字ガイドを見ながら5問から自分のペースで練習できます。成績は端末に保存されます。">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="keywords" content="タイピング練習,無料,初心者,シニア,中高年,ローマ字入力,パソコン練習">
 <meta name="theme-color" content="#FF6B35">
 <link rel="canonical" href="https://yukkuri-typing.kkpwebninja.com/">
 <!-- WEBNINJA_UNIFIED_FAVICON -->
@@ -24,14 +26,38 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "ゆっくりタイピング",
-  "url": "https://yukkuri-typing.kkpwebninja.com/",
-  "description": "時間制限なし！焦らずゆっくり練習できる、パソコン初心者・中高年向けの無料タイピング練習サイト",
-  "applicationCategory": "GameApplication",
-  "operatingSystem": "Web",
-  "offers": {"@type":"Offer","price":"0","priceCurrency":"JPY"},
-  "author": {"@type":"Organization","name":"web忍者の砦"}
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://yukkuri-typing.kkpwebninja.com/#website",
+      "url": "https://yukkuri-typing.kkpwebninja.com/",
+      "name": "ゆっくりタイピング",
+      "inLanguage": "ja"
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://yukkuri-typing.kkpwebninja.com/#app",
+      "name": "ゆっくりタイピング",
+      "url": "https://yukkuri-typing.kkpwebninja.com/",
+      "description": "初心者・シニア向けの無料タイピング練習。登録不要・時間制限なしでローマ字入力を練習できます。",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Web",
+      "browserRequirements": "JavaScript対応ブラウザ",
+      "isAccessibleForFree": true,
+      "offers": {"@type":"Offer","price":"0","priceCurrency":"JPY"},
+      "audience": {"@type":"Audience","audienceType":"パソコン初心者・シニア・中高年"},
+      "author": {"@type":"Organization","name":"web忍者の砦","url":"https://kkpwebninja.com/"}
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"無料ですか？登録は必要ですか？","acceptedAnswer":{"@type":"Answer","text":"完全無料・登録不要で、ページを開いてすぐ練習できます。"}},
+        {"@type":"Question","name":"時間制限はありますか？","acceptedAnswer":{"@type":"Answer","text":"時間制限はありません。1問ずつ自分のペースで練習できます。"}},
+        {"@type":"Question","name":"ローマ字が分からなくても練習できますか？","acceptedAnswer":{"@type":"Answer","text":"画面にローマ字ガイドが表示されるため、見ながら入力できます。"}},
+        {"@type":"Question","name":"成績は保存されますか？","acceptedAnswer":{"@type":"Answer","text":"直近5回の成績と最高記録を、この端末のブラウザ内に保存します。"}}
+      ]
+    }
+  ]
 }
 </script>
 
@@ -505,15 +531,43 @@ footer a:hover { color: white; }
 .yt-info details{background:#fff;border:1px solid #e4f0e7;border-radius:10px;margin-bottom:8px}
 .yt-info summary{padding:12px 14px;font-size:14px;font-weight:700;cursor:pointer}
 .yt-info p{padding:0 14px 12px;margin:0;font-size:13.5px;line-height:1.85;color:#444}
+
+/* ===== PRACTICE OPTIONS / RECORDS ===== */
+.practice-settings{background:#fff;border:1px solid #f1dfcf;border-radius:16px;padding:18px;margin:0 auto 26px;max-width:620px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.practice-settings h2{font-size:1.05rem;margin-bottom:12px;color:#444}
+.count-btns{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.count-btn{border:2px solid #ffd0bd;background:#fff;color:#9a4829;border-radius:999px;padding:10px 20px;font-weight:700;cursor:pointer;min-width:88px}
+.count-btn[aria-pressed="true"]{background:#FF6B35;color:#fff;border-color:#FF6B35}
+.best-summary{margin-top:12px;font-size:.9rem;color:#666;min-height:1.4em}
+.result-note{margin:-18px 0 24px;color:#6a6a6a;font-size:.92rem}
+.btn-share{padding:13px 32px;background:#1668b2;color:white;border:none;border-radius:40px;font-size:1rem;font-weight:bold;cursor:pointer}
+.seo-guide{max-width:760px;margin:32px auto 0;padding:26px 22px;background:#fff;border-radius:16px;border:1px solid #f0e2d7;line-height:1.9}
+.seo-guide h2{font-size:1.35rem;color:#b94e27;margin-bottom:10px}
+.seo-guide h3{font-size:1.05rem;color:#444;margin:20px 0 6px}
+.seo-guide p,.seo-guide li{font-size:.95rem;color:#555}
+.seo-guide ol,.seo-guide ul{padding-left:1.4rem}
+.skip-link{position:absolute;left:-9999px;top:8px;background:#fff;color:#b94e27;padding:10px;z-index:10}
+.skip-link:focus{left:8px}
+@media(max-width:600px){
+  main{padding-top:20px}
+  .hero-title{font-size:1.9rem}
+  .feature-item{min-width:30%;padding:12px 8px}
+  .btn-lv{min-width:100%;padding:16px 24px}
+  .tok .kana{font-size:2.15rem}
+  .sentence-card{padding-left:10px;padding-right:10px}
+  .rc{min-width:42%;padding:14px 16px}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">練習メニューへ移動</a>
 
 <header>
   <span class="site-name">ゆっくりタイピング</span>
 </header>
 
-<main>
+<main id="main-content">
 
   <!-- ======= START SCREEN ======= -->
   <div id="scr-start">
@@ -536,6 +590,16 @@ footer a:hover { color: white; }
         <div class="fi-text">3段階の難しさ</div>
       </div>
     </div>
+
+    <section class="practice-settings" aria-labelledby="count-heading">
+      <h2 id="count-heading">練習する問題数</h2>
+      <div class="count-btns">
+        <button class="count-btn" type="button" aria-pressed="false" onclick="setPracticeCount(5,this)">5問</button>
+        <button class="count-btn" type="button" aria-pressed="true" onclick="setPracticeCount(10,this)">10問</button>
+        <button class="count-btn" type="button" aria-pressed="false" onclick="setPracticeCount(20,this)">20問</button>
+      </div>
+      <p class="best-summary" id="best-summary">まずは5問からでも大丈夫です</p>
+    </section>
 
     <p class="level-heading">難しさを選んでください</p>
     <div class="level-btns">
@@ -622,7 +686,7 @@ footer a:hover { color: white; }
       <button class="btn-change" onclick="goStart()">レベル変更</button>
     </div>
 
-    <div class="praise" id="praise"></div>
+    <div class="praise" id="praise" role="status" aria-live="polite"></div>
 
     <div class="sentence-card">
       <div class="card-hint">キーボードで入力してください（ローマ字入力）</div>
@@ -664,10 +728,17 @@ footer a:hover { color: white; }
           <div class="rc-val" id="r-acc">100</div>
           <div class="rc-unit">%</div>
         </div>
+        <div class="rc">
+          <div class="rc-label">1分あたり</div>
+          <div class="rc-val" id="r-kpm">0</div>
+          <div class="rc-unit">キー</div>
+        </div>
       </div>
+      <p class="result-note" id="result-note">この端末に記録を保存しました</p>
       <div class="result-btns">
         <button class="btn-retry" onclick="retryGame()">もういちど</button>
         <button class="btn-back" onclick="goStart()">レベルをかえる</button>
+        <button class="btn-share" onclick="shareResult()">結果を共有</button>
       </div>
       <div class="yt-shop">
         <div class="yt-shop-h">練習がはかどる道具</div>
@@ -694,6 +765,25 @@ footer a:hover { color: white; }
 </main>
 
 
+<section class="seo-guide" aria-labelledby="guide-heading">
+  <h2 id="guide-heading">初心者向けタイピング練習の進め方</h2>
+  <p>「ゆっくりタイピング」は、キーボード操作に慣れていない初心者やシニア・中高年の方が、時間に追われずローマ字入力を練習できる無料サイトです。登録は必要ありません。</p>
+  <h3>毎日5問から始めましょう</h3>
+  <ol>
+    <li>最初は「やさしい・5問」を選び、ローマ字ガイドを見ながら入力します。</li>
+    <li>速さよりも正確さを意識し、慣れたら10問、20問へ増やします。</li>
+    <li>結果画面の「せいかくさ」と「1分あたり」の記録を前回と比べます。</li>
+  </ol>
+  <h3>上達しやすい姿勢と指の置き方</h3>
+  <p>背中を丸めすぎず、肘がほぼ直角になる高さにキーボードを置きます。左手の人差し指をF、右手の人差し指をJの突起に置く「ホームポジション」を意識すると、少しずつ手元を見ないで打てるようになります。</p>
+  <h3>この練習が向いている方</h3>
+  <ul>
+    <li>パソコンを始めたばかりで、ローマ字入力に自信がない方</li>
+    <li>時間制限のあるタイピングゲームでは焦ってしまう方</li>
+    <li>シニア・中高年向けの見やすく簡単な練習を探している方</li>
+  </ul>
+</section>
+
 <section class="yt-info">
   <h2>よくある質問</h2>
   <details><summary>無料ですか？登録は必要ですか？</summary><p>完全無料・登録不要です。ページを開いてすぐ練習を始められます。広告は表示されますが、機能に制限はありません。</p></details>
@@ -701,7 +791,7 @@ footer a:hover { color: white; }
   <details><summary>どの難しさから始めればいいですか？</summary><p>キーボードにまだ慣れていない方は「やさしい」（短い単語）から。あいさつ文が打てるようになったら「ふつう」、文章の速さを上げたい方は「むずかしい」へ進んでください。</p></details>
   <details><summary>ローマ字がうろ覚えでも大丈夫ですか？</summary><p>画面にローマ字ガイドが出るので、見ながら打てば自然に覚えられます。「っ」「ん」など迷いやすい入力は上の「入力ルール」にまとめてあります。</p></details>
   <details><summary>スマホでも練習できますか？</summary><p>できますが、このサイトは物理キーボードでの練習を想定しています。パソコンや、タブレット＋外付けキーボードでの利用をおすすめします。</p></details>
-  <details><summary>成績は保存されますか？</summary><p>保存機能はありません。1回ごとに「かかった時間・ミスの回数・せいかくさ」を表示するだけのシンプルな作りです。記録を残したい方は結果画面をスクリーンショットしてください。</p></details>
+  <details><summary>成績は保存されますか？</summary><p>直近5回の成績と最高記録を、この端末のブラウザ内に保存します。名前やメールアドレスなどの個人情報は必要ありません。</p></details>
 </section>
 
 <!-- WEBNINJA_RELATED_APPS -->
@@ -739,6 +829,8 @@ const SENTENCES = {
     'あおいうみ',
     'たかいやま',
     'さわやかなかぜ',
+    'おはな', 'ひなた', 'えがお', 'ゆっくり', 'ぱそこん',
+    'きーぼーど', 'あかるいへや', 'おいしいおちゃ', 'まいにちれんしゅう', 'すこしずつすすむ',
   ],
   normal: [
     'おはようございます',
@@ -751,6 +843,10 @@ const SENTENCES = {
     'がんばることがたいせつです',
     'こんにちはよいおてんきですね',
     'ともだちとたのしくあそびました',
+    'あせらずゆっくりすすみましょう', 'きょうもげんきにすごします', 'まどをあけてかぜをいれます',
+    'あたたかいおちゃをのみました', 'ぱそこんでてがみをかきます', 'しせいをただしてすわります',
+    'みぎてとひだりてをつかいます', 'まちがえてもだいじょうぶです', 'きのうよりすこしなれました',
+    'じぶんのぺーすでつづけましょう',
   ],
   hard: [
     'いしのうえにもさんねん',
@@ -763,6 +859,11 @@ const SENTENCES = {
     'ひとのふりみてわがふりなおせ',
     'なせばなるなさねばならぬなにごとも',
     'まいにちすこしずつがんばっています',
+    'あせらずにただしくうつことをこころがけます', 'きーぼーどをみないでうてるようになりたいです',
+    'ちいさなせいちょうをよろこぶことがたいせつです', 'ぱそこんをつかってかぞくにめーるをおくります',
+    'まいあさじゅっぷんかんたいぴんぐをれんしゅうします', 'しっぱいはじょうたつするためのだいじないっぽです',
+    'ゆっくりでもつづければかならずじょうずになります', 'ただしいしせいでりらっくすしてきーをうちます',
+    'きょうできたことをあしたもくりかえしてみましょう', 'あたらしいことをまなぶのにおそすぎることはありません',
   ],
 };
 
@@ -889,12 +990,36 @@ let totalMiss = 0;
 let sentMiss = 0;
 let totalKeys = 0;
 let startTime = null;
+let practiceCount = 10;
+let lastResultText = '';
+const HISTORY_KEY = 'yukkuriTypingHistoryV2';
+
+function setPracticeCount(count, button) {
+  practiceCount = count;
+  document.querySelectorAll('.count-btn').forEach(btn => btn.setAttribute('aria-pressed', String(btn === button)));
+}
+function readHistory() {
+  try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); } catch (_) { return []; }
+}
+function renderStartStats() {
+  const history = readHistory();
+  const box = document.getElementById('best-summary');
+  if (!box) return;
+  if (!history.length) { box.textContent = 'まずは5問からでも大丈夫です'; return; }
+  const bestAcc = Math.max(...history.map(x => x.acc));
+  const bestKpm = Math.max(...history.map(x => x.kpm));
+  box.textContent = 'この端末の最高記録：正確さ ' + bestAcc + '%・1分 ' + bestKpm + 'キー';
+}
+function trackEvent(name, params) {
+  if (typeof gtag === 'function') gtag('event', name, params || {});
+}
 
 // ==================== GAME LOGIC ====================
 function startGame(level) {
   curLevel = level;
   const src = SENTENCES[level];
-  sentences = src.slice().sort(() => Math.random() - 0.5);
+  sentences = src.slice().sort(() => Math.random() - 0.5).slice(0, practiceCount);
+  trackEvent('typing_start', {level: level, question_count: practiceCount});
   sentIdx = 0;
   totalMiss = 0;
   totalKeys = 0;
@@ -1093,9 +1218,26 @@ function showResult() {
     : 100;
   document.getElementById('r-time').textContent = sec;
   document.getElementById('r-miss').textContent = totalMiss;
+  const kpm = sec > 0 ? Math.round(totalKeys / sec * 60) : totalKeys;
   document.getElementById('r-acc').textContent = acc;
+  document.getElementById('r-kpm').textContent = kpm;
   document.getElementById('result-sub').textContent = '全' + sentences.length + '問完了しました！';
+  const history = readHistory();
+  history.unshift({date:new Date().toISOString(),level:curLevel,count:sentences.length,sec:sec,miss:totalMiss,acc:acc,kpm:kpm});
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(history.slice(0, 5)));
+  lastResultText = 'ゆっくりタイピングで' + sentences.length + '問練習しました。正確さ' + acc + '%、1分あたり' + kpm + 'キー！';
+  trackEvent('typing_complete', {level:curLevel,question_count:sentences.length,accuracy:acc,keys_per_minute:kpm});
   showScreen('result');
+}
+async function shareResult() {
+  const shareData = {title:'ゆっくりタイピング',text:lastResultText,url:'https://yukkuri-typing.kkpwebninja.com/'};
+  try {
+    if (navigator.share) await navigator.share(shareData);
+    else {
+      await navigator.clipboard.writeText(lastResultText + ' https://yukkuri-typing.kkpwebninja.com/');
+      document.getElementById('result-note').textContent = '結果をコピーしました';
+    }
+  } catch (_) {}
 }
 
 // ==================== KEY EVENTS ====================
@@ -1109,19 +1251,7 @@ document.addEventListener('keydown', e => {
   if (e.ctrlKey || e.altKey || e.metaKey) return;
   processKey(e.key);
 });
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "ゆっくりタイピング",
-  "description": "時間制限なし！焦らずゆっくり練習できる、パソコン初心者・中高年向けの無料タイピング練習サイト",
-  "url": "https://yukkuri-typing.kkpwebninja.com/",
-  "applicationCategory": "Game",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
-  "author": { "@type": "Organization", "name": "web忍者の砦" }
-}
+renderStartStats();
 </script>
 </body>
 </html>
