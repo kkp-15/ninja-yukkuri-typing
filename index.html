@@ -1326,5 +1326,44 @@ document.addEventListener('keydown', e => {
 restoreTextSize();
 renderStartStats();
 </script>
+
+<!-- KKP_ANALYTICS_V1: 共通ページ・流入・収益導線計測 -->
+<script>
+(function(){
+  const siteId = 'typing';
+  function send(name, params) {
+    if (typeof gtag !== 'function') return;
+    gtag('event', name, Object.assign({site_id: siteId}, params || {}));
+  }
+  try {
+    const ref = document.referrer ? new URL(document.referrer) : null;
+    if (ref && ref.hostname === 'kkpwebninja.com') {
+      send('typing_internal_entry', {entry_source: 'kkp_home', referrer_path: ref.pathname});
+    }
+  } catch (_) {}
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a');
+    if (!link) return;
+    const href = link.href || '';
+    const sponsored = (link.getAttribute('rel') || '').split(/\s+/).includes('sponsored');
+    if (sponsored) {
+      let domain = '';
+      try { domain = new URL(href).hostname; } catch (_) {}
+      send('typing_affiliate_click', {link_domain: domain, link_text: (link.textContent || '').trim().slice(0, 50)});
+    }
+    if (link.hostname && link.hostname.endsWith('kkpwebninja.com') && link.hostname !== location.hostname) {
+      send('typing_internal_exit', {destination_host: link.hostname});
+    }
+  });
+
+  document.addEventListener('click', function(e) {
+    const level = e.target.closest('.btn-lv');
+    if (level) send('typing_level_select', {level: (level.textContent || '').trim().slice(0, 30)});
+    const count = e.target.closest('.count-btn');
+    if (count) send('typing_count_select', {count: (count.textContent || '').trim()});
+  });
+})();
+</script>
+
 </body>
 </html>
