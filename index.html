@@ -883,12 +883,12 @@ header{background:#c2451a;padding:10px 20px}
           <caption>拗音（2文字まとめて入力）</caption>
           <thead><tr><th>かな</th><th>入力</th><th>かな</th><th>入力</th><th>かな</th><th>入力</th><th>かな</th><th>入力</th></tr></thead>
           <tbody>
-            <tr><td>きゃ</td><td>kya</td><td>しゃ</td><td>sha / sya</td><td>ちゃ</td><td>cha / tya</td><td>にゃ</td><td>nya</td></tr>
-            <tr><td>きゅ</td><td>kyu</td><td>しゅ</td><td>shu / syu</td><td>ちゅ</td><td>chu / tyu</td><td>にゅ</td><td>nyu</td></tr>
-            <tr><td>きょ</td><td>kyo</td><td>しょ</td><td>sho / syo</td><td>ちょ</td><td>cho / tyo</td><td>にょ</td><td>nyo</td></tr>
-            <tr><td>じゃ</td><td>ja / jya</td><td>りゃ</td><td>rya</td><td>ひゃ</td><td>hya</td><td>みゃ</td><td>mya</td></tr>
-            <tr><td>じゅ</td><td>ju / jyu</td><td>りゅ</td><td>ryu</td><td>ひゅ</td><td>hyu</td><td>みゅ</td><td>myu</td></tr>
-            <tr><td>じょ</td><td>jo / jyo</td><td>りょ</td><td>ryo</td><td>ひょ</td><td>hyo</td><td>みょ</td><td>myo</td></tr>
+            <tr><td>きゃ</td><td>kya</td><td>しゃ</td><td>sha / sya / shya</td><td>ちゃ</td><td>cha / tya / cya</td><td>にゃ</td><td>nya</td></tr>
+            <tr><td>きゅ</td><td>kyu</td><td>しゅ</td><td>shu / syu / shyu</td><td>ちゅ</td><td>chu / tyu / cyu</td><td>にゅ</td><td>nyu</td></tr>
+            <tr><td>きょ</td><td>kyo</td><td>しょ</td><td>sho / syo / shyo</td><td>ちょ</td><td>cho / tyo / cyo</td><td>にょ</td><td>nyo</td></tr>
+            <tr><td>じゃ</td><td>ja / jya / zya</td><td>りゃ</td><td>rya</td><td>ひゃ</td><td>hya</td><td>みゃ</td><td>mya</td></tr>
+            <tr><td>じゅ</td><td>ju / jyu / zyu</td><td>りゅ</td><td>ryu</td><td>ひゅ</td><td>hyu</td><td>みゅ</td><td>myu</td></tr>
+            <tr><td>じょ</td><td>jo / jyo / zyo</td><td>りょ</td><td>ryo</td><td>ひょ</td><td>hyo</td><td>みょ</td><td>myo</td></tr>
           </tbody>
         </table>
       </div>
@@ -1143,14 +1143,15 @@ const PRAISE_LIST = [
 // ==================== ROMAJI ENGINE ====================
 const COMPOUND = {
   'きゃ':['kya'],'きゅ':['kyu'],'きょ':['kyo'],
-  'しゃ':['sha','sya'],'しゅ':['shu','syu'],'しょ':['sho','syo'],
-  'ちゃ':['cha','tya'],'ちゅ':['chu','tyu'],'ちょ':['cho','tyo'],
+  'しゃ':['sha','sya','shya'],'しゅ':['shu','syu','shyu'],'しょ':['sho','syo','shyo'],
+  'ちゃ':['cha','tya','cya'],'ちゅ':['chu','tyu','cyu'],'ちょ':['cho','tyo','cyo'],
   'にゃ':['nya'],'にゅ':['nyu'],'にょ':['nyo'],
   'ひゃ':['hya'],'ひゅ':['hyu'],'ひょ':['hyo'],
   'みゃ':['mya'],'みゅ':['myu'],'みょ':['myo'],
   'りゃ':['rya'],'りゅ':['ryu'],'りょ':['ryo'],
   'ぎゃ':['gya'],'ぎゅ':['gyu'],'ぎょ':['gyo'],
-  'じゃ':['ja','jya'],'じゅ':['ju','jyu'],'じょ':['jo','jyo'],
+  'じゃ':['ja','jya','zya'],'じゅ':['ju','jyu','zyu'],'じょ':['jo','jyo','zyo'],
+  'ぢゃ':['dya'],'ぢゅ':['dyu'],'ぢょ':['dyo'],
   'びゃ':['bya'],'びゅ':['byu'],'びょ':['byo'],
   'ぴゃ':['pya'],'ぴゅ':['pyu'],'ぴょ':['pyo'],
 };
@@ -1216,7 +1217,7 @@ function tokenize(text) {
     // っ
     if (ch === 'っ') {
       // 促音は「次の子音を1回余分に打つ」（きって = ki + t + te）。ここで持つのはその1文字だけ
-      let opts = ['xtu', 'ltu'];
+      let opts = ['xtu', 'ltu', 'xtsu', 'ltsu'];
       const nextOpts = getNextOpts(text, i + 1);
       if (nextOpts) {
         const doubled = [...new Set(
