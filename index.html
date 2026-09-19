@@ -788,6 +788,10 @@ header{background:#c2451a;padding:10px 20px}
 .kb-fg.on.kb-fg-home::after{background:#fff}
 .kb-fg{overflow:hidden}
 .kb-note-home{border-bottom:4px solid #c98a4b;font-weight:bold}
+/* Enter は L字の1つのキー。上下の2枚を線でつないで1つに見せる */
+.kb-key.kb-enter-a{border-bottom:1px solid transparent;border-radius:6px 6px 0 0}
+.kb-key.kb-enter-b{margin-top:-4px;border-top:none;border-radius:0 0 6px 6px}
+.kb-key.kb-enter-a.kb-next,.kb-key.kb-enter-b.kb-next{border-color:#d9531f}
 </style>
 </head>
 <body>
@@ -1510,6 +1514,7 @@ function buildKeyboard() {
   if (!kb || kb.childElementCount) return;
   kb.innerHTML = KB_ROWS.map(row => '<div class="kb-row">' + row.map(([id, label, w, kind]) =>
     '<span class="kb-key' + (kind === 'fn' ? ' kb-fn' : '') + (id === 'f' || id === 'j' ? ' kb-home' : '') +
+    (id === 'enter' ? (label ? ' kb-enter-a' : ' kb-enter-b') : '') +
     '" data-k="' + id.replace(/"/g, '&quot;') + '" style="flex-grow:' + (w || 1) + '">' + label + '</span>').join('') + '</div>').join('');
 }
 function kbKeys(id) {
