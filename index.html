@@ -764,6 +764,12 @@ header{background:#c2451a;padding:10px 20px}
 .tok.curr .rguide{text-shadow:0 1px 0 #fff}
 .rg-next{box-shadow:0 2px 0 #9e3510;font-weight:900}
 .tok.done .rguide{font-weight:normal}
+/* ホームポジションの手（うっすら） */
+.kb{position:relative}
+.kb-hands{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.kb-hand{opacity:.17;fill:#9a6a44;stroke:#9a6a44;stroke-linecap:round}
+.kb-hand-on{opacity:.55;stroke:#d9531f;stroke-linecap:round}
+@media (prefers-reduced-motion:no-preference){.kb-hand-on{transition:opacity .15s}}
 </style>
 </head>
 <body>
@@ -1499,17 +1505,74 @@ function updateKeyboard() {
   if (tokIdx >= tokens.length) {
     kbKeys('enter').forEach(el => el.classList.add('kb-next'));
     finger.innerHTML = 'できました。<b>Enter</b>でつぎへ進みます';
+    drawHands(['右手の小指'], ['enter']);
     return;
   }
   const tok = tokens[tokIdx];
   const next = ((tok.opts.find(o => o.startsWith(typed)) || tok.opts[0]).slice(typed.length))[0];
-  if (!next) { finger.textContent = ''; return; }
+  if (!next) { finger.textContent = ''; drawHands([]); return; }
   const shifted = KB_SHIFTED[next];
   (shifted || [next]).forEach(id => kbKeys(id).forEach(el => el.classList.add('kb-next')));
   const base = shifted ? shifted[0] : next;
   const name = KB_FINGER[base] || '';
   const label = KB_LABEL[next] || next.toUpperCase();
   finger.innerHTML = (shifted ? 'Shift を押しながら ' : '') + (name ? name + 'で ' : '') + '<b>' + label + '</b>';
+  // Shift は反対の手の小指で押す
+  const shiftFinger = shifted ? (shifted[1] === 'shiftr' ? '右手の小指' : '左手の小指') : null;
+  drawHands([name, shiftFinger].filter(Boolean), shifted ? shifted : [next]);
+}
+window.addEventListener('resize', () => { if (!document.getElementById('scr-prac').classList.contains('hidden')) updateKeyboard(); });
+// ホームポジションの手を、キーボードの図の上にうっすら重ねる。
+// 指先は A S D F ／ J K L ;、親指はスペース。つぎに打つキーの指だけを濃くする
+const HAND_FINGERS = [
+  ['左手の小指','a','L'],['左手の薬指','s','L'],['左手の中指','d','L'],['左手の人差し指','f','L'],
+  ['右手の人差し指','j','R'],['右手の中指','k','R'],['右手の薬指','l','R'],['右手の小指',';','R'],
+];
+function drawHands(activeNames, targetIds) {
+  const kb = document.getElementById('kb');
+  if (!kb || !kb.offsetWidth) return;
+  let svg = kb.querySelector('svg.kb-hands');
+  if (!svg) {
+    svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('class', 'kb-hands');
+    svg.setAttribute('aria-hidden', 'true');
+    kb.appendChild(svg);
+  }
+  const box = kb.getBoundingClientRect();
+  svg.setAttribute('viewBox', '0 0 ' + box.width + ' ' + box.height);
+  const rect = id => { const el = kbKeys(id)[0]; if (!el) return null; const r = el.getBoundingClientRect(); return { x: r.left - box.left, y: r.top - box.top, w: r.width, h: r.height }; };
+  const space = rect('space'), zrow = rect('z');
+  if (!space || !zrow) return;
+  const palmTop = zrow.y + zrow.h * 0.35;
+  const palmBottom = box.height - 3;
+  const shapes = { L: [], R: [] };
+  const active = [];
+  HAND_FINGERS.forEach(([name, key, side]) => {
+    const k = rect(key);
+    const w = k.w * 0.62;
+    const cx = k.x + k.w / 2, tip = k.y + k.h * 0.42;
+    const d = '<line x1="' + cx + '" y1="' + tip + '" x2="' + cx + '" y2="' + (palmTop + 6) + '" stroke-width="' + w + '"/>';
+    shapes[side].push({ cx, w, d });
+    if (activeNames.includes(name)) {
+      // 担当の指を、手のひらからつぎに打つキーまで伸ばして濃く描く
+      const tid = (targetIds || []).find(t => (KB_FINGER[t] || '') === name || (t === 'shiftl' && name === '左手の小指') || (t === 'shiftr' && name === '右手の小指') || (t === 'enter' && name === '右手の小指'));
+      const t = tid ? rect(tid) : null;
+      const tx = t ? t.x + t.w / 2 : cx, ty = t ? t.y + t.h * 0.45 : tip;
+      active.push('<line x1="' + cx + '" y1="' + (palmTop + 6) + '" x2="' + tx + '" y2="' + ty + '" stroke-width="' + w + '"/>');
+    }
+  });
+  const hand = side => {
+    const f = shapes[side];
+    const left = Math.min(...f.map(o => o.cx - o.w / 2)), right = Math.max(...f.map(o => o.cx + o.w / 2));
+    const palm = '<rect x="' + left + '" y="' + palmTop + '" width="' + (right - left) + '" height="' + (palmBottom - palmTop) + '" rx="' + Math.min((palmBottom - palmTop) * 0.55, (right - left) / 2) + '"/>';
+    // 親指: 手のひらの人差し指側から、スペースキーへ
+    const inner = side === 'L' ? right : left;
+    const tx = side === 'L' ? space.x + space.w * 0.28 : space.x + space.w * 0.72;
+    const thumb = '<line x1="' + inner + '" y1="' + (palmTop + (palmBottom - palmTop) * 0.35) + '" x2="' + tx + '" y2="' + (space.y + space.h * 0.5) + '" stroke-width="' + f[0].w * 1.05 + '"/>';
+    return f.map(o => o.d).join('') + palm + thumb;
+  };
+  svg.innerHTML = '<g class="kb-hand">' + hand('L') + hand('R') + '</g>' +
+    (active.length ? '<g class="kb-hand-on">' + active.join('') + '</g>' : '');
 }
 function flashMissKey(key) {
   const id = String(key).toLowerCase();
