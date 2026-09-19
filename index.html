@@ -743,7 +743,6 @@ header{background:#c2451a;padding:10px 20px}
 
 <header>
   <span class="site-name">ゆっくりタイピング</span>
-  <span class="header-note">シニア・中高年のパソコン初心者向け</span>
   <div class="header-tools"><button class="text-size-btn" type="button" id="text-size-btn" onclick="toggleLargeText()" aria-pressed="false">文字を大きく</button></div>
 </header>
 
@@ -752,9 +751,8 @@ header{background:#c2451a;padding:10px 20px}
   <!-- ======= START SCREEN ======= -->
   <div id="scr-start">
     <h1 class="hero-title">ゆっくりタイピング<span class="hero-kw">シニア向けの無料タイピング練習</span></h1>
-    <p class="hero-sub">時間制限なし。大きな文字とローマ字ガイド、つぎに打つキーが光るキーボードの図つき。登録不要で、下のボタンを押すとすぐ始まります。</p>
 
-    <p class="level-heading">難しさを選ぶと始まります</p>
+    <p class="level-heading">押すと、すぐ始まります</p>
     <div class="level-btns">
       <button class="btn-lv lv-easy" onclick="startGame('easy')">
         <span class="lv-name">はじめて</span>
@@ -771,28 +769,26 @@ header{background:#c2451a;padding:10px 20px}
     </div>
 
     <section class="practice-settings" aria-labelledby="count-heading">
-      <h2 id="count-heading">練習する問題数</h2>
+      <h2 id="count-heading">問題数</h2>
       <div class="count-btns">
         <button class="count-btn" type="button" aria-pressed="false" onclick="setPracticeCount(5,this)">5問</button>
         <button class="count-btn" type="button" aria-pressed="true" onclick="setPracticeCount(10,this)">10問</button>
         <button class="count-btn" type="button" aria-pressed="false" onclick="setPracticeCount(20,this)">20問</button>
       </div>
-      <p class="best-summary" id="best-summary">まずは5問からでも大丈夫です</p>
+      <p class="best-summary" id="best-summary"></p>
     </section>
 
-    <div class="rules-box">
-      <h3>入力ルール</h3>
+    <details class="chart-wrap">
+      <summary>「っ」「ん」の打ち方とローマ字の表</summary>
+      <div class="chart-inner">
+        <div class="rules-box">
       <p>
         ローマ字入力で打ちます。画面に表示されたひらがなをキーボードで入力してください。<br>
         <strong>「っ」</strong> は、つぎの文字の最初のキーを <strong>1回多く</strong> 打ちます。（例：きって → kitte、ゆっくり → yukkuri）<strong>xtu</strong> や <strong>ltu</strong> でも入力できます。<br>
         <strong>「ん」</strong> は <strong>nn</strong> と入力します（次が母音のとき）。それ以外は <strong>n</strong> 1つでもOK。<br>
         <strong>「しゃ」「ちょ」</strong> などは 2文字まとめて入力します。（例：しょ → sho）
       </p>
-    </div>
-
-    <details class="chart-wrap">
-      <summary>ローマ字一覧表を見る</summary>
-      <div class="chart-inner">
+        </div>
         <table class="romaji-chart">
           <thead><tr><th>かな</th><th>入力</th><th>かな</th><th>入力</th><th>かな</th><th>入力</th><th>かな</th><th>入力</th><th>かな</th><th>入力</th></tr></thead>
           <tbody>
@@ -974,7 +970,7 @@ header{background:#c2451a;padding:10px 20px}
   <details><summary>無料ですか？登録は必要ですか？</summary><p>完全無料・登録不要です。ページを開いてすぐ練習を始められます。広告は表示されますが、機能に制限はありません。</p></details>
   <details><summary>時間制限が本当にないのですか？</summary><p>ありません。制限時間で急かされると手元が乱れ、変な癖がつきやすくなります。このサイトは1問ずつ、納得できるまでゆっくり打てる設計です。</p></details>
   <details><summary>どの難しさから始めればいいですか？</summary><p>キーボードにまだ慣れていない方は「はじめて」（短い単語）から。あいさつ文が打てるようになったら「ふつう」、文章の速さを上げたい方は「むずかしい」へ進んでください。</p></details>
-  <details><summary>ローマ字がうろ覚えでも大丈夫ですか？</summary><p>画面にローマ字ガイドが出るので、見ながら打てば自然に覚えられます。「っ」「ん」など迷いやすい入力は上の「入力ルール」にまとめてあります。</p></details>
+  <details><summary>ローマ字がうろ覚えでも大丈夫ですか？</summary><p>画面にローマ字ガイドが出るので、見ながら打てば自然に覚えられます。「っ」「ん」など迷いやすい入力は上の「「っ」「ん」の打ち方とローマ字の表」にまとめてあります。</p></details>
   <details><summary>どのキーをどの指で打つか分かりません。</summary><p>練習画面の下にキーボードの図が出ます。つぎに打つキーに色がつき、「左手の人差し指で F」のように使う指も文字で表示します。慣れてきたら「キーボードの図をかくす」で消して、手元を見ない練習に進めます。</p></details>
   <details><summary>スマホでも練習できますか？</summary><p>できますが、このサイトは物理キーボードでの練習を想定しています。パソコンや、タブレット＋外付けキーボードでの利用をおすすめします。</p></details>
   <details><summary>成績は保存されますか？</summary><p>直近5回の成績と最高記録を、この端末のブラウザ内に保存します。名前やメールアドレスなどの個人情報は必要ありません。</p></details>
@@ -1211,7 +1207,7 @@ function renderStartStats() {
   const history = readHistory();
   const box = document.getElementById('best-summary');
   if (!box) return;
-  if (!history.length) { box.textContent = 'まずは5問からでも大丈夫です'; return; }
+  if (!history.length) { box.textContent = ''; return; }
   const bestAcc = Math.max(...history.map(x => x.acc));
   const bestKpm = Math.max(...history.map(x => x.kpm));
   box.textContent = 'この端末の最高記録：正確さ ' + bestAcc + '%・1分 ' + bestKpm + 'キー';
