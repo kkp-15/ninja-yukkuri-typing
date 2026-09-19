@@ -66,6 +66,14 @@
 }
 </script>
 
+<!-- 確認用: ?preview=1 で広告とGA4を止める（自分で開くときに表示回数・アクセス数を増やさない） -->
+<script>
+(function(){
+  var p = /[?&](preview|noads)=1/.test(location.search) || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  window.__kkpPreview = p;
+  if (p) { window['ga-disable-G-2LM85GJN0L'] = true; }
+})();
+</script>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2LM85GJN0L"></script>
 <script>
@@ -76,7 +84,7 @@
 </script>
 
 <!-- AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1298304917726270" crossorigin="anonymous"></script>
+<script>if (!window.__kkpPreview) { var kkpAd = document.createElement('script'); kkpAd.async = true; kkpAd.crossOrigin = 'anonymous'; kkpAd.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1298304917726270'; document.head.appendChild(kkpAd); }</script>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -979,7 +987,7 @@ header{background:#c2451a;padding:10px 20px}
          style="display:block"
          data-ad-client="ca-pub-1298304917726270"
          data-ad-slot="2937937957"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    <script>if (!window.__kkpPreview) { (adsbygoogle = window.adsbygoogle || []).push({}); }</script>
   </div>
 
 </main>

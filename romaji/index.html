@@ -48,6 +48,14 @@
 }
 </script>
 
+<!-- 確認用: ?preview=1 で広告とGA4を止める（自分で開くときに表示回数・アクセス数を増やさない） -->
+<script>
+(function(){
+  var p = /[?&](preview|noads)=1/.test(location.search) || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  window.__kkpPreview = p;
+  if (p) { window['ga-disable-G-2LM85GJN0L'] = true; }
+})();
+</script>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2LM85GJN0L"></script>
 <script>
