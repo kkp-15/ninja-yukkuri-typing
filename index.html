@@ -754,6 +754,16 @@ header{background:#c2451a;padding:10px 20px}
 .rg-next{display:inline-block;background:#d9531f;color:#fff;border-radius:4px;padding:0 3px;margin:0 1px}
 .rg-left{color:#1f1f1f}
 .rb-done{color:#2e7d32}
+/* ===== 2026-09-20 文字の強調（太さ・縁取り・影）。大きさは変えない
+   いま打つ字＝いちばん太く縁取りと影／これからの字＝太く縁取り／打ち終わった字＝細くして下がって見せる */
+.tok .kana{font-weight:bold}
+.tok.curr .kana{font-weight:900;-webkit-text-stroke:1px #c2451a;text-shadow:0 2px 0 #f2c46b,0 0 1px #fff}
+.tok.pend .kana{-webkit-text-stroke:.6px #1f1f1f;text-shadow:0 1px 0 rgba(0,0,0,.12)}
+.tok.done .kana{font-weight:normal;-webkit-text-stroke:0;text-shadow:none}
+.tok .rguide{font-weight:bold}
+.tok.curr .rguide{text-shadow:0 1px 0 #fff}
+.rg-next{box-shadow:0 2px 0 #9e3510;font-weight:900}
+.tok.done .rguide{font-weight:normal}
 </style>
 </head>
 <body>
