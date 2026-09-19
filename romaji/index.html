@@ -85,7 +85,7 @@ table.kana th { background: #f3ece0; font-size: .95rem; font-weight: normal; }
 table.kana td b { display: block; font-size: 1.75rem; line-height: 1.2; font-weight: bold; }
 table.kana td span { display: block; font-family: 'Courier New', Consolas, monospace; font-size: 1.35rem; font-weight: bold; color: #b0391a; letter-spacing: .5px; }
 table.kana td.empty { background: #faf7f2; }
-table.kana td small { display: block; font-family: 'Courier New', Consolas, monospace; font-size: 1rem; color: #555; }
+table.kana td small { display: block; font-family: 'Courier New', Consolas, monospace; font-size: .95rem; color: #444; white-space: nowrap; }
 .rules { border: 2px solid #d9531f; padding: 10px 14px; margin: 6px 0 16px; }
 .rules p { margin: 3px 0; font-size: 1.1rem; }
 .rules code, p code, li code { font-family: 'Courier New', Consolas, monospace; font-weight: bold; color: #b0391a; font-size: 1.15em; }
@@ -96,11 +96,11 @@ table.kana td small { display: block; font-family: 'Courier New', Consolas, mono
 /* 印刷: A4 縦1枚に表と打ち方だけを出す */
 @media print {
   @page { size: A4 portrait; margin: 8mm; }
-  header.site, .crumb, .doc-date, .lead, .tools, .after, footer, .related { display: none !important; }
+  header.site, .crumb, .doc-date, .lead, .tools, .after, footer, .related, .screen-only { display: none !important; }
   main { max-width: none; padding: 0; }
   h1 { font-size: 14pt; margin-bottom: 2mm; }
   table.kana th, table.kana td { padding: 0.6mm 0.5mm; }
-  table.kana td small { font-size: 9pt; color: #333; }
+  table.kana td small { font-size: 8pt; color: #333; line-height: 1.1; }
   .note { font-size: 8.5pt; }
   body { line-height: 1.35; }
   table.kana td b { font-size: 15pt; line-height: 1.1; }
@@ -146,19 +146,19 @@ table.kana td small { display: block; font-family: 'Courier New', Consolas, mono
       <thead><tr><th>あ行</th><th>か行</th><th>さ行</th><th>た行</th><th>な行</th><th>は行</th><th>ま行</th><th>や行</th><th>ら行</th><th>わ行</th></tr></thead>
       <tbody>
         <tr><td><b>あ</b><span>a</span></td><td><b>か</b><span>ka</span></td><td><b>さ</b><span>sa</span></td><td><b>た</b><span>ta</span></td><td><b>な</b><span>na</span></td><td><b>は</b><span>ha</span></td><td><b>ま</b><span>ma</span></td><td><b>や</b><span>ya</span></td><td><b>ら</b><span>ra</span></td><td><b>わ</b><span>wa</span></td></tr>
-        <tr><td><b>い</b><span>i</span></td><td><b>き</b><span>ki</span></td><td><b>し</b><span>si</span><small>shi</small></td><td><b>ち</b><span>ti</span><small>chi</small></td><td><b>に</b><span>ni</span></td><td><b>ひ</b><span>hi</span></td><td><b>み</b><span>mi</span></td><td class="empty"></td><td><b>り</b><span>ri</span></td><td><b>を</b><span>wo</span></td></tr>
-        <tr><td><b>う</b><span>u</span></td><td><b>く</b><span>ku</span></td><td><b>す</b><span>su</span></td><td><b>つ</b><span>tu</span><small>tsu</small></td><td><b>ぬ</b><span>nu</span></td><td><b>ふ</b><span>fu</span><small>hu</small></td><td><b>む</b><span>mu</span></td><td><b>ゆ</b><span>yu</span></td><td><b>る</b><span>ru</span></td><td><b>ん</b><span>nn</span></td></tr>
+        <tr><td><b>い</b><span>i</span></td><td><b>き</b><span>ki</span></td><td><b>し</b><span>si</span><small>または shi</small></td><td><b>ち</b><span>ti</span><small>または chi</small></td><td><b>に</b><span>ni</span></td><td><b>ひ</b><span>hi</span></td><td><b>み</b><span>mi</span></td><td class="empty"></td><td><b>り</b><span>ri</span></td><td><b>を</b><span>wo</span></td></tr>
+        <tr><td><b>う</b><span>u</span></td><td><b>く</b><span>ku</span></td><td><b>す</b><span>su</span></td><td><b>つ</b><span>tu</span><small>または tsu</small></td><td><b>ぬ</b><span>nu</span></td><td><b>ふ</b><span>fu</span><small>または hu</small></td><td><b>む</b><span>mu</span></td><td><b>ゆ</b><span>yu</span></td><td><b>る</b><span>ru</span></td><td><b>ん</b><span>nn</span></td></tr>
         <tr><td><b>え</b><span>e</span></td><td><b>け</b><span>ke</span></td><td><b>せ</b><span>se</span></td><td><b>て</b><span>te</span></td><td><b>ね</b><span>ne</span></td><td><b>へ</b><span>he</span></td><td><b>め</b><span>me</span></td><td class="empty"></td><td><b>れ</b><span>re</span></td><td class="empty"></td></tr>
         <tr><td><b>お</b><span>o</span></td><td><b>こ</b><span>ko</span></td><td><b>そ</b><span>so</span></td><td><b>と</b><span>to</span></td><td><b>の</b><span>no</span></td><td><b>ほ</b><span>ho</span></td><td><b>も</b><span>mo</span></td><td><b>よ</b><span>yo</span></td><td><b>ろ</b><span>ro</span></td><td class="empty"></td></tr>
       </tbody>
     </table>
 
-    <p class="sheet-title">濁る音・半濁音（が・ざ・だ・ば・ぱ）と、小さい字</p>
+    <p class="sheet-title">「が」「ぱ」のような音と、小さい「ぁ」「ゃ」「っ」</p>
     <table class="kana">
-      <thead><tr><th>が行</th><th>ざ行</th><th>だ行</th><th>ば行</th><th>ぱ行</th><th colspan="2">小さい字（x でも l でも可）</th></tr></thead>
+      <thead><tr><th>が行</th><th>ざ行</th><th>だ行</th><th>ば行</th><th>ぱ行</th><th colspan="2">小さい字だけを打つとき</th></tr></thead>
       <tbody>
         <tr><td><b>が</b><span>ga</span></td><td><b>ざ</b><span>za</span></td><td><b>だ</b><span>da</span></td><td><b>ば</b><span>ba</span></td><td><b>ぱ</b><span>pa</span></td><td><b>ぁ</b><span>xa</span></td><td><b>ゃ</b><span>xya</span></td></tr>
-        <tr><td><b>ぎ</b><span>gi</span></td><td><b>じ</b><span>ji</span><small>zi</small></td><td><b>ぢ</b><span>di</span></td><td><b>び</b><span>bi</span></td><td><b>ぴ</b><span>pi</span></td><td><b>ぃ</b><span>xi</span></td><td><b>ゅ</b><span>xyu</span></td></tr>
+        <tr><td><b>ぎ</b><span>gi</span></td><td><b>じ</b><span>ji</span><small>または zi</small></td><td><b>ぢ</b><span>di</span></td><td><b>び</b><span>bi</span></td><td><b>ぴ</b><span>pi</span></td><td><b>ぃ</b><span>xi</span></td><td><b>ゅ</b><span>xyu</span></td></tr>
         <tr><td><b>ぐ</b><span>gu</span></td><td><b>ず</b><span>zu</span></td><td><b>づ</b><span>du</span></td><td><b>ぶ</b><span>bu</span></td><td><b>ぷ</b><span>pu</span></td><td><b>ぅ</b><span>xu</span></td><td><b>ょ</b><span>xyo</span></td></tr>
         <tr><td><b>げ</b><span>ge</span></td><td><b>ぜ</b><span>ze</span></td><td><b>で</b><span>de</span></td><td><b>べ</b><span>be</span></td><td><b>ぺ</b><span>pe</span></td><td><b>ぇ</b><span>xe</span></td><td><b>っ</b><span>xtu</span></td></tr>
         <tr><td><b>ご</b><span>go</span></td><td><b>ぞ</b><span>zo</span></td><td><b>ど</b><span>do</span></td><td><b>ぼ</b><span>bo</span></td><td><b>ぽ</b><span>po</span></td><td><b>ぉ</b><span>xo</span></td><td class="empty"></td></tr>
@@ -169,12 +169,12 @@ table.kana td small { display: block; font-family: 'Courier New', Consolas, mono
     <table class="kana">
       <thead><tr><th>きゃ行</th><th>しゃ行</th><th>ちゃ行</th><th>にゃ行</th><th>ひゃ行</th><th>みゃ行</th><th>りゃ行</th><th>ぎゃ行</th><th>じゃ行</th><th>びゃ行</th></tr></thead>
       <tbody>
-        <tr><td><b>きゃ</b><span>kya</span></td><td><b>しゃ</b><span>sha</span><small>sya</small></td><td><b>ちゃ</b><span>cha</span><small>tya</small></td><td><b>にゃ</b><span>nya</span></td><td><b>ひゃ</b><span>hya</span></td><td><b>みゃ</b><span>mya</span></td><td><b>りゃ</b><span>rya</span></td><td><b>ぎゃ</b><span>gya</span></td><td><b>じゃ</b><span>ja</span><small>jya</small></td><td><b>びゃ</b><span>bya</span></td></tr>
-        <tr><td><b>きゅ</b><span>kyu</span></td><td><b>しゅ</b><span>shu</span><small>syu</small></td><td><b>ちゅ</b><span>chu</span><small>tyu</small></td><td><b>にゅ</b><span>nyu</span></td><td><b>ひゅ</b><span>hyu</span></td><td><b>みゅ</b><span>myu</span></td><td><b>りゅ</b><span>ryu</span></td><td><b>ぎゅ</b><span>gyu</span></td><td><b>じゅ</b><span>ju</span><small>jyu</small></td><td><b>びゅ</b><span>byu</span></td></tr>
-        <tr><td><b>きょ</b><span>kyo</span></td><td><b>しょ</b><span>sho</span><small>syo</small></td><td><b>ちょ</b><span>cho</span><small>tyo</small></td><td><b>にょ</b><span>nyo</span></td><td><b>ひょ</b><span>hyo</span></td><td><b>みょ</b><span>myo</span></td><td><b>りょ</b><span>ryo</span></td><td><b>ぎょ</b><span>gyo</span></td><td><b>じょ</b><span>jo</span><small>jyo</small></td><td><b>びょ</b><span>byo</span></td></tr>
+        <tr><td><b>きゃ</b><span>kya</span></td><td><b>しゃ</b><span>sha</span><small>または sya</small></td><td><b>ちゃ</b><span>cha</span><small>または tya</small></td><td><b>にゃ</b><span>nya</span></td><td><b>ひゃ</b><span>hya</span></td><td><b>みゃ</b><span>mya</span></td><td><b>りゃ</b><span>rya</span></td><td><b>ぎゃ</b><span>gya</span></td><td><b>じゃ</b><span>ja</span><small>または jya</small></td><td><b>びゃ</b><span>bya</span></td></tr>
+        <tr><td><b>きゅ</b><span>kyu</span></td><td><b>しゅ</b><span>shu</span><small>または syu</small></td><td><b>ちゅ</b><span>chu</span><small>または tyu</small></td><td><b>にゅ</b><span>nyu</span></td><td><b>ひゅ</b><span>hyu</span></td><td><b>みゅ</b><span>myu</span></td><td><b>りゅ</b><span>ryu</span></td><td><b>ぎゅ</b><span>gyu</span></td><td><b>じゅ</b><span>ju</span><small>または jyu</small></td><td><b>びゅ</b><span>byu</span></td></tr>
+        <tr><td><b>きょ</b><span>kyo</span></td><td><b>しょ</b><span>sho</span><small>または syo</small></td><td><b>ちょ</b><span>cho</span><small>または tyo</small></td><td><b>にょ</b><span>nyo</span></td><td><b>ひょ</b><span>hyo</span></td><td><b>みょ</b><span>myo</span></td><td><b>りょ</b><span>ryo</span></td><td><b>ぎょ</b><span>gyo</span></td><td><b>じょ</b><span>jo</span><small>または jyo</small></td><td><b>びょ</b><span>byo</span></td></tr>
       </tbody>
     </table>
-    <p class="note">下の小さい字は、同じ字になる別の打ち方です。どちらで打ってもかまいません。</p>
+    <p class="note">「または」と書いてあるのは、同じ字になる別の打ち方です。どちらで打ってもかまいません。<span class="screen-only">小さい「ぁ」「ゃ」「っ」は、ふつうは前の字とまとめて打ちます（「しゃ」＝sha、「きって」＝kitte）。小さい字だけを出したいときに、先頭に x を付けます（l でも同じ）。</span></p>
   </section>
 
   <div class="after">
@@ -186,6 +186,9 @@ table.kana td small { display: block; font-family: 'Courier New', Consolas, mono
     <h2>ローマ字入力で、つまずきやすいところ</h2>
     <h3>「っ」（小さい「つ」）の打ち方</h3>
     <p>「っ」のあとに来る字の、最初のキーを1回多く打ちます。「きって」なら <code>ki</code> ＋ <code>t</code> ＋ <code>te</code> で <code>kitte</code> です。「っ」だけを出したいときは <code>xtu</code>（または <code>ltu</code>）と打ちます。</p>
+    <h3>小さい「ゃ」「ゅ」「ょ」「ぁ」の打ち方</h3>
+    <p>「しゃ」「きょ」のような音は、2文字をまとめて打ちます。「しゃ」は <code>sha</code>、「きょ」は <code>kyo</code> です。小さい字を1つずつ打つ必要はありません。</p>
+    <p>小さい字だけを出したいとき（「ぁ」「ゃ」など）は、先頭に <code>x</code> を付けて打ちます。「ぁ」は <code>xa</code>、「ゃ」は <code>xya</code> です。<code>x</code> の代わりに <code>l</code> を使っても同じ字になります。</p>
     <h3>「ん」の打ち方</h3>
     <p><code>nn</code> と2回打つと、いつでも「ん」になります。「ほんを」「こんにちは」のように、「ん」のあとが「あいうえお」「な行」「や行」のときは、2回打たないと別の字になってしまいます。文の最後の「ん」も2回です。迷ったら <code>nn</code> と覚えておけば間違いません。</p>
     <h3>「を」と「ぢ」「づ」</h3>
