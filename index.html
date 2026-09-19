@@ -777,6 +777,17 @@ header{background:#c2451a;padding:10px 20px}
 .card-hint{font-size:1rem;color:#333}
 .kb-toggle{font-size:1rem;color:#222}
 .kb-finger{color:#222}
+/* ローマ字ガイドはキーボードの図のキー（大文字）に合わせて大文字で見せる */
+.tok .rguide,.romaji-bar{text-transform:uppercase}
+.rg-sub{text-transform:uppercase}
+/* 人差し指の置き場所（F と J）をいつでも分かるように */
+.kb-key.kb-home{background:#fff6ea;border-color:#e0b98c}
+.kb-key.kb-home::after{width:16px;height:4px;background:#c98a4b;bottom:4px;margin-left:-8px}
+.kb-key.kb-next.kb-home{background:#d9531f;border-color:#b0391a}
+.kb-fg.kb-fg-home::after{content:"";position:absolute;left:50%;top:6px;width:14px;height:4px;margin-left:-7px;background:#c98a4b;border-radius:2px}
+.kb-fg.on.kb-fg-home::after{background:#fff}
+.kb-fg{overflow:hidden}
+.kb-note-home{border-bottom:4px solid #c98a4b;font-weight:bold}
 </style>
 </head>
 <body>
@@ -911,7 +922,7 @@ header{background:#c2451a;padding:10px 20px}
       <div class="kb-finger" id="kb-finger" aria-live="polite"></div>
       <div class="kb" id="kb" aria-hidden="true"></div>
       <div class="kb-fingers" id="kb-fingers" aria-hidden="true"></div>
-      <p class="kb-note"><span class="kb-note-key">オレンジのキー</span>を、<span class="kb-note-finger">濃くなった指</span>で押します。打ったら人差し指を <b>F</b>・<b>J</b> に戻します。</p>
+      <p class="kb-note"><span class="kb-note-key">オレンジのキー</span>を、<span class="kb-note-finger">濃くなった指</span>で押します。打ったら人差し指を <b class="kb-note-home">F</b>・<b class="kb-note-home">J</b> に戻します。</p>
       <div class="kb-tools"><button class="kb-toggle" type="button" id="kb-toggle" onclick="toggleKeyboard()">キーボードの図をかくす</button></div>
     </div>
   </div>
@@ -1542,7 +1553,7 @@ function drawHands(activeNames) {
   const row = document.getElementById('kb-fingers');
   if (!kb || !row || !kb.offsetWidth) return;
   if (row.childElementCount !== HAND_FINGERS.length) {
-    row.innerHTML = HAND_FINGERS.map(([name]) => '<span class="kb-fg" data-n="' + name + '"></span>').join('');
+    row.innerHTML = HAND_FINGERS.map(([name]) => '<span class="kb-fg' + (/人差し指/.test(name) ? ' kb-fg-home' : '') + '" data-n="' + name + '"></span>').join('');
   }
   const box = kb.getBoundingClientRect();
   const space = kbKeys('space')[0];

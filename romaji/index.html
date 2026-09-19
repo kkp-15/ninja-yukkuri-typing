@@ -83,9 +83,9 @@ table.kana { width: 100%; border-collapse: collapse; table-layout: fixed; margin
 table.kana th, table.kana td { border: 1px solid #bfb29a; text-align: center; padding: 4px 2px; vertical-align: middle; }
 table.kana th { background: #f3ece0; font-size: .95rem; font-weight: normal; }
 table.kana td b { display: block; font-size: 1.75rem; line-height: 1.2; font-weight: bold; }
-table.kana td span { display: block; font-family: 'Courier New', Consolas, monospace; font-size: 1.35rem; font-weight: bold; color: #b0391a; letter-spacing: .5px; }
+table.kana td span { text-transform: uppercase; display: block; font-family: 'Courier New', Consolas, monospace; font-size: 1.35rem; font-weight: bold; color: #b0391a; letter-spacing: .5px; }
 table.kana td.empty { background: #faf7f2; }
-table.kana td small { display: block; font-family: 'Courier New', Consolas, monospace; font-size: .95rem; color: #444; white-space: nowrap; }
+table.kana td small { text-transform: uppercase; display: block; font-family: 'Courier New', Consolas, monospace; font-size: .95rem; color: #444; white-space: nowrap; }
 .rules { border: 2px solid #d9531f; padding: 10px 14px; margin: 6px 0 16px; }
 .rules p { margin: 3px 0; font-size: 1.1rem; }
 .rules code, p code, li code { font-family: 'Courier New', Consolas, monospace; font-weight: bold; color: #b0391a; font-size: 1.15em; }
@@ -174,7 +174,7 @@ table.kana td small { display: block; font-family: 'Courier New', Consolas, mono
         <tr><td><b>きょ</b><span>kyo</span></td><td><b>しょ</b><span>sho</span><small>または syo</small></td><td><b>ちょ</b><span>cho</span><small>または tyo</small></td><td><b>にょ</b><span>nyo</span></td><td><b>ひょ</b><span>hyo</span></td><td><b>みょ</b><span>myo</span></td><td><b>りょ</b><span>ryo</span></td><td><b>ぎょ</b><span>gyo</span></td><td><b>じょ</b><span>jo</span><small>または jyo</small></td><td><b>びょ</b><span>byo</span></td></tr>
       </tbody>
     </table>
-    <p class="note">「または」と書いてあるのは、同じ字になる別の打ち方です。どちらで打ってもかまいません。<span class="screen-only">小さい「ぁ」「ゃ」「っ」は、ふつうは前の字とまとめて打ちます（「しゃ」＝sha、「きって」＝kitte）。小さい字だけを出したいときに、先頭に x を付けます（l でも同じ）。</span></p>
+    <p class="note">表はキーボードの刻印に合わせて大文字で書いていますが、<b>打つときは小文字のままで大丈夫です</b>（Shift や Caps は使いません）。「または」と書いてあるのは、同じ字になる別の打ち方です。どちらで打ってもかまいません。<span class="screen-only">小さい「ぁ」「ゃ」「っ」は、ふつうは前の字とまとめて打ちます（「しゃ」＝sha、「きって」＝kitte）。小さい字だけを出したいときに、先頭に x を付けます（l でも同じ）。</span></p>
   </section>
 
   <div class="after">
@@ -195,6 +195,8 @@ table.kana td small { display: block; font-family: 'Courier New', Consolas, mono
     <p>「を」は <code>wo</code>、「ぢ」は <code>di</code>、「づ」は <code>du</code> と打ちます。「お」「じ」「ず」と同じ音ですが、キーは違います。</p>
     <h3>のばす音「ー」と、「、」「。」</h3>
     <p>のばす音「ー」は、キーボード上の段の右のほうにある <code>-</code>（ほ）のキーです。「、」は <code>,</code>（ね）、「。」は <code>.</code>（る）のキーです。</p>
+    <h3>キーの文字は大文字だけど、大文字で打つの？</h3>
+    <p>いいえ。キーボードには大文字が刻まれていますが、そのまま押せば小文字が入ります。日本語を打つときに Shift キーや Caps Lock を使う必要はありません。</p>
     <h3>打ったのに英字のまま出るとき</h3>
     <p>文字の入力が「英数」になっていると、ローマ字がそのまま出ます。Windows はキーボード左上の「半角/全角」キー、Mac はスペースキーの右の「かな」キーを押すと、ひらがなに切り替わります。</p>
 
