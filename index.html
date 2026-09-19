@@ -770,6 +770,14 @@ header{background:#c2451a;padding:10px 20px}
 .kb-hand{opacity:.17;fill:#9a6a44;stroke:#9a6a44;stroke-linecap:round}
 .kb-hand-on{opacity:.55;stroke:#d9531f;stroke-linecap:round}
 @media (prefers-reduced-motion:no-preference){.kb-hand-on{transition:opacity .15s}}
+/* 練習画面の説明文を読める大きさ・濃さに（キーボード図の下・問題の上） */
+.kb-note{font-size:1.05rem;color:#222;line-height:1.7;margin-top:8px}
+.kb-note b{font-size:1.1em}
+.kb-note-key{display:inline-block;background:#d9531f;color:#fff;border-radius:4px;padding:0 6px;font-weight:bold}
+.kb-note-finger{font-weight:bold;color:#b0391a;border-bottom:3px solid rgba(217,83,31,.55)}
+.card-hint{font-size:1rem;color:#333}
+.kb-toggle{font-size:1rem;color:#222}
+.kb-finger{color:#222}
 </style>
 </head>
 <body>
@@ -903,7 +911,7 @@ header{background:#c2451a;padding:10px 20px}
     <div class="kb-wrap" id="kb-wrap">
       <div class="kb-finger" id="kb-finger" aria-live="polite"></div>
       <div class="kb" id="kb" aria-hidden="true"></div>
-      <p class="kb-note">色のついたキーが、つぎに打つキーです。F と J には小さな出っぱりがあります。</p>
+      <p class="kb-note"><span class="kb-note-key">オレンジのキー</span>を、<span class="kb-note-finger">濃くなった指</span>で押します。打ったら人差し指を <b>F</b>・<b>J</b> に戻します。</p>
       <div class="kb-tools"><button class="kb-toggle" type="button" id="kb-toggle" onclick="toggleKeyboard()">キーボードの図をかくす</button></div>
     </div>
   </div>
