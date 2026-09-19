@@ -47,7 +47,7 @@
       "offers": {"@type":"Offer","price":"0","priceCurrency":"JPY"},
       "audience": {"@type":"Audience","audienceType":"パソコン初心者・シニア・中高年"},
       "datePublished": "2026-06-07",
-      "dateModified": "2026-09-19",
+      "dateModified": "2026-09-20",
       "author": {"@type":"Organization","name":"web忍者の砦","url":"https://kkpwebninja.com/"}
     },
     {
@@ -57,6 +57,8 @@
         {"@type":"Question","name":"時間制限はありますか？","acceptedAnswer":{"@type":"Answer","text":"時間制限はありません。1問ずつ自分のペースで練習できます。"}},
         {"@type":"Question","name":"ローマ字が分からなくても練習できますか？","acceptedAnswer":{"@type":"Answer","text":"画面にローマ字ガイドが表示されるため、見ながら入力できます。"}},
         {"@type":"Question","name":"どのキーをどの指で打つか分かりません。","acceptedAnswer":{"@type":"Answer","text":"練習画面の下にキーボードの図が出ます。つぎに打つキーに色がつき、「左手の人差し指で F」のように使う指も文字で表示します。図は「キーボードの図をかくす」で消せます。"}},
+        {"@type":"Question","name":"60代・70代からでも、手元を見ずに打てるようになりますか？","acceptedAnswer":{"@type":"Answer","text":"年齢で決まるものではありません。ただ、急ぐと手元を見る癖が戻りやすいので、時間制限のない練習でゆっくり進めるのが向いています。人差し指を F と J に置き、練習画面のキーボードの図で光るキーと使う指を確かめながら打つと、キーの場所を少しずつ覚えられます。慣れたら図をかくして練習してください。"}},
+        {"@type":"Question","name":"ローマ字の表を印刷できますか？","acceptedAnswer":{"@type":"Answer","text":"できます。ローマ字入力の早見表のページで、大きな文字の表がA4用紙1枚に印刷されます。"}},
         {"@type":"Question","name":"成績は保存されますか？","acceptedAnswer":{"@type":"Answer","text":"直近5回の成績と最高記録を、この端末のブラウザ内に保存します。"}}
       ]
     }
@@ -736,6 +738,22 @@ header{background:#c2451a;padding:10px 20px}
 .yt-links a{font-size:.95rem;border-radius:6px;background:#fff;border:1px solid #9bbfa6;color:#22603a;padding:8px 14px}
 .yt-pr{font-size:.85rem;color:#666;text-align:left}
 .yt-item{border-top-color:#e0d5c3}
+.chart-print{margin:0 0 10px;font-size:1.05rem}
+.chart-print a{color:#1a5fb4;text-decoration:underline;font-weight:bold}
+.seo-guide a{color:#1a5fb4;text-decoration:underline}
+/* ===== 2026-09-20 文字の見分け（大きさはそのまま・色で分ける）
+   打ち終わり＝落ち着いた緑／いま打つ字＝薄い黄色の地にオレンジ／これから＝黒。つぎのキーはキーボードの図と同じオレンジの札 */
+.tok{border-radius:6px}
+.tok.done .kana{color:#5f9565}
+.tok.done .rguide{color:#5f9565}
+.tok.curr{background:#fff1c9;border-bottom-color:#d9531f;box-shadow:0 0 0 2px #f2c46b inset}
+.tok.curr .kana{color:#c2451a}
+.tok.pend .kana{color:#1f1f1f}
+.tok.pend .rguide{color:#4a4a4a}
+.rg-done{color:#2e7d32}
+.rg-next{display:inline-block;background:#d9531f;color:#fff;border-radius:4px;padding:0 3px;margin:0 1px}
+.rg-left{color:#1f1f1f}
+.rb-done{color:#2e7d32}
 </style>
 </head>
 <body>
@@ -781,11 +799,12 @@ header{background:#c2451a;padding:10px 20px}
     <details class="chart-wrap">
       <summary>「っ」「ん」の打ち方とローマ字の表</summary>
       <div class="chart-inner">
+        <p class="chart-print"><a href="/romaji/">大きな文字の早見表を印刷する（A4・1枚）</a></p>
         <div class="rules-box">
       <p>
         ローマ字入力で打ちます。画面に表示されたひらがなをキーボードで入力してください。<br>
         <strong>「っ」</strong> は、つぎの文字の最初のキーを <strong>1回多く</strong> 打ちます。（例：きって → kitte、ゆっくり → yukkuri）<strong>xtu</strong> や <strong>ltu</strong> でも入力できます。<br>
-        <strong>「ん」</strong> は <strong>nn</strong> と入力します（次が母音のとき）。それ以外は <strong>n</strong> 1つでもOK。<br>
+        <strong>「ん」</strong> は <strong>nn</strong> と2回打ちます。あとに あ行・な行・や行 が続かなければ <strong>n</strong> 1つでもOK（文の最後の「ん」は <strong>nn</strong>）。<br>
         <strong>「しゃ」「ちょ」</strong> などは 2文字まとめて入力します。（例：しょ → sho）
       </p>
         </div>
@@ -804,7 +823,7 @@ header{background:#c2451a;padding:10px 20px}
           <tbody>
             <tr><td>は</td><td>ha</td><td>ま</td><td>ma</td><td>や</td><td>ya</td><td>ら</td><td>ra</td><td>わ</td><td>wa</td></tr>
             <tr><td>ひ</td><td>hi</td><td>み</td><td>mi</td><td>　</td><td>　</td><td>り</td><td>ri</td><td>を</td><td>wo</td></tr>
-            <tr><td>ふ</td><td>fu</td><td>む</td><td>mu</td><td>ゆ</td><td>yu</td><td>る</td><td>ru</td><td>ん</td><td>n / nn</td></tr>
+            <tr><td>ふ</td><td>fu / hu</td><td>む</td><td>mu</td><td>ゆ</td><td>yu</td><td>る</td><td>ru</td><td>ん</td><td>n / nn</td></tr>
             <tr><td>へ</td><td>he</td><td>め</td><td>me</td><td>　</td><td>　</td><td>れ</td><td>re</td><td>っ</td><td>xtu / ltu</td></tr>
             <tr><td>ほ</td><td>ho</td><td>も</td><td>mo</td><td>よ</td><td>yo</td><td>ろ</td><td>ro</td><td>　</td><td>　</td></tr>
           </tbody>
@@ -922,8 +941,8 @@ header{background:#c2451a;padding:10px 20px}
 
 
 <section class="seo-guide" aria-labelledby="guide-heading">
-  <h2 id="guide-heading">シニア・中高年向けタイピング練習の進め方</h2>
-  <p class="doc-date">公開 2026年6月7日／更新 2026年9月19日</p>
+  <h2 id="guide-heading">シニア・高齢者のタイピング練習の進め方</h2>
+  <p class="doc-date">公開 2026年6月7日／更新 2026年9月20日</p>
   <p>「ゆっくりタイピング」は、<strong>シニア・中高年のパソコン初心者</strong>が、時間に追われずローマ字入力を練習できる無料サイトです。登録は必要ありません。画面右上の「文字を大きく」を押すと、説明や練習文字をさらに見やすくできます。</p>
   <h3>毎日5問から始めましょう</h3>
   <ol>
@@ -933,6 +952,24 @@ header{background:#c2451a;padding:10px 20px}
   </ol>
   <h3>上達しやすい姿勢と指の置き方</h3>
   <p>背中を丸めすぎず、肘がほぼ直角になる高さにキーボードを置きます。左手の人差し指をF、右手の人差し指をJの突起に置く「ホームポジション」を意識すると、少しずつ手元を見ないで打てるようになります。</p>
+  <h3>60代・70代からのブラインドタッチ（手元を見ずに打つ）</h3>
+  <p>ブラインドタッチは、いきなり目指さなくて大丈夫です。次の順で、一つずつ進めてください。</p>
+  <ol>
+    <li><strong>まずは手元を見てよい。</strong>練習画面の下のキーボードの図で、つぎに打つキーが光ります。図と手元を見比べながら、キーの場所を覚えます。</li>
+    <li><strong>人差し指を F と J に置く。</strong>この2つのキーには小さな出っぱりがあり、見なくても指で分かります。1問打つごとに、指をここへ戻します。</li>
+    <li><strong>図の案内どおりの指で打つ。</strong>「左手の中指で E」のように、使う指も文字で出ます。最初は遅くなりますが、同じ指で打つほうが早く覚えられます。</li>
+    <li><strong>慣れたら図をかくす。</strong>練習画面の「キーボードの図をかくす」で消して、画面だけを見て打ちます。</li>
+  </ol>
+  <p>時間制限はないので、1問にどれだけ時間がかかってもかまいません。正確さが上がってから、少しずつ速くなっていきます。</p>
+  <h3>ローマ字の表を印刷して横に置く</h3>
+  <p>ローマ字の打ち方を覚えるまでは、表を見ながら打つのが近道です。<a href="/romaji/">ローマ字入力の早見表（大きな文字・印刷用）</a>は、A4用紙1枚に大きな文字で印刷できます。「っ」「ん」「ー」の打ち方も載せています。</p>
+  <h3>ご家族・パソコン教室の方へ</h3>
+  <ul>
+    <li>最初は「はじめて・5問」から。1回が数分で終わるので、疲れる前に区切れます。</li>
+    <li>結果の表に「前回」の記録が並びます。速さより「正確さ」が上がっていることを一緒に確かめてください。</li>
+    <li>ローマ字の早見表は、受講生への配布や、ご自宅でパソコンの横に置く用にお使いください。</li>
+    <li>登録も名前の入力もいりません。記録はその端末のブラウザの中にだけ残ります。</li>
+  </ul>
   <h3>この練習が向いている方</h3>
   <ul>
     <li>パソコンを始めたばかりで、ローマ字入力に自信がない方</li>
@@ -972,6 +1009,8 @@ header{background:#c2451a;padding:10px 20px}
   <details><summary>どの難しさから始めればいいですか？</summary><p>キーボードにまだ慣れていない方は「はじめて」（短い単語）から。あいさつ文が打てるようになったら「ふつう」、文章の速さを上げたい方は「むずかしい」へ進んでください。</p></details>
   <details><summary>ローマ字がうろ覚えでも大丈夫ですか？</summary><p>画面にローマ字ガイドが出るので、見ながら打てば自然に覚えられます。「っ」「ん」など迷いやすい入力は上の「「っ」「ん」の打ち方とローマ字の表」にまとめてあります。</p></details>
   <details><summary>どのキーをどの指で打つか分かりません。</summary><p>練習画面の下にキーボードの図が出ます。つぎに打つキーに色がつき、「左手の人差し指で F」のように使う指も文字で表示します。慣れてきたら「キーボードの図をかくす」で消して、手元を見ない練習に進めます。</p></details>
+  <details><summary>60代・70代からでも、手元を見ずに打てるようになりますか？</summary><p>年齢で決まるものではありません。ただ、急ぐと手元を見る癖が戻りやすいので、時間制限のない練習でゆっくり進めるのが向いています。人差し指を F と J に置き、練習画面のキーボードの図で光るキーと使う指を確かめながら打つと、キーの場所を少しずつ覚えられます。慣れたら図をかくして練習してください。</p></details>
+  <details><summary>ローマ字の表を印刷できますか？</summary><p>できます。<a href="/romaji/">ローマ字入力の早見表</a>のページの「この表を印刷する」で、大きな文字の表がA4用紙1枚に印刷されます。</p></details>
   <details><summary>スマホでも練習できますか？</summary><p>できますが、このサイトは物理キーボードでの練習を想定しています。パソコンや、タブレット＋外付けキーボードでの利用をおすすめします。</p></details>
   <details><summary>成績は保存されますか？</summary><p>直近5回の成績と最高記録を、この端末のブラウザ内に保存します。名前やメールアドレスなどの個人情報は必要ありません。</p></details>
 </section>
@@ -1076,7 +1115,7 @@ const SINGLE = {
   'さ':['sa'],'し':['si','shi'],'す':['su'],'せ':['se'],'そ':['so'],
   'た':['ta'],'ち':['ti','chi'],'つ':['tu','tsu'],'て':['te'],'と':['to'],
   'な':['na'],'に':['ni'],'ぬ':['nu'],'ね':['ne'],'の':['no'],
-  'は':['ha'],'ひ':['hi'],'ふ':['fu'],'へ':['he'],'ほ':['ho'],
+  'は':['ha'],'ひ':['hi'],'ふ':['fu','hu'],'へ':['he'],'ほ':['ho'],
   'ま':['ma'],'み':['mi'],'む':['mu'],'め':['me'],'も':['mo'],
   'や':['ya'],'ゆ':['yu'],'よ':['yo'],
   'ら':['ra'],'り':['ri'],'る':['ru'],'れ':['re'],'ろ':['ro'],
@@ -1087,6 +1126,9 @@ const SINGLE = {
   'ば':['ba'],'び':['bi'],'ぶ':['bu'],'べ':['be'],'ぼ':['bo'],
   'ぱ':['pa'],'ぴ':['pi'],'ぷ':['pu'],'ぺ':['pe'],'ぽ':['po'],
   'ー':['-'],'、':[','],'。':['.'],'！':['!'],'？':['?'],
+  // 小さい字を単独で打つとき（x でも l でもよい。Windows・Mac の日本語入力と同じ）
+  'ぁ':['xa','la'],'ぃ':['xi','li'],'ぅ':['xu','lu'],'ぇ':['xe','le'],'ぉ':['xo','lo'],
+  'ゃ':['xya','lya'],'ゅ':['xyu','lyu'],'ょ':['xyo','lyo'],'ゎ':['xwa','lwa'],
 };
 const SMALL_KANA = new Set(['ぁ','ぃ','ぅ','ぇ','ぉ','っ','ゃ','ゅ','ょ','ゎ']);
 const VOWELS = new Set(['あ','い','う','え','お','ぁ','ぃ','ぅ','ぇ','ぉ']);
@@ -1099,7 +1141,8 @@ function needDoubleN(nextKana) {
   if (VOWELS.has(nextKana)) return true;
   if (NA_ROW.has(nextKana)) return true;
   if (YA_ROW.has(nextKana)) return true;
-  if (WA_ROW.has(nextKana)) return true;
+  // 「わ」「を」の前は n 1回で打てる（日本語入力と同じ）。「ん」が続くときだけ nn
+  if (nextKana === 'ん') return true;
   return false;
 }
 
@@ -1251,6 +1294,21 @@ function processKey(key) {
   if (tokIdx >= tokens.length) return;
   const k = key.toLowerCase();
   const tok = tokens[tokIdx];
+  // 「ん」を n 1回でも nn でも打てるようにする（日本語入力と同じ）。
+  // n を1回打った時点では確定させず、つぎのキーで決める
+  if (tok.kana === 'ん' && tok.opts.includes('n')) {
+    if (typed === '' && k === 'n') { typed = 'n'; totalKeys++; renderTokens(); updateRomajiBar(); return; }
+    if (typed === 'n') {
+      typedHistory += (k === 'n') ? 'nn' : 'n';
+      typed = '';
+      tokIdx++;
+      if (k === 'n') { totalKeys++; renderTokens(); updateRomajiBar(); if (tokIdx >= tokens.length) onDone(); return; }
+      renderTokens(); updateRomajiBar();
+      if (tokIdx >= tokens.length) { onDone(); return; }
+      processKey(k);
+      return;
+    }
+  }
   const attempt = typed + k;
 
   // Check complete match
@@ -1354,7 +1412,9 @@ function renderTokens() {
       const done = typed;
       const left = activeOpt.slice(done.length);
       const others = tok.opts.filter(o => o !== activeOpt);
-      let guideHtml = '<span class="rg-main"><span class="rg-done">' + done + '</span><span class="rg-left">' + left + '</span></span>';
+      // つぎに打つ1文字だけを、キーボードの図と同じ色の札にする
+      let guideHtml = '<span class="rg-main"><span class="rg-done">' + done + '</span>' +
+        (left ? '<span class="rg-next">' + left[0] + '</span><span class="rg-left">' + left.slice(1) + '</span>' : '') + '</span>';
       if (!typed && others.length) {
         guideHtml += others.map(o => '<span class="rg-sub">' + o + '</span>').join('');
       }
