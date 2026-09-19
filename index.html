@@ -792,6 +792,9 @@ header{background:#c2451a;padding:10px 20px}
 .kb-key.kb-enter-a{border-bottom:1px solid transparent;border-radius:6px 6px 0 0}
 .kb-key.kb-enter-b{margin-top:-4px;border-top:none;border-radius:0 0 6px 6px}
 .kb-key.kb-enter-a.kb-next,.kb-key.kb-enter-b.kb-next{border-color:#d9531f}
+.hint-row{min-height:30px;text-align:center;margin-bottom:6px}
+.type-hint{font-size:1.05rem;color:#b0391a;margin:0}
+.type-hint b{background:#fff1c9;padding:0 4px;border-radius:3px}
 </style>
 </head>
 <body>
@@ -913,6 +916,9 @@ header{background:#c2451a;padding:10px 20px}
     <div class="input-row">
       <div class="input-box" id="input-box" style="display:none"></div>
       <span class="miss-count" id="miss-count"></span>
+    </div>
+    <div class="hint-row">
+      <p class="type-hint" id="type-hint" role="status" aria-live="polite"></p>
     </div>
 
     <div class="btn-next-wrap">
@@ -1322,6 +1328,7 @@ function loadSentence() {
   document.getElementById('btn-next').classList.remove('ready');
   document.getElementById('enter-hint').classList.remove('show');
   document.getElementById('praise').textContent = '';
+  document.getElementById('type-hint').innerHTML = '';
   document.getElementById('praise').style.animation = 'none';
   updateProgress();
   renderTokens();
@@ -1376,6 +1383,7 @@ function processKey(key) {
   }
 
   // Miss
+  showTypeHint(tok, k);
   flashMissKey(k);
   totalMiss++;
   sentMiss++;
@@ -1615,6 +1623,26 @@ function updateMissCount() {
   document.getElementById('miss-count').textContent = sentMiss > 0 ? 'ミス: ' + sentMiss + '回' : '';
 }
 
+// 打ち間違えたときに、その場で理由を出す（「ん」のつまずきが多い）
+function showTypeHint(tok, k) {
+  const el = document.getElementById('type-hint');
+  if (!el) return;
+  const prev = tokIdx > 0 ? tokens[tokIdx - 1] : null;
+  let msg = '';
+  if (tok.kana === 'ん') {
+    msg = tok.opts.length === 1
+      ? '「ん」は <b>N を2回</b>です（つぎが あ行・な行・や行 のときと、文の最後）'
+      : '「ん」は <b>N</b> を打ちます（迷ったら2回でも大丈夫）';
+  } else if (prev && prev.kana === 'ん' && tok.opts[0][0] === 'n' && typed === '') {
+    // 「んの」「んに」など。N が3回続く
+    msg = '「ん」のあとの <b>' + tok.kana + '</b> は、もう一度 <b>N</b> からです（' + prev.kana + tok.kana + '＝NN' + tok.opts[0].toUpperCase() + '）';
+  } else if (tok.smallTsu) {
+    msg = '「っ」は、つぎの文字の最初のキーを <b>1回多く</b> 打ちます';
+  } else if (typed === '') {
+    msg = '<b>' + tok.kana + '</b> は <b>' + tok.opts[0].toUpperCase() + '</b> です';
+  }
+  el.innerHTML = msg;
+}
 function showResult() {
   const sec = Math.round((Date.now() - startTime) / 1000);
   const acc = totalKeys > 0
