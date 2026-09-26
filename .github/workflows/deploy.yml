@@ -36,6 +36,10 @@ jobs:
               "keyLocation": "https://yukkuri-typing.kkpwebninja.com/646dcacc821cbe2aa6cf10361d940ea9.txt",
               "urlList": [
                 "https://yukkuri-typing.kkpwebninja.com/",
-                "https://yukkuri-typing.kkpwebninja.com/romaji/"
+                "https://yukkuri-typing.kkpwebninja.com/romaji/",
+                "https://yukkuri-typing.kkpwebninja.com/60dai/",
+                "https://yukkuri-typing.kkpwebninja.com/kotsu/",
+                "https://yukkuri-typing.kkpwebninja.com/home-position/",
+                "https://yukkuri-typing.kkpwebninja.com/nou/"
               ]
             }' -w "\nHTTP %{http_code}\n"
