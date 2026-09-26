@@ -20,3 +20,22 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: "4.85.0"
           command: pages deploy . --project-name=ninja-yukkuri-typing --branch=main --commit-dirty=true
+
+      # Bing に「更新したよ」と伝える（IndexNow）。このサイトは流入の7割が Bing。
+      # 鍵は公開前提のもの（誰でも見られるファイルとして置いている）。秘密ではない。
+      # Google は IndexNow を使わないので、そちらは sitemap のまま。
+      # ページを足したら urlList と sitemap.xml の両方に入れる。
+      - name: Bing に更新を知らせる（IndexNow）
+        continue-on-error: true   # 通知に失敗しても公開自体は成功扱いにする
+        run: |
+          curl -sS -X POST https://api.indexnow.org/IndexNow \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d '{
+              "host": "yukkuri-typing.kkpwebninja.com",
+              "key": "646dcacc821cbe2aa6cf10361d940ea9",
+              "keyLocation": "https://yukkuri-typing.kkpwebninja.com/646dcacc821cbe2aa6cf10361d940ea9.txt",
+              "urlList": [
+                "https://yukkuri-typing.kkpwebninja.com/",
+                "https://yukkuri-typing.kkpwebninja.com/romaji/"
+              ]
+            }' -w "\nHTTP %{http_code}\n"
