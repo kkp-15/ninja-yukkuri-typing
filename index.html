@@ -810,6 +810,50 @@ body { background: #fff; }
 details.chart-wrap, section.senior-support, article.support-card { border-radius: 8px; }
 .guide-pic{display:block;width:160px;height:auto;margin:0 auto .6rem}
 @media (min-width:640px){.guide-pic{float:right;margin:0 0 .6rem 1.2rem}.seo-guide h3,.seo-guide h2{clear:both}}
+/* ===== 2026-09-30 続けて使うための仕組み（きょうの練習・上達の記録・練習した日・つぎの一歩・お気に入りの案内） ===== */
+.today-box{display:flex;align-items:center;flex-wrap:wrap;gap:6px 16px;margin:0 0 14px}
+.btn-today{font:inherit;font-size:1.25rem;font-weight:bold;padding:14px 26px;border-radius:8px;border:1px solid #b0391a;border-bottom-width:4px;background:#d9531f;color:#fff;cursor:pointer}
+.btn-today:active{transform:translateY(2px);border-bottom-width:2px}
+.btn-today:focus-visible,.btn-record:focus-visible,.btn-next-step:focus-visible{outline:3px solid #1a5fb4;outline-offset:2px}
+.today-desc{font-size:1.05rem;color:#333}
+.btn-record{font:inherit;font-size:1rem;font-weight:bold;padding:10px 16px;border-radius:8px;border:1px solid #bfb29a;background:#fff;color:#222;cursor:pointer}
+.btn-record:hover{background:#fff3ea}
+.result-btns .btn-record{padding:13px 24px;font-size:1.1rem}
+.result-growth{font-size:1.1rem;color:#222;line-height:1.7;margin:0 0 12px;padding:8px 0 8px 14px;border-left:5px solid #2e7d32}
+.result-growth b{color:#1b5e20}
+.growth-count{display:block;font-size:1rem;color:#444}
+.next-step{margin:0 0 16px;display:flex;align-items:center;flex-wrap:wrap;gap:8px 16px}
+.next-step-text{margin:0;font-size:1.05rem;color:#333;line-height:1.7;flex:1 1 300px}
+.btn-next-step{font:inherit;font-size:1.1rem;font-weight:bold;padding:12px 20px;border-radius:8px;border:1px solid #1668b2;background:#1668b2;color:#fff;cursor:pointer}
+@media (min-width:641px){.result-table th,.result-table td{padding:7px 14px}.result-title{margin-bottom:2px}.result-sub{margin-bottom:10px}}
+.next-step{margin:16px 0 0;padding-top:12px;border-top:1px solid #e0d5c3}
+.result-today{margin:12px 0 4px;font-size:1.05rem;color:#333;line-height:1.7}
+.bm-help{margin:10px 0 0;border-top:1px solid #e0d5c3;border-bottom:1px solid #e0d5c3;padding:10px 2px}
+.bm-help summary{cursor:pointer;font-size:1.05rem;color:#1a5fb4;text-decoration:underline}
+.bm-body{padding:8px 0 0;font-size:1.05rem;line-height:1.8;color:#222}
+.bm-body ol{padding-left:1.5rem;margin:4px 0 8px}
+.bm-body kbd{display:inline-block;border:1px solid #999;border-bottom-width:3px;border-radius:4px;padding:0 8px;font-family:inherit;font-weight:bold;background:#fff}
+#scr-record{max-width:760px;margin:0 auto}
+.record-title{font-size:1.7rem;color:#222;margin:0 0 6px}
+.record-lead{font-size:1.15rem;color:#222;margin:0 0 10px}
+.record-h{font-size:1.2rem;color:#222;border-bottom:2px solid #e0d5c3;padding-bottom:4px;margin:22px 0 8px}
+.record-note-s{font-size:1rem;color:#444;margin:0 0 8px}
+.record-note{font-size:1.05rem;color:#333;line-height:1.8;margin:0 0 10px}
+.record-btns{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 4px}
+.record-btns .btn-retry,.record-btns .btn-back{font-size:1.05rem !important;padding:12px 20px}
+.record-status{font-size:1.05rem;color:#1b5e20;min-height:1.5em;margin:6px 0 0}
+table.cal{border-collapse:collapse;width:100%;max-width:560px;table-layout:fixed;background:#fff}
+table.cal th,table.cal td{border:1px solid #d9cdb8;text-align:center;padding:4px 2px;height:48px;vertical-align:top}
+table.cal th{background:#f3ece0;height:auto;font-size:1rem}
+.cal-d{display:block;font-size:.95rem;color:#555}
+.cal-mark{display:inline-block;min-width:26px;height:26px;line-height:26px;border-radius:50%;background:#2e7d32;color:#fff;font-weight:bold;font-size:.95rem}
+table.cal td.today{outline:3px solid #d9531f;outline-offset:-3px}
+table.cal td.future{background:#faf7f2}
+table.record-table{border-collapse:collapse;width:100%;background:#fff}
+table.record-table th,table.record-table td{border:1px solid #d9cdb8;padding:8px 10px;text-align:left;font-size:1.05rem;vertical-align:top}
+table.record-table thead th{background:#f3ece0;font-size:1rem}
+table.record-table small{display:block;font-size:.9rem;color:#555}
+@media (max-width:640px){table.record-table th,table.record-table td{padding:6px;font-size:.95rem}}
 </style>
 </head>
 <body>
@@ -825,6 +869,11 @@ details.chart-wrap, section.senior-support, article.support-card { border-radius
   <!-- ======= START SCREEN ======= -->
   <div id="scr-start">
     <h1 class="hero-title">ゆっくりタイピング</h1>
+
+    <div class="today-box hidden" id="today-box">
+      <button class="btn-today" type="button" id="btn-today" onclick="startToday()">きょうの練習をはじめる</button>
+      <span class="today-desc" id="today-desc"></span>
+    </div>
 
     <p class="level-heading">押すと、すぐ始まります</p>
     <div class="level-btns">
@@ -850,6 +899,7 @@ details.chart-wrap, section.senior-support, article.support-card { border-radius
         <button class="count-btn" type="button" aria-pressed="false" onclick="setPracticeCount(20,this)">20問</button>
       </div>
       <p class="best-summary" id="best-summary"></p>
+      <button class="btn-record" type="button" id="btn-record-start" onclick="openRecord('start')">練習の記録を見る</button>
     </section>
 
     <details class="chart-wrap">
@@ -966,12 +1016,31 @@ details.chart-wrap, section.senior-support, article.support-card { border-radius
           <tr><th scope="row">1分あたり</th><td><span id="r-kpm">0</span> キー</td><td id="p-kpm">—</td></tr>
         </tbody>
       </table>
-      <p class="result-note" id="result-note">この端末に記録を保存しました</p>
+      <p class="result-growth" id="result-growth"></p>
       <div class="result-btns">
         <button class="btn-retry" onclick="retryGame()">もういちど</button>
         <button class="btn-back" onclick="goStart()">レベルをかえる</button>
+        <button class="btn-record" type="button" onclick="openRecord('result')">練習の記録</button>
         <button class="btn-share" onclick="shareResult()">結果を共有</button>
       </div>
+      <div class="next-step" id="next-step">
+        <p class="next-step-text" id="next-step-text"></p>
+        <button class="btn-next-step hidden" type="button" id="btn-next-step" onclick="startNextStep()"></button>
+      </div>
+      <p class="result-today" id="result-today"></p>
+      <p class="result-note" id="result-note">この端末に記録を保存しました</p>
+      <details class="bm-help" id="bm-help">
+        <summary>つぎに来るときのために：このページを「お気に入り」に入れる方法</summary>
+        <div class="bm-body">
+          <p><b>Windows のパソコン</b>（Edge・Chrome）</p>
+          <ol>
+            <li>キーボードの左下の <kbd>Ctrl</kbd> を押したまま、<kbd>D</kbd> を押します。</li>
+            <li>小さな画面が出たら「完了」を押します。</li>
+            <li>つぎからは、画面の右上の「☆」のしるし、または「お気に入り」から、このページを開けます。</li>
+          </ol>
+          <p><b>Mac</b>：<kbd>command</kbd> を押したまま <kbd>D</kbd> を押し、「追加」を押します。</p>
+        </div>
+      </details>
       <div class="yt-shop">
         <div class="yt-shop-h">練習がはかどる道具</div>
       <div class="yt-item"><span class="yt-txt"><b>打ちやすいキーボード</b><small>キーが大きく浅いものは指の負担が少なく、初心者向きです</small></span><span class="yt-links"><a href="https://www.amazon.co.jp/s?k=%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%20%E6%9C%89%E7%B7%9A%20%E9%9D%99%E9%9F%B3%20%E6%97%A5%E6%9C%AC%E8%AA%9E%E9%85%8D%E5%88%97&tag=kkp15-22" target="_blank" rel="nofollow sponsored noopener">Amazon</a><a href="https://hb.afl.rakuten.co.jp/hgc/11008fdf.72a391c0.11008fe0.307a7b09/_RTLink144160?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%2520%25E6%259C%2589%25E7%25B7%259A%2520%25E9%259D%2599%25E9%259F%25B3%2520%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E9%2585%258D%25E5%2588%2597%2F&m=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%2520%25E6%259C%2589%25E7%25B7%259A%2520%25E9%259D%2599%25E9%259F%25B3%2520%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E9%2585%258D%25E5%2588%2597%2F" target="_blank" rel="nofollow sponsored noopener">楽天</a></span></div>
@@ -980,6 +1049,37 @@ details.chart-wrap, section.senior-support, article.support-card { border-radius
         <div class="yt-pr">PR・Amazon／楽天アフィリエイトのリンクです</div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- ======= RECORD SCREEN（練習の記録・この端末の中だけに保存） ======= -->
+  <div id="scr-record" class="hidden">
+    <div class="record-wrap">
+      <h2 class="record-title">練習の記録</h2>
+      <p class="record-lead" id="record-lead"></p>
+
+      <h3 class="record-h">練習した日</h3>
+      <p class="record-note-s">丸のついた日が、練習した日です。数字はその日に練習した回数です。</p>
+      <table class="cal" id="cal" aria-label="練習した日のカレンダー（最近5週間）"></table>
+
+      <h3 class="record-h">難しさごとの記録</h3>
+      <table class="record-table" id="record-levels"></table>
+
+      <h3 class="record-h">最近の練習（新しい順に10回）</h3>
+      <table class="record-table" id="record-recent"></table>
+
+      <div class="record-btns">
+        <button class="btn-retry" type="button" onclick="goStart()">練習にもどる</button>
+      </div>
+
+      <h3 class="record-h">記録の保存について</h3>
+      <p class="record-note">記録は、このパソコンのブラウザの中だけに保存しています。名前などの登録はいりません。そのかわり、ブラウザの「閲覧データの削除」をしたり、別のパソコンで開いたりすると、記録は見えません。心配なときは、ファイルに保存しておくと、あとで戻せます。</p>
+      <div class="record-btns">
+        <button class="btn-back" type="button" onclick="exportRecord()">記録をファイルに保存</button>
+        <button class="btn-back" type="button" onclick="document.getElementById('record-file').click()">保存したファイルから戻す</button>
+        <input type="file" id="record-file" accept=".json,application/json" class="hidden" onchange="importRecord(this)">
+      </div>
+      <p class="record-status" id="record-status" role="status" aria-live="polite"></p>
     </div>
   </div>
 
@@ -1292,6 +1392,7 @@ let totalKeys = 0;
 let startTime = null;
 let practiceCount = 10;
 let lastResultText = '';
+let resultShown = false;   // 1回の練習で結果を2回保存しないための目印
 const HISTORY_KEY = 'yukkuriTypingHistoryV2';
 const LARGE_TEXT_KEY = 'yukkuriTypingLargeText';
 
@@ -1321,13 +1422,25 @@ function readHistory() {
   try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); } catch (_) { return []; }
 }
 function renderStartStats() {
-  const history = readHistory();
+  const log = readLog();
   const box = document.getElementById('best-summary');
+  const recBtn = document.getElementById('btn-record-start');
+  const todayBox = document.getElementById('today-box');
   if (!box) return;
-  if (!history.length) { box.textContent = ''; return; }
-  const bestAcc = Math.max(...history.map(x => x.acc));
-  const bestKpm = Math.max(...history.map(x => x.kpm));
-  box.textContent = 'この端末の最高記録：正確さ ' + bestAcc + '%・1分 ' + bestKpm + 'キー';
+  if (!log.length) {
+    box.textContent = '';
+    recBtn.classList.add('hidden');
+    todayBox.classList.add('hidden');
+    return;
+  }
+  const today = log.filter(x => x.d === dayStr()).length;
+  box.textContent = '練習した日：これまで ' + practiceDays(log) + '日' + (today ? '（きょう ' + today + '回）' : '');
+  recBtn.classList.remove('hidden');
+  // 2回目からは「きょうの練習」をボタン1つで始められるようにする（5問・数分で終わる）
+  const plan = todayPlan(log);
+  document.getElementById('btn-today').textContent = 'きょうの練習をはじめる（' + LEVEL_NAME[plan.level] + '・5問）';
+  document.getElementById('today-desc').textContent = plan.why;
+  todayBox.classList.remove('hidden');
 }
 function trackEvent(name, params) {
   if (typeof gtag === 'function') gtag('event', name, params || {});
@@ -1359,6 +1472,7 @@ function startGame(level) {
   totalMiss = 0;
   totalKeys = 0;
   startTime = Date.now();
+  resultShown = false;
   showScreen('prac');
   loadSentence();
 }
@@ -1458,6 +1572,7 @@ function onDone() {
 }
 
 function nextSentence() {
+  if (resultShown) return;
   sentIdx++;
   if (sentIdx >= sentences.length) {
     showResult();
@@ -1474,6 +1589,9 @@ function showScreen(name) {
   document.getElementById('scr-start').classList.toggle('hidden', name !== 'start');
   document.getElementById('scr-prac').classList.toggle('hidden', name !== 'prac');
   document.getElementById('scr-result').classList.toggle('hidden', name !== 'result');
+  document.getElementById('scr-record').classList.toggle('hidden', name !== 'record');
+  if (name === 'start') renderStartStats();
+  window.scrollTo(0, 0);
 }
 
 function updateProgress() {
@@ -1689,6 +1807,8 @@ function showTypeHint(tok, k) {
   el.innerHTML = msg;
 }
 function showResult() {
+  if (resultShown) return;
+  resultShown = true;
   const sec = Math.round((Date.now() - startTime) / 1000);
   const acc = totalKeys > 0
     ? Math.min(100, Math.round(totalKeys / (totalKeys + totalMiss) * 100))
@@ -1700,14 +1820,21 @@ function showResult() {
   document.getElementById('r-kpm').textContent = kpm;
   document.getElementById('result-sub').textContent = '全' + sentences.length + '問完了しました！';
   const history = readHistory();
+  const log = readLog();
   // 前回（同じ難しさ・同じ問題数）の記録があれば横に並べる
-  const prev = history.find(h => h.level === curLevel && h.count === sentences.length);
+  const prev = log.slice().reverse().find(h => h.level === curLevel && h.count === sentences.length);
   document.getElementById('p-time').textContent = prev ? prev.sec + ' 秒' : '—';
   document.getElementById('p-miss').textContent = prev ? prev.miss + ' 回' : '—';
   document.getElementById('p-acc').textContent = prev ? prev.acc + ' %' : '—';
   document.getElementById('p-kpm').textContent = prev ? prev.kpm + ' キー' : '—';
   history.unshift({date:new Date().toISOString(),level:curLevel,count:sentences.length,sec:sec,miss:totalMiss,acc:acc,kpm:kpm});
-  localStorage.setItem(HISTORY_KEY, JSON.stringify(history.slice(0, 5)));
+  try { localStorage.setItem(HISTORY_KEY, JSON.stringify(history.slice(0, 5))); } catch (_) {}
+  const entry = {t: Date.now(), d: dayStr(), level: curLevel, count: sentences.length, sec: sec, miss: totalMiss, acc: acc, kpm: kpm};
+  const firstToday = !log.some(x => x.d === entry.d);
+  log.push(entry);
+  writeLog(log);
+  renderResultExtras(entry, log);
+  if (firstToday) trackEvent('typing_daily_first_complete', {practice_days: practiceDays(log), level: curLevel});
   lastResultText = 'ゆっくりタイピングで' + sentences.length + '問練習しました。正確さ' + acc + '%、1分あたり' + kpm + 'キー！';
   trackEvent('typing_complete', {level:curLevel,question_count:sentences.length,accuracy:acc,keys_per_minute:kpm});
   showScreen('result');
@@ -1728,15 +1855,240 @@ document.addEventListener('keydown', e => {
   const prac = document.getElementById('scr-prac');
   if (prac.classList.contains('hidden')) return;
   if (e.key.length !== 1) {
-    if (e.key === 'Enter' && tokIdx >= tokens.length) nextSentence();
+    // Enter は「つぎへ」ボタンにも届くので、ボタン側の動作は止める（止めないと2回進み、結果が2回保存される）
+    if (e.key === 'Enter' && tokIdx >= tokens.length) { e.preventDefault(); nextSentence(); }
     return;
   }
   if (e.ctrlKey || e.altKey || e.metaKey) return;
   processKey(e.key);
 });
+
+// ==================== 練習の記録（この端末の中だけ・ログインなし） ====================
+// 1回の練習ごとに1件。日ごとの回数・はじめての記録との比べ・カレンダーに使う。
+const LOG_KEY = 'yukkuriTypingLogV1';
+const LAST_VISIT_KEY = 'yukkuriTypingLastVisit';
+const LEVEL_NAME = {easy: 'はじめて', normal: 'ふつう', hard: 'むずかしい'};
+const LEVEL_NEXT = {easy: 'normal', normal: 'hard'};
+function dayStr(d) {
+  d = d || new Date();
+  const z = n => String(n).padStart(2, '0');
+  return d.getFullYear() + '-' + z(d.getMonth() + 1) + '-' + z(d.getDate());
+}
+function dayLabel(ds) {
+  const m = ds.split('-');
+  return Number(m[1]) + '月' + Number(m[2]) + '日';
+}
+function readLog() {
+  let log = [];
+  try { log = JSON.parse(localStorage.getItem(LOG_KEY) || '[]'); } catch (_) { log = []; }
+  if (!Array.isArray(log)) log = [];
+  if (!log.length) {
+    // 前からの記録（直近5回）を引き継ぐ。Enter の不具合で同じ結果が2件ずつ入っているので1件にまとめる
+    const old = readHistory().slice().reverse();
+    old.forEach(h => {
+      const t = Date.parse(h.date) || Date.now();
+      const dup = log.some(x => x.level === h.level && x.count === h.count && x.sec === h.sec && x.miss === h.miss && x.acc === h.acc && x.kpm === h.kpm && Math.abs(x.t - t) < 10000);
+      if (!dup) log.push({t: t, d: dayStr(new Date(t)), level: h.level, count: h.count, sec: h.sec, miss: h.miss, acc: h.acc, kpm: h.kpm});
+    });
+    if (log.length) writeLog(log);
+  }
+  return log.filter(x => x && x.level && x.d);
+}
+function writeLog(log) {
+  try { localStorage.setItem(LOG_KEY, JSON.stringify(log.slice(-1000))); } catch (_) {}
+}
+function practiceDays(log) {
+  return new Set(log.map(x => x.d)).size;
+}
+
+// つぎの一歩：同じ難しさで正確さ95%以上が3回続いたら、ひとつ上をすすめる。85%未満なら同じ難しさをもういちど。
+function nextStep(log, level) {
+  const same = log.filter(x => x.level === level);
+  const last3 = same.slice(-3);
+  const last = same[same.length - 1];
+  if (LEVEL_NEXT[level] && last3.length === 3 && last3.every(x => x.acc >= 95)) {
+    const to = LEVEL_NEXT[level];
+    return {kind: 'level_up', level: to, count: 5,
+      text: '「' + LEVEL_NAME[level] + '」で正確さ95%以上が3回つづきました。つぎは「' + LEVEL_NAME[to] + '」を5問、ためしてみませんか。',
+      btn: '「' + LEVEL_NAME[to] + '」を5問はじめる'};
+  }
+  if (last && last.acc < 85) {
+    return {kind: 'repeat', level: level, count: 5,
+      text: 'ミスが少し多めでした。キーボードの図で光るキーと、色の変わる指を見ながら、同じ「' + LEVEL_NAME[level] + '」をもういちど練習すると確実です。',
+      btn: '「' + LEVEL_NAME[level] + '」を5問もういちど'};
+  }
+  return {kind: 'keep', level: level, count: 5,
+    text: 'この調子です。同じ「' + LEVEL_NAME[level] + '」を続けると、キーの場所が手になじんできます。', btn: ''};
+}
+// きょうの練習：前回の難しさ（上がる目安を満たしていれば、ひとつ上）を5問
+function todayPlan(log) {
+  const last = log[log.length - 1];
+  const step = nextStep(log, last.level);
+  if (step.kind === 'level_up') return {level: step.level, why: '「' + LEVEL_NAME[last.level] + '」が安定してきたので、ひとつ上です'};
+  return {level: last.level, why: '前回のつづきです。数分で終わります'};
+}
+function startToday() {
+  const plan = todayPlan(readLog());
+  setPracticeCount(5, document.querySelectorAll('.count-btn')[0]);
+  trackEvent('typing_today_start', {level: plan.level});
+  startGame(plan.level);
+}
+let pendingStep = null;
+function startNextStep() {
+  if (!pendingStep) return;
+  trackEvent('typing_next_step_click', {kind: pendingStep.kind, from_level: curLevel, to_level: pendingStep.level});
+  setPracticeCount(5, document.querySelectorAll('.count-btn')[0]);
+  startGame(pendingStep.level);
+}
+
+function renderResultExtras(entry, log) {
+  // はじめて練習した日と比べる（同じ難しさ・同じ問題数）
+  const same = log.filter(x => x.level === entry.level && x.count === entry.count);
+  const growth = document.getElementById('result-growth');
+  if (same.length >= 2) {
+    const first = same[0];
+    const dk = entry.kpm - first.kpm, da = entry.acc - first.acc;
+    const sign = n => (n > 0 ? '+' : '') + n;
+    growth.innerHTML = '「' + LEVEL_NAME[entry.level] + '・' + entry.count + '問」をはじめて練習した<b>' + dayLabel(first.d) + '</b>とくらべると、' +
+      '1分あたり <b>' + first.kpm + ' → ' + entry.kpm + 'キー（' + sign(dk) + '）</b>、正確さ <b>' + first.acc + ' → ' + entry.acc + '%（' + sign(da) + '）</b>です。' +
+      '<span class="growth-count">この練習は ' + same.length + '回目です。</span>';
+  } else {
+    growth.textContent = 'この難しさ・問題数では、はじめての記録です。つぎに練習すると、今回とくらべられます。';
+  }
+  const step = nextStep(log, entry.level);
+  document.getElementById('next-step-text').textContent = step.text;
+  const btn = document.getElementById('btn-next-step');
+  pendingStep = step.btn ? step : null;
+  btn.textContent = step.btn;
+  btn.classList.toggle('hidden', !step.btn);
+  const todayN = log.filter(x => x.d === entry.d).length;
+  document.getElementById('result-today').textContent =
+    'きょうの練習は、これで' + todayN + '回目です（練習した日：これまで ' + practiceDays(log) + '日）。つづけるのは、疲れる前の短い時間で十分です。また明日、5問から。';
+}
+
+// ---- 記録の画面 ----
+function openRecord(from) {
+  trackEvent('typing_record_open', {from: from});
+  renderRecord();
+  showScreen('record');
+}
+function esc(t) { return String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function renderRecord() {
+  const log = readLog();
+  const today = dayStr();
+  document.getElementById('record-lead').textContent = log.length
+    ? 'これまでに練習した日は ' + practiceDays(log) + '日、練習した回数は ' + log.length + '回です。'
+    : 'まだ記録がありません。練習を1回終えると、ここに記録が出ます。';
+
+  // カレンダー：最近5週間（日曜はじまり）
+  const byDay = {};
+  log.forEach(x => { byDay[x.d] = (byDay[x.d] || 0) + 1; });
+  const now = new Date(); now.setHours(0, 0, 0, 0);
+  const start = new Date(now); start.setDate(now.getDate() - now.getDay() - 28);
+  let html = '<thead><tr>' + ['日','月','火','水','木','金','土'].map(w => '<th scope="col">' + w + '</th>').join('') + '</tr></thead><tbody>';
+  for (let w = 0; w < 5; w++) {
+    html += '<tr>';
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(start); d.setDate(start.getDate() + w * 7 + i);
+      const ds = dayStr(d);
+      const future = d > now;
+      const n = byDay[ds] || 0;
+      const label = (d.getDate() === 1 || (w === 0 && i === 0)) ? (d.getMonth() + 1) + '/' + d.getDate() : String(d.getDate());
+      const cls = [n ? 'done' : '', ds === today ? 'today' : '', future ? 'future' : ''].filter(Boolean).join(' ');
+      html += '<td class="' + cls + '"' + (n ? ' aria-label="' + dayLabel(ds) + ' ' + n + '回"' : '') + '><span class="cal-d">' + (future ? '' : label) + '</span>' +
+        (n ? '<span class="cal-mark">' + n + '</span>' : '') + '</td>';
+    }
+    html += '</tr>';
+  }
+  document.getElementById('cal').innerHTML = html + '</tbody>';
+
+  // 難しさごと：回数・はじめて・最近5回の平均・いちばん良い
+  let lv = '<thead><tr><th scope="col">難しさ</th><th scope="col">回数</th><th scope="col">はじめての記録</th><th scope="col">最近5回の平均</th><th scope="col">いちばん速い</th></tr></thead><tbody>';
+  ['easy', 'normal', 'hard'].forEach(k => {
+    const a = log.filter(x => x.level === k);
+    if (!a.length) { lv += '<tr><th scope="row">' + LEVEL_NAME[k] + '</th><td>0回</td><td>—</td><td>—</td><td>—</td></tr>'; return; }
+    const r = a.slice(-5);
+    const avg = f => Math.round(r.reduce((s, x) => s + x[f], 0) / r.length);
+    const best = a.reduce((b, x) => x.kpm > b.kpm ? x : b, a[0]);
+    lv += '<tr><th scope="row">' + LEVEL_NAME[k] + '</th><td>' + a.length + '回</td>' +
+      '<td>' + a[0].kpm + 'キー・' + a[0].acc + '%<small>' + dayLabel(a[0].d) + '</small></td>' +
+      '<td><b>' + avg('kpm') + 'キー・' + avg('acc') + '%</b></td>' +
+      '<td>' + best.kpm + 'キー<small>' + dayLabel(best.d) + '</small></td></tr>';
+  });
+  document.getElementById('record-levels').innerHTML = lv + '</tbody>';
+
+  let rc = '<thead><tr><th scope="col">日</th><th scope="col">難しさ</th><th scope="col">問題数</th><th scope="col">正確さ</th><th scope="col">1分あたり</th></tr></thead><tbody>';
+  const recent = log.slice(-10).reverse();
+  if (!recent.length) rc += '<tr><td colspan="5">まだ記録がありません</td></tr>';
+  recent.forEach(x => {
+    rc += '<tr><td>' + dayLabel(x.d) + '</td><td>' + esc(LEVEL_NAME[x.level] || x.level) + '</td><td>' + x.count + '問</td><td>' + x.acc + '%</td><td>' + x.kpm + 'キー</td></tr>';
+  });
+  document.getElementById('record-recent').innerHTML = rc + '</tbody>';
+}
+
+// ---- 記録をファイルに保存・戻す ----
+function exportRecord() {
+  const data = {app: 'yukkuri-typing', version: 1, exported: new Date().toISOString(), log: readLog(), seen: readSeen()};
+  const blob = new Blob([JSON.stringify(data)], {type: 'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'yukkuri-typing-kiroku-' + dayStr().replace(/-/g, '') + '.json';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  document.getElementById('record-status').textContent = 'ファイルを保存しました。「ダウンロード」フォルダに入っています。';
+  trackEvent('typing_record_export', {entries: data.log.length});
+}
+function importRecord(input) {
+  const f = input.files && input.files[0];
+  const status = document.getElementById('record-status');
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    try {
+      const data = JSON.parse(r.result);
+      if (!data || data.app !== 'yukkuri-typing' || !Array.isArray(data.log)) throw new Error('bad');
+      const log = readLog();
+      const key = x => [x.t, x.level, x.count, x.acc, x.kpm].join('|');   // 同じ記録を二重に入れない
+      const have = new Set(log.map(key));
+      let added = 0;
+      data.log.forEach(x => {
+        if (!x || typeof x.t !== 'number' || !LEVEL_NAME[x.level]) return;
+        const e = {t: x.t, d: dayStr(new Date(x.t)), level: x.level, count: Number(x.count), sec: Number(x.sec), miss: Number(x.miss), acc: Number(x.acc), kpm: Number(x.kpm)};
+        if (have.has(key(e))) return;
+        log.push(e); have.add(key(e)); added++;
+      });
+      log.sort((a, b) => a.t - b.t);
+      writeLog(log);
+      status.textContent = added ? '記録を ' + added + '件 戻しました。' : 'このファイルの記録は、もう入っていました。';
+      trackEvent('typing_record_import', {entries: added});
+      renderRecord();
+    } catch (_) {
+      status.textContent = 'このファイルは読み込めませんでした。「記録をファイルに保存」で作ったファイルを選んでください。';
+    }
+    input.value = '';
+  };
+  r.readAsText(f);
+}
+
+// ---- また来てくれた人を数える（2日目・7日目の戻りを測るため） ----
+function noteVisit() {
+  const today = dayStr();
+  let last = null;
+  try { last = localStorage.getItem(LAST_VISIT_KEY); } catch (_) {}
+  if (last && last !== today) {
+    const days = Math.round((Date.parse(today) - Date.parse(last)) / 86400000);
+    trackEvent('typing_return_visit', {days_since: days, practice_days: practiceDays(readLog())});
+  }
+  try { localStorage.setItem(LAST_VISIT_KEY, today); } catch (_) {}
+}
+document.getElementById('bm-help').addEventListener('toggle', function () {
+  if (this.open) trackEvent('typing_bookmark_help_open');
+});
+
 restoreTextSize();
 restoreKeyboard();
 renderStartStats();
+noteVisit();
 </script>
 
 <!-- KKP_ANALYTICS_V1: 共通ページ・流入・収益導線計測 -->
