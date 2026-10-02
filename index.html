@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>シニア向け無料タイピング練習｜大きな文字でゆっくり練習</title>
-<meta name="description" content="シニア・中高年のパソコン初心者向け無料タイピング練習。大きな文字とローマ字ガイドで、時間制限なし・登録不要。5問からゆっくり自分のペースで練習できます。">
+<meta name="description" content="シニア・中高年のパソコン初心者向け無料タイピング練習。大きな文字で、つぎに打つキーと使う指をキーボードの図で案内します。時間制限なし・登録不要。5問から始められ、練習した日や上達の記録も残ります。">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="keywords" content="タイピング練習,無料,初心者,シニア,中高年,ローマ字入力,パソコン練習">
 <meta name="theme-color" content="#FF6B35">
@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
 <meta property="og:title" content="シニア向け無料タイピング練習｜ゆっくりタイピング">
-<meta property="og:description" content="大きな文字とローマ字ガイドで、時間制限なし。シニア・中高年のパソコン初心者向け無料練習。">
+<meta property="og:description" content="大きな文字で、つぎに打つキーと指を案内。時間制限なし・登録不要。シニア・中高年のパソコン初心者向け無料練習。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://yukkuri-typing.kkpwebninja.com/">
 <meta property="og:site_name" content="ゆっくりタイピング">
@@ -47,7 +47,7 @@
       "offers": {"@type":"Offer","price":"0","priceCurrency":"JPY"},
       "audience": {"@type":"Audience","audienceType":"パソコン初心者・シニア・中高年"},
       "datePublished": "2026-06-07",
-      "dateModified": "2026-09-26",
+      "dateModified": "2026-10-02",
       "author": {"@type":"Organization","name":"web忍者の砦","url":"https://kkpwebninja.com/"}
     },
     {
@@ -624,10 +624,10 @@ footer a:hover { color: white; }
 .yt-ad { text-align:center; margin:2rem auto 0; max-width:640px;
          min-height:288px; padding-top:.5rem; border-top:1px solid #eee; }
 .yt-ad-label { font-size:11px; color:#999; letter-spacing:.08em; margin-bottom:6px; }
-.yt-ad ins.adsbygoogle { display:block; width:300px; height:250px; margin:0 auto; }
+.yt-ad ins.adsbygoogle, .yt-ad ins.adsbygoogle-later { display:block; width:300px; height:250px; margin:0 auto; }
 @media (min-width:768px){
   .yt-ad { min-height:318px; }
-  .yt-ad ins.adsbygoogle { width:336px; height:280px; }
+  .yt-ad ins.adsbygoogle, .yt-ad ins.adsbygoogle-later { width:336px; height:280px; }
 }
 /* ===== 2026-09-19 最初の画面で始められるように／読み物を読みやすく ===== */
 .hero-title{font-size:2.1rem;margin-bottom:6px}
@@ -1090,11 +1090,12 @@ table.record-table small{display:block;font-size:.9rem;color:#555}
        無効クリックとみなされる恐れがあった。 -->
   <div class="yt-ad">
     <div class="yt-ad-label">広告</div>
-    <ins class="adsbygoogle"
+    <!-- 2026-10-02 ito・npb と同じ型：開いた瞬間には読み込まず、枠が画面の手前300pxに来たら1回だけ。
+         練習を1回終えるごとに、枠が半分以上見えたら新しい広告を1回（前回から30秒未満は見送り）。位置・大きさは不変 -->
+    <ins class="adsbygoogle-later"
          style="display:block"
          data-ad-client="ca-pub-1298304917726270"
          data-ad-slot="2937937957"></ins>
-    <script>if (!window.__kkpPreview) { (adsbygoogle = window.adsbygoogle || []).push({}); }</script>
   </div>
 
 </main>
@@ -1473,6 +1474,7 @@ function startGame(level) {
   totalKeys = 0;
   startTime = Date.now();
   resultShown = false;
+  adStopWaiting();
   showScreen('prac');
   loadSentence();
 }
@@ -1835,6 +1837,7 @@ function showResult() {
   writeLog(log);
   renderResultExtras(entry, log);
   if (firstToday) trackEvent('typing_daily_first_complete', {practice_days: practiceDays(log), level: curLevel});
+  adAfterPractice();
   lastResultText = 'ゆっくりタイピングで' + sentences.length + '問練習しました。正確さ' + acc + '%、1分あたり' + kpm + 'キー！';
   trackEvent('typing_complete', {level:curLevel,question_count:sentences.length,accuracy:acc,keys_per_minute:kpm});
   showScreen('result');
@@ -2085,10 +2088,57 @@ document.getElementById('bm-help').addEventListener('toggle', function () {
   if (this.open) trackEvent('typing_bookmark_help_open');
 });
 
+// ==================== 広告の読み込み（2026-10-02） ====================
+// 開いた瞬間には読み込まない。枠が画面の手前300pxに来たら1回だけ読み込む。
+// 1回の滞在が長い（平均19分・何十回も練習する）ので、練習を1回終えるごとに、枠が半分以上見えたときだけ
+// 新しい広告を1回読み込む。前回から30秒未満なら見送り。見ないまま次の練習を始めたら読み込まない。
+// GA4 typing_ad_show の reload = first / push / skip / notseen
+const AD = {last: 0, first: false, wait: false, io: null, tpl: null};
+function adSlot() { const box = document.querySelector('.yt-ad'); return box ? box.querySelector('ins') : null; }
+function adPush(reason) {
+  let slot = adSlot(); if (!slot) return;
+  if (!AD.tpl) AD.tpl = slot.cloneNode(false);
+  // 一度読み込んだ ins にはもう push できないので、まっさらな複製に差し替える
+  if (slot.hasAttribute('data-adsbygoogle-status')) { const f = AD.tpl.cloneNode(false); slot.replaceWith(f); slot = f; }
+  slot.className = 'adsbygoogle';
+  AD.last = Date.now();
+  let pushed = false;
+  const doPush = () => { if (pushed) return; pushed = true; try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (_) {} };
+  requestAnimationFrame(doPush); setTimeout(doPush, 120);
+  trackEvent('typing_ad_show', {reload: reason});
+}
+function adFirst() {
+  const box = document.querySelector('.yt-ad'); if (!box) return;
+  if (!('IntersectionObserver' in window)) { AD.first = true; adPush('first'); return; }
+  const io = new IntersectionObserver(es => {
+    if (es.some(e => e.isIntersecting) && !AD.first) { AD.first = true; io.disconnect(); adPush('first'); }
+  }, {rootMargin: '300px 0px'});
+  io.observe(box);
+}
+function adStopWaiting() {
+  if (AD.io) { AD.io.disconnect(); AD.io = null; }
+  if (AD.wait) { AD.wait = false; trackEvent('typing_ad_show', {reload: 'notseen'}); }
+}
+function adAfterPractice() {
+  if (!AD.first) return;   // まだ1回目も読み込んでいない（枠が遠い）なら、最初の読み込みに任せる
+  adStopWaiting();
+  const box = document.querySelector('.yt-ad'); if (!box || !('IntersectionObserver' in window)) return;
+  AD.wait = true;
+  AD.io = new IntersectionObserver(es => {
+    if (!es.some(e => e.isIntersecting && e.intersectionRatio >= 0.5) || !AD.wait) return;
+    AD.wait = false; AD.io.disconnect(); AD.io = null;
+    if (Date.now() - AD.last < 30000) { trackEvent('typing_ad_show', {reload: 'skip'}); return; }
+    adPush('push');
+  }, {threshold: [0.5]});
+  AD.io.observe(box);
+}
+window.addEventListener('pagehide', adStopWaiting);
+
 restoreTextSize();
 restoreKeyboard();
 renderStartStats();
 noteVisit();
+adFirst();
 </script>
 
 <!-- KKP_ANALYTICS_V1: 共通ページ・流入・収益導線計測 -->
