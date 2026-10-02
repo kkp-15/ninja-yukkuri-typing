@@ -854,6 +854,60 @@ table.record-table th,table.record-table td{border:1px solid #d9cdb8;padding:8px
 table.record-table thead th{background:#f3ece0;font-size:1rem}
 table.record-table small{display:block;font-size:.9rem;color:#555}
 @media (max-width:640px){table.record-table th,table.record-table td{padding:6px;font-size:.95rem}}
+/* ===== 2026-10-03 UI/UX指針（feedback_uiux_checklist）の適用。高齢の方向けなので文字は小さくしすぎない（本文17〜18px）。
+   むだに大きい見出しを抑え、空きすぎた余白を詰め、関係するものを1つのまとまりに。大きいのは練習のかなの文字だけ ===== */
+/* スタート：見出しは上の帯と同じ名前なので控えめに（33.6→24px） */
+.hero-title{font-size:1.5rem;line-height:1.3;margin:0 0 10px}
+.level-heading{font-size:1.15rem;line-height:1.4;margin:0 0 8px}
+.btn-lv{padding:12px 16px}
+.btn-lv .lv-name{line-height:1.3}
+.btn-lv .lv-desc{font-size:1.0625rem;line-height:1.4;margin-top:2px}
+.count-btn{font-size:1.0625rem;min-height:46px}
+.practice-settings{padding:10px 2px;margin-bottom:16px}
+.practice-settings h2{font-size:1.0625rem}
+/* 2回目以降の人：きょうの練習と、練習した日・記録をひとまとまりに（中は近く、外とは離す） */
+.today-box{display:block;margin:0 0 18px;padding:0 0 14px;border-bottom:1px solid #e0d5c3}
+.today-row{display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px}
+.today-stats{margin-top:8px}
+.today-stats .best-summary{flex:0 1 auto;margin:0;font-size:1.0625rem;color:#333}
+.today-desc{font-size:1.0625rem}
+.btn-record{font-size:1.0625rem}
+.kb-toggle{min-height:44px}
+.chart-wrap summary{font-size:1.0625rem}
+/* 練習画面：1366×650 で、問題・つぎへ・キーボードの図・指10本・説明の1行まで1画面に入れる */
+@media (min-width:641px){
+  main{padding-top:6px}
+  #scr-prac .prac-header{margin-bottom:4px}
+  #scr-prac .sentence-card{padding:8px 16px 8px;margin-bottom:4px}
+  #scr-prac .hint-row{min-height:26px;margin-bottom:2px}
+  #scr-prac .btn-next{padding:9px 44px}
+  .kb-wrap{margin-top:2px}
+  .kb-finger{margin-bottom:2px}
+  .kb-key{height:33px}
+  .kb-fingers{margin-top:0}
+  .kb-note{margin-top:2px}
+  .kb-tools{margin-top:4px}
+}
+/* 「レベル変更」は見た目はそのまま、押せる高さを44pxに */
+.btn-change{display:inline-block;padding:13px 8px;margin:-13px -8px;line-height:1.2}
+/* 結果：見出しは控えめに。ボタンは1段にまとめる（共有は弱め） */
+.result-title{font-size:1.5rem;line-height:1.3}
+.result-btns{gap:10px}
+.btn-retry,.btn-back,.result-btns .btn-record{padding:12px 20px}
+.btn-share{padding:12px 18px;background:#fff;color:#1668b2;border:1px solid #1668b2}
+.result-growth{line-height:1.6;margin-bottom:10px}
+.next-step-text,.result-today{line-height:1.6}
+/* 記録の画面 */
+.record-title{font-size:1.5rem;line-height:1.3}
+.record-h{margin:18px 0 6px}
+.record-note{line-height:1.7}
+/* 下の読み物・よくある質問：本文17〜18px・行間1.7（1.8〜1.9は空きすぎ） */
+.seo-guide{line-height:1.7;padding:20px 22px}
+.seo-guide p,.seo-guide li{font-size:1.0625rem;line-height:1.7}
+.seo-guide h3{margin:16px 0 4px}
+.seo-guide p{margin-bottom:8px}
+.yt-info summary{font-size:1.0625rem;padding:12px 14px}
+.yt-info p{font-size:1.0625rem;line-height:1.7}
 </style>
 </head>
 <body>
@@ -871,8 +925,14 @@ table.record-table small{display:block;font-size:.9rem;color:#555}
     <h1 class="hero-title">ゆっくりタイピング</h1>
 
     <div class="today-box hidden" id="today-box">
-      <button class="btn-today" type="button" id="btn-today" onclick="startToday()">きょうの練習をはじめる</button>
-      <span class="today-desc" id="today-desc"></span>
+      <div class="today-row">
+        <button class="btn-today" type="button" id="btn-today" onclick="startToday()">きょうの練習をはじめる</button>
+        <span class="today-desc" id="today-desc"></span>
+      </div>
+      <div class="today-row today-stats">
+        <p class="best-summary" id="best-summary"></p>
+        <button class="btn-record" type="button" id="btn-record-start" onclick="openRecord('start')">練習の記録を見る</button>
+      </div>
     </div>
 
     <p class="level-heading">押すと、すぐ始まります</p>
@@ -898,8 +958,6 @@ table.record-table small{display:block;font-size:.9rem;color:#555}
         <button class="count-btn" type="button" aria-pressed="true" onclick="setPracticeCount(10,this)">10問</button>
         <button class="count-btn" type="button" aria-pressed="false" onclick="setPracticeCount(20,this)">20問</button>
       </div>
-      <p class="best-summary" id="best-summary"></p>
-      <button class="btn-record" type="button" id="btn-record-start" onclick="openRecord('start')">練習の記録を見る</button>
     </section>
 
     <details class="chart-wrap">

@@ -126,6 +126,22 @@ table.kana td small { text-transform: uppercase; display: block; font-family: 'C
   table.kana td b { font-size: 1.4rem; }
   table.kana td span { font-size: 1.05rem; }
 }
+
+/* 2026-10-03 UI/UX指針の適用（画面のみ・印刷は変えない）：本文18px・行間1.7・見出しの上を広く下を狭く・段落の間を詰める */
+@media screen {
+  body{line-height:1.7}
+  p,li{font-size:1.125rem}
+  p{margin-bottom:8px}
+  li{margin-bottom:2px}
+  h1{font-size:1.6rem;line-height:1.35}
+  h2{margin:26px 0 8px;line-height:1.35}
+  h3{margin:18px 0 4px;line-height:1.4}
+  .answer p{font-size:1.125rem;line-height:1.65}
+  .note{font-size:1rem}
+  .faq dt{margin-top:12px}
+  .related li{padding:6px 0}
+}
+@media screen and (max-width:560px){ h1{font-size:1.4rem} p,li{font-size:1.0625rem} }
 </style>
 </head>
 <body>
