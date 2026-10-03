@@ -908,6 +908,20 @@ table.record-table small{display:block;font-size:.9rem;color:#555}
 .seo-guide p{margin-bottom:8px}
 .yt-info summary{font-size:1.0625rem;padding:12px 14px}
 .yt-info p{font-size:1.0625rem;line-height:1.7}
+
+/* ===== 2026-10-03 広告を結果画面へ（ユーザー承認「不快にならないなら移して」）
+   狭い画面：文の下・ボタンから20px以上（margin-top 24px）。PC 1080px以上：結果の右の列に置き、ボタンと横に離す。
+   :has が使えないブラウザでは右の列にしない（はみ出さないように、下に置いたまま） ===== */
+#scr-result .yt-ad{margin:24px auto 8px;max-width:none;border-top:1px solid #e0d5c3;padding-top:8px}
+.yt-ad-label{font-size:12px;color:#666}
+@supports selector(:has(a)){
+  @media (min-width:1080px){
+    main:has(#scr-result:not(.hidden)){max-width:1060px}
+    #scr-result .result-wrap{max-width:none;display:grid;grid-template-columns:minmax(0,620px) 336px;column-gap:40px;justify-content:center;align-items:start}
+    #scr-result .result-wrap > *{grid-column:1}
+    #scr-result .result-wrap > .yt-ad{grid-column:2;grid-row:1 / span 12;margin:6px 0 0;border-top:0;padding-top:0;min-height:300px}
+  }
+}
 </style>
 </head>
 <body>
@@ -1086,6 +1100,23 @@ table.record-table small{display:block;font-size:.9rem;color:#555}
         <button class="btn-next-step hidden" type="button" id="btn-next-step" onclick="startNextStep()"></button>
       </div>
       <p class="result-today" id="result-today"></p>
+      <!-- 2026-10-03 ユーザー承認「不快にならないなら移して」：広告は結果画面だけ（練習中・スタートには出さない）。
+           ボタンから20px以上離す・「広告」ラベル・高さを先に確保・標準の長方形1枠。PC（1080px以上）は結果の右の列に置き、
+           狭い画面は文の下に置く。戻す条件はメモリ project_yukkuri_typing_traffic.md -->
+      <!-- 広告：砦の標準に合わせる（「広告」ラベル・高さ予約・標準サイズ）。
+           以前は data-ad-format="auto" + full-width-responsive のままで、
+           スマホで 375x375 という標準外の正方形になり画面を大きく占有していた。
+           そのぶん広告のクリック率が8%（他サイトの18倍）まで上がっていて、
+           無効クリックとみなされる恐れがあった。 -->
+      <div class="yt-ad">
+        <div class="yt-ad-label">広告</div>
+        <!-- 2026-10-02 ito・npb と同じ型：開いた瞬間には読み込まず、枠が画面の手前300pxに来たら1回だけ。
+             練習を1回終えるごとに、枠が半分以上見えたら新しい広告を1回（前回から30秒未満は見送り）。位置・大きさは不変 -->
+        <ins class="adsbygoogle-later"
+             style="display:block"
+             data-ad-client="ca-pub-1298304917726270"
+             data-ad-slot="2937937957"></ins>
+      </div>
       <p class="result-note" id="result-note">この端末に記録を保存しました</p>
       <details class="bm-help" id="bm-help">
         <summary>つぎに来るときのために：このページを「お気に入り」に入れる方法</summary>
@@ -1141,20 +1172,7 @@ table.record-table small{display:block;font-size:.9rem;color:#555}
     </div>
   </div>
 
-  <!-- 広告：砦の標準に合わせる（「広告」ラベル・高さ予約・標準サイズ）。
-       以前は data-ad-format="auto" + full-width-responsive のままで、
-       スマホで 375x375 という標準外の正方形になり画面を大きく占有していた。
-       そのぶん広告のクリック率が8%（他サイトの18倍）まで上がっていて、
-       無効クリックとみなされる恐れがあった。 -->
-  <div class="yt-ad">
-    <div class="yt-ad-label">広告</div>
-    <!-- 2026-10-02 ito・npb と同じ型：開いた瞬間には読み込まず、枠が画面の手前300pxに来たら1回だけ。
-         練習を1回終えるごとに、枠が半分以上見えたら新しい広告を1回（前回から30秒未満は見送り）。位置・大きさは不変 -->
-    <ins class="adsbygoogle-later"
-         style="display:block"
-         data-ad-client="ca-pub-1298304917726270"
-         data-ad-slot="2937937957"></ins>
-  </div>
+
 
 </main>
 
