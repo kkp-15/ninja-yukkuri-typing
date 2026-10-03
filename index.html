@@ -1659,7 +1659,8 @@ function nextSentence() {
   }
 }
 
-function retryGame() { startGame(curLevel); }
+// 「もういちど」を押した回数（2026-10-03 広告を結果画面へ移した前後で比べる）
+function retryGame() { trackEvent('typing_retry_click', {level: curLevel}); startGame(curLevel); }
 function goStart()   { showScreen('start'); }
 
 // ==================== UI ====================
