@@ -40,6 +40,7 @@ jobs:
                 "https://yukkuri-typing.kkpwebninja.com/60dai/",
                 "https://yukkuri-typing.kkpwebninja.com/kotsu/",
                 "https://yukkuri-typing.kkpwebninja.com/home-position/",
-                "https://yukkuri-typing.kkpwebninja.com/nou/"
+                "https://yukkuri-typing.kkpwebninja.com/nou/",
+                "https://yukkuri-typing.kkpwebninja.com/kigou/"
               ]
             }' -w "\nHTTP %{http_code}\n"
