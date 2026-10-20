@@ -957,6 +957,19 @@ header .site-name{color:var(--k-sumi);font-family:var(--k-brush);font-weight:400
 .btn-next{background:var(--k-shu);border:var(--k-bw-s) solid var(--k-sumi);box-shadow:var(--k-sh-s)}
 .btn-next:disabled{border-color:#b8ad9c;box-shadow:none}
 .seo-guide h2{color:var(--k-sumi);border-bottom:var(--k-bw-s) solid var(--k-orange);padding-bottom:4px}
+/* ===== 2026-10-20 清潔感（kkp-kit 17eac63 の方針）: オレンジの案内箱（ローマ字の表の折りたたみ）を k-fold の形に・本文の赤字の強調を墨の太字に =====
+   高齢者向け: 字の大きさ・書体・ボタンの大きさは変えない（summary の字の大きさもそのまま）。印刷・キーボード図・難しさの色・広告は不変。 */
+@media screen{
+.chart-wrap{background:none;border:0;border-top:1px solid var(--k-line-soft);border-bottom:1px solid var(--k-line-soft);border-radius:0}
+details.chart-wrap{border-radius:0}
+.chart-wrap summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;padding:10px 2px;color:var(--k-sumi)}
+.chart-wrap summary::-webkit-details-marker{display:none}
+.chart-wrap summary::before{content:none}
+.chart-wrap summary::after{content:"＋";flex:0 0 30px;display:grid;place-items:center;width:30px;height:30px;border:var(--k-bw-s) solid var(--k-sumi);border-radius:4px;font-size:1rem}
+.chart-wrap[open] summary::after{content:"−"}
+.seo-guide strong,.rules-box strong{color:var(--k-sumi)}
+.seo-guide h2{border-bottom-color:var(--k-sumi)}
+}
 </style>
 <!-- kkp-rel-d4:start -->
 <style id="kkp-rel-d4">
