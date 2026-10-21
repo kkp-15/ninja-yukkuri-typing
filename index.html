@@ -1057,10 +1057,10 @@ details.chart-wrap{border-radius:0}
         <p class="chart-print"><a href="/romaji/">大きな文字の早見表を印刷する（A4・1枚）</a></p>
         <div class="rules-box">
       <p>
-        ローマ字入力で打ちます。画面に表示されたひらがなをキーボードで入力してください。<br>
-        <strong>「っ」</strong> は、つぎの文字の最初のキーを <strong>1回多く</strong> 打ちます。（例：きって → kitte、ゆっくり → yukkuri）<strong>xtu</strong> や <strong>ltu</strong> でも入力できます。<br>
-        <strong>「ん」</strong> は <strong>nn</strong> と2回打ちます。あとに あ行・な行・や行 が続かなければ <strong>n</strong> 1つでもOK（文の最後の「ん」は <strong>nn</strong>）。<br>
-        <strong>「しゃ」「ちょ」</strong> などは 2文字まとめて入力します。（例：しょ → sho）
+        画面に出たひらがなを、ローマ字で打ちます。<br>
+        <strong>「っ」</strong> は、つぎの文字の最初のキーを <strong>1回多く</strong> 打ちます（例：きって → kitte）。<strong>xtu</strong> や <strong>ltu</strong> でも打てます。<br>
+        <strong>「ん」</strong> は <strong>nn</strong> と2回打ちます。あとに あ行・な行・や行 が来なければ <strong>n</strong> 1つでも大丈夫です（文の最後は <strong>nn</strong>）。<br>
+        <strong>「しゃ」「ちょ」</strong> などは 2文字まとめて打ちます（例：しょ → sho）。
       </p>
         </div>
         <table class="romaji-chart">
@@ -1122,7 +1122,7 @@ details.chart-wrap{border-radius:0}
     <div class="praise" id="praise" role="status" aria-live="polite"></div>
 
     <div class="sentence-card">
-      <div class="card-hint">キーボードで入力してください（ローマ字入力）</div>
+      <div class="card-hint">ローマ字で打ってください</div>
       <div class="tokens-row" id="tokens-row"></div>
       <div class="romaji-bar" id="romaji-bar"></div>
     </div>
@@ -1225,7 +1225,7 @@ details.chart-wrap{border-radius:0}
       <p class="record-lead" id="record-lead"></p>
 
       <h3 class="record-h">練習した日</h3>
-      <p class="record-note-s">丸のついた日が、練習した日です。数字はその日に練習した回数です。</p>
+      <p class="record-note-s">丸のついた日が練習した日です。数字はその日の回数です。</p>
       <table class="cal" id="cal" aria-label="練習した日のカレンダー（最近5週間）"></table>
 
       <h3 class="record-h">難しさごとの記録</h3>
@@ -1239,7 +1239,7 @@ details.chart-wrap{border-radius:0}
       </div>
 
       <h3 class="record-h">記録の保存について</h3>
-      <p class="record-note">記録は、このパソコンのブラウザの中だけに保存しています。名前などの登録はいりません。そのかわり、ブラウザの「閲覧データの削除」をしたり、別のパソコンで開いたりすると、記録は見えません。心配なときは、ファイルに保存しておくと、あとで戻せます。</p>
+      <p class="record-note">記録は、このパソコンのブラウザの中だけに残ります。名前などの登録はいりません。ブラウザの「閲覧データの削除」をしたり、別のパソコンで開いたりすると、記録は見えません。心配なときは「記録をファイルに保存」を押しておくと、あとで戻せます。</p>
       <div class="record-btns">
         <button class="btn-back" type="button" onclick="exportRecord()">記録をファイルに保存</button>
         <button class="btn-back" type="button" onclick="document.getElementById('record-file').click()">保存したファイルから戻す</button>
@@ -1257,7 +1257,7 @@ details.chart-wrap{border-radius:0}
 <section class="seo-guide" aria-labelledby="guide-heading">
   <h2 id="guide-heading">シニア・高齢者のタイピング練習の進め方</h2>
   <p class="doc-date">公開 2026年6月7日／更新 2026年9月26日</p>
-  <p>「ゆっくりタイピング」は、<strong>シニア・中高年のパソコン初心者</strong>が、時間に追われずローマ字入力を練習できる無料サイトです。登録は必要ありません。画面右上の「文字を大きく」を押すと、説明や練習文字をさらに見やすくできます。</p>
+  <p>「ゆっくりタイピング」は、<strong>シニア・中高年のパソコン初心者</strong>が、急がずにローマ字入力を練習できる無料サイトです。登録はいりません。字が小さいときは、画面右上の「文字を大きく」を押してください。</p>
   <h3>毎日5問から始めましょう</h3>
   <!-- 挿し絵（2026-09-25・Codex制作・シリーズ共通の男の子と、おじいちゃん）。急がず始めてよい安心感を伝える -->
   <img class="guide-pic" src="/img/guide-practice.webp" width="320" height="259" alt="孫に見守られながら、ゆっくりキーボードを打つおじいちゃん" loading="lazy" decoding="async">
@@ -1267,9 +1267,9 @@ details.chart-wrap{border-radius:0}
     <li>結果画面の「せいかくさ」と「1分あたり」の記録を前回と比べます。</li>
   </ol>
   <h3>上達しやすい姿勢と指の置き方</h3>
-  <p>背中を丸めすぎず、肘がほぼ直角になる高さにキーボードを置きます。左手の人差し指をF、右手の人差し指をJの突起に置く「ホームポジション」を意識すると、少しずつ手元を見ないで打てるようになります。</p>
+  <p>キーボードは、ひじがほぼ直角になる高さに置きます。左手の人差し指を F、右手の人差し指を J の小さな出っぱりに置きます（ホームポジション）。こうすると、少しずつ手元を見ずに打てるようになります。</p>
   <h3>お題は全部で193問</h3>
-  <p>「はじめて」は季節や暮らしの短い言葉が73問、「ふつう」はそのままメールに書けるあいさつ・連絡の文が60問、「むずかしい」はことわざと暮らしの文が60問です。<strong>一周するまで同じお題は出ません</strong>ので、くり返し練習しても新しい文に出会えます。「、」「。」やのばす音「ー」も打てるようにしてあります。</p>
+  <p>「はじめて」は季節や暮らしの短い言葉が73問、「ふつう」はメールにそのまま使えるあいさつの文が60問、「むずかしい」はことわざや暮らしの文が60問です。<strong>一周するまで同じお題は出ません</strong>。「、」「。」やのばす音「ー」も打てます。</p>
   <h3>60代・70代からのブラインドタッチ（手元を見ずに打つ）</h3>
   <p>ブラインドタッチは、いきなり目指さなくて大丈夫です。次の順で、一つずつ進めてください。</p>
   <ol>
@@ -1280,7 +1280,7 @@ details.chart-wrap{border-radius:0}
   </ol>
   <p>時間制限はないので、1問にどれだけ時間がかかってもかまいません。正確さが上がってから、少しずつ速くなっていきます。</p>
   <h3>ローマ字の表を印刷して横に置く</h3>
-  <p>ローマ字の打ち方を覚えるまでは、表を見ながら打つのが近道です。<a href="/romaji/">ローマ字入力の早見表（大きな文字・印刷用）</a>は、A4用紙1枚に大きな文字で印刷できます。「っ」「ん」「ー」の打ち方も載せています。＠や「」などの記号は<a href="/kigou/">キーボードの記号の打ち方一覧</a>にまとめています。</p>
+  <p>ローマ字を覚えるまでは、表を見ながら打つのが近道です。<a href="/romaji/">ローマ字入力の早見表（大きな文字・印刷用）</a>は、A4の紙1枚に印刷できます。「っ」「ん」「ー」の打ち方も載っています。＠や「」などの記号は<a href="/kigou/">キーボードの記号の打ち方一覧</a>にあります。</p>
   <h3>よくある疑問に答える読み物</h3>
   <ul>
     <li><a href="/60dai/">60代・70代からタッチタイピングは身につく？</a></li>
@@ -1306,7 +1306,7 @@ details.chart-wrap{border-radius:0}
 
 <section class="senior-support" aria-labelledby="support-heading">
   <h2 id="support-heading">パソコン初心者の練習を助ける道具</h2>
-  <p>キーが見えにくい、指や手首が疲れやすいと感じる方に向いた道具を探せます。購入は必須ではありません。まずは無料練習を続け、必要を感じたときだけご覧ください。</p>
+  <p>キーが見えにくい方や、指・手首が疲れやすい方に向いた道具です。買わなくても練習はできます。必要なときだけご覧ください。</p>
   <div class="support-grid">
     <article class="support-card">
       <h3>大きな文字の日本語キーボード</h3>
