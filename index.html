@@ -1026,6 +1026,15 @@ details.chart-wrap{border-radius:0}
       </div>
     </div>
 
+    <!-- 2026-10-25 レベルのボタンは押すとすぐ始まるので、問題数を先に選べるよう上へ -->
+    <section class="practice-settings" aria-labelledby="count-heading">
+      <h2 id="count-heading">問題数</h2>
+      <div class="count-btns">
+        <button class="count-btn" type="button" aria-pressed="false" onclick="setPracticeCount(5,this)">5問</button>
+        <button class="count-btn" type="button" aria-pressed="true" onclick="setPracticeCount(10,this)">10問</button>
+        <button class="count-btn" type="button" aria-pressed="false" onclick="setPracticeCount(20,this)">20問</button>
+      </div>
+    </section>
     <p class="level-heading">押すと、すぐ始まります</p>
     <div class="level-btns">
       <button class="btn-lv lv-easy" onclick="startGame('easy')">
@@ -1041,15 +1050,6 @@ details.chart-wrap{border-radius:0}
         <span class="lv-desc">ことわざ・長い文章</span>
       </button>
     </div>
-
-    <section class="practice-settings" aria-labelledby="count-heading">
-      <h2 id="count-heading">問題数</h2>
-      <div class="count-btns">
-        <button class="count-btn" type="button" aria-pressed="false" onclick="setPracticeCount(5,this)">5問</button>
-        <button class="count-btn" type="button" aria-pressed="true" onclick="setPracticeCount(10,this)">10問</button>
-        <button class="count-btn" type="button" aria-pressed="false" onclick="setPracticeCount(20,this)">20問</button>
-      </div>
-    </section>
 
     <details class="chart-wrap">
       <summary>「っ」「ん」の打ち方とローマ字の表</summary>
