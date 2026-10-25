@@ -976,6 +976,16 @@ details.chart-wrap{border-radius:0}
 .lv-home{background:#fff;color:#222;border-left-color:#1f5f9e}
 .lv-mid{background:#fff;color:#222;border-left-color:#a67c00}
 .btn-lv{min-height:48px}
+/* 2026-10-25 長いお題も 1366×650 の1画面に。1行に収まらないときだけ、お題の字を2段階で小さくする（JS の fitTokens）。
+   いちばん小さくても かな26px・ローマ字18px（本文17〜18pxの決まり）。いま打つ字の黄色地・縁取り・オレンジの札はそのまま */
+#tokens-row.fit1,#tokens-row.fit2{gap:4px 6px}
+#tokens-row.fit1 .tok,#tokens-row.fit2 .tok{padding:1px 3px 2px;min-height:0}
+#tokens-row.fit1 .tok .kana{font-size:30px}
+#tokens-row.fit1 .tok .rguide{font-size:18px;min-height:0;line-height:1.25}
+#tokens-row.fit2 .tok .kana{font-size:26px}
+#tokens-row.fit2 .tok .rguide{font-size:18px;min-height:0;line-height:1.2}
+#tokens-row.fit1 .rg-sub,#tokens-row.fit2 .rg-sub{display:none}
+.sentence-card.fitting .card-hint{display:none}
 </style>
 <!-- kkp-rel-d4:start -->
 <style id="kkp-rel-d4">
@@ -1684,8 +1694,30 @@ function loadSentence() {
   document.getElementById('praise').style.animation = 'none';
   updateProgress();
   renderTokens();
+  fitTokens();
   updateRomajiBar();
   updateMissCount();
+}
+
+// 長いお題は2行に折れて画面の下にはみ出すので、1行（小さくしたら2行）に収まるまで字を2段階で小さくする。
+// 1問のあいだは大きさを変えない（打つたびに字が跳ねないよう、出したときに1回だけ決める）。
+// いま打つ字の札で幅が少し増えても折れ方が変わらないよう、94%の幅で測る
+function tokRows(row) {
+  return new Set(Array.prototype.map.call(row.children, el => el.offsetTop)).size;
+}
+function fitTokens() {
+  const row = document.getElementById('tokens-row');
+  const card = row && row.closest('.sentence-card');
+  if (!row || !row.children.length) return;
+  row.classList.remove('fit1', 'fit2');
+  card.classList.remove('fitting');
+  row.style.width = '94%';
+  if (tokRows(row) > 1) {
+    card.classList.add('fitting');
+    row.classList.add('fit1');
+    if (tokRows(row) > 2) { row.classList.remove('fit1'); row.classList.add('fit2'); }
+  }
+  row.style.width = '';
 }
 
 function processKey(key) {
@@ -1820,7 +1852,8 @@ function renderTokens() {
       let guideHtml = '<span class="rg-main"><span class="rg-done">' + done + '</span>' +
         (left ? '<span class="rg-next">' + left[0] + '</span><span class="rg-left">' + left.slice(1) + '</span>' : '') + '</span>';
       if (!typed && others.length) {
-        guideHtml += others.map(o => '<span class="rg-sub">' + o + '</span>').join('');
+        // 別の打ち方は1つだけ見せる（3つ並ぶと高さが増え、1366×650 からはみ出す）
+        guideHtml += others.slice(0, 1).map(o => '<span class="rg-sub">' + o + '</span>').join('');
       }
       rEl.innerHTML = guideHtml;
     } else {
@@ -1910,7 +1943,7 @@ function updateKeyboard() {
   const shiftFinger = shifted ? (shifted[1] === 'shiftr' ? '右手の小指' : '左手の小指') : null;
   drawHands([name, shiftFinger].filter(Boolean));
 }
-window.addEventListener('resize', () => { if (!document.getElementById('scr-prac').classList.contains('hidden')) updateKeyboard(); });
+window.addEventListener('resize', () => { if (!document.getElementById('scr-prac').classList.contains('hidden')) { fitTokens(); updateKeyboard(); } });
 // ホームポジションの指を、キーボードの図の「下」に並べる（キーの文字を隠さない）。
 // いま使う指だけ色を変える。左から 小指・薬指・中指・人差し指 ／ 親指2本 ／ 人差し指・中指・薬指・小指
 const HAND_FINGERS = [
