@@ -48,7 +48,7 @@
       "offers": {"@type":"Offer","price":"0","priceCurrency":"JPY"},
       "audience": {"@type":"Audience","audienceType":"パソコン初心者・シニア・中高年"},
       "datePublished": "2026-06-07",
-      "dateModified": "2026-10-02",
+      "dateModified": "2026-10-25",
       "author": {"@type":"Organization","name":"web忍者の砦","url":"https://kkpwebninja.com/"}
     },
     {
@@ -57,11 +57,12 @@
         {"@type":"Question","name":"無料ですか？登録は必要ですか？","acceptedAnswer":{"@type":"Answer","text":"完全無料・登録不要で、ページを開いてすぐ練習できます。"}},
         {"@type":"Question","name":"時間制限はありますか？","acceptedAnswer":{"@type":"Answer","text":"時間制限はありません。1問ずつ自分のペースで練習できます。"}},
         {"@type":"Question","name":"ローマ字が分からなくても練習できますか？","acceptedAnswer":{"@type":"Answer","text":"画面にローマ字ガイドが表示されるため、見ながら入力できます。"}},
+        {"@type":"Question","name":"どの難しさから始めればいいですか？","acceptedAnswer":{"@type":"Answer","text":"キーボードに初めてさわる方は「ホームポジション」から。F・J に人差し指を置いたまま、まん中の段のキーだけを打ちます。慣れたら「はじめて」「すこし長い言葉」「ふつう」「むずかしい」の順に進みます。正確さ95%以上が3回つづくと、結果の画面でひとつ上の段をおすすめします。"}},
         {"@type":"Question","name":"どのキーをどの指で打つか分かりません。","acceptedAnswer":{"@type":"Answer","text":"練習画面の下にキーボードの図が出ます。つぎに打つキーに色がつき、「左手の人差し指で F」のように使う指も文字で表示します。図は「キーボードの図をかくす」で消せます。"}},
         {"@type":"Question","name":"60代・70代からでも、手元を見ずに打てるようになりますか？","acceptedAnswer":{"@type":"Answer","text":"年齢で決まるものではありません。ただ、急ぐと手元を見る癖が戻りやすいので、時間制限のない練習でゆっくり進めるのが向いています。人差し指を F と J に置き、練習画面のキーボードの図で光るキーと使う指を確かめながら打つと、キーの場所を少しずつ覚えられます。慣れたら図をかくして練習してください。"}},
         {"@type":"Question","name":"ローマ字の表を印刷できますか？","acceptedAnswer":{"@type":"Answer","text":"できます。ローマ字入力の早見表のページで、大きな文字の表がA4用紙1枚に印刷されます。"}},
-        {"@type":"Question","name":"同じお題ばかり出ませんか？","acceptedAnswer":{"@type":"Answer","text":"お題は全部で193問あり、一周するまで同じお題は出ません。どこまで出したかは、この端末のブラウザ内に覚えています。"}},
-        {"@type":"Question","name":"成績は保存されますか？","acceptedAnswer":{"@type":"Answer","text":"直近5回の成績と最高記録を、この端末のブラウザ内に保存します。"}}
+        {"@type":"Question","name":"同じお題ばかり出ませんか？","acceptedAnswer":{"@type":"Answer","text":"お題は全部で269問あり、一周するまで同じお題は出ません。どこまで出したかは、この端末のブラウザ内に覚えています。"}},
+        {"@type":"Question","name":"成績は保存されますか？","acceptedAnswer":{"@type":"Answer","text":"練習ごとの記録（正確さ・1分あたりのキー数・練習した日）を、この端末のブラウザ内に保存します。"}}
       ]
     }
   ]
@@ -971,6 +972,10 @@ details.chart-wrap{border-radius:0}
 .seo-guide strong,.rules-box strong{color:var(--k-sumi)}
 .seo-guide h2{border-bottom-color:var(--k-sumi)}
 }
+/* 2026-10-25 段を5つに（ホームポジション・すこし長い言葉を足した）。3つ＋2つの2行で、左上からやさしい順 */
+.lv-home{background:#fff;color:#222;border-left-color:#1f5f9e}
+.lv-mid{background:#fff;color:#222;border-left-color:#a67c00}
+.btn-lv{min-height:48px}
 </style>
 <!-- kkp-rel-d4:start -->
 <style id="kkp-rel-d4">
@@ -1037,9 +1042,17 @@ details.chart-wrap{border-radius:0}
     </section>
     <p class="level-heading">押すと、すぐ始まります</p>
     <div class="level-btns">
+      <button class="btn-lv lv-home" onclick="startGame('home')">
+        <span class="lv-name">ホームポジション</span>
+        <span class="lv-desc">F・J とまん中の段</span>
+      </button>
       <button class="btn-lv lv-easy" onclick="startGame('easy')">
         <span class="lv-name">はじめて</span>
         <span class="lv-desc">短い単語・大きな文字</span>
+      </button>
+      <button class="btn-lv lv-mid" onclick="startGame('mid')">
+        <span class="lv-name">すこし長い言葉</span>
+        <span class="lv-desc">短い文・「、」「。」</span>
       </button>
       <button class="btn-lv lv-normal" onclick="startGame('normal')">
         <span class="lv-name">ふつう</span>
@@ -1262,14 +1275,15 @@ details.chart-wrap{border-radius:0}
   <!-- 挿し絵（2026-09-25・Codex制作・シリーズ共通の男の子と、おじいちゃん）。急がず始めてよい安心感を伝える -->
   <img class="guide-pic" src="/img/guide-practice.webp" width="320" height="259" alt="孫に見守られながら、ゆっくりキーボードを打つおじいちゃん" loading="lazy" decoding="async">
   <ol>
-    <li>最初は「はじめて・5問」を選び、ローマ字ガイドを見ながら入力します。</li>
+    <li>キーボードに初めてさわる方は「ホームポジション・5問」から。F・J に人差し指を置いたまま、まん中の段のキーだけを打ちます。</li>
+    <li>つぎに「はじめて」で短い言葉を、ローマ字ガイドを見ながら入力します。そのあと「すこし長い言葉」「ふつう」「むずかしい」の順です。</li>
     <li>速さよりも正確さを意識し、慣れたら10問、20問へ増やします。</li>
     <li>結果画面の「せいかくさ」と「1分あたり」の記録を前回と比べます。</li>
   </ol>
   <h3>上達しやすい姿勢と指の置き方</h3>
   <p>キーボードは、ひじがほぼ直角になる高さに置きます。左手の人差し指を F、右手の人差し指を J の小さな出っぱりに置きます（ホームポジション）。こうすると、少しずつ手元を見ずに打てるようになります。</p>
-  <h3>お題は全部で193問</h3>
-  <p>「はじめて」は季節や暮らしの短い言葉が73問、「ふつう」はメールにそのまま使えるあいさつの文が60問、「むずかしい」はことわざや暮らしの文が60問です。<strong>一周するまで同じお題は出ません</strong>。「、」「。」やのばす音「ー」も打てます。</p>
+  <h3>お題は全部で269問</h3>
+  <p>「ホームポジション」はまん中の段のキーと短い言葉が38問、「はじめて」は季節や暮らしの短い言葉が73問、「すこし長い言葉」は暮らしの短い文が38問、「ふつう」はメールにそのまま使えるあいさつの文が60問、「むずかしい」はことわざや暮らしの文が60問です。<strong>一周するまで同じお題は出ません</strong>。「、」「。」やのばす音「ー」も打てます。</p>
   <h3>60代・70代からのブラインドタッチ（手元を見ずに打つ）</h3>
   <p>ブラインドタッチは、いきなり目指さなくて大丈夫です。次の順で、一つずつ進めてください。</p>
   <ol>
@@ -1291,7 +1305,7 @@ details.chart-wrap{border-radius:0}
   </ul>
   <h3>ご家族・パソコン教室の方へ</h3>
   <ul>
-    <li>最初は「はじめて・5問」から。1回が数分で終わるので、疲れる前に区切れます。</li>
+    <li>キーボードに初めてさわる方は「ホームポジション・5問」から。1回が数分で終わるので、疲れる前に区切れます。</li>
     <li>結果の表に「前回」の記録が並びます。速さより「正確さ」が上がっていることを一緒に確かめてください。</li>
     <li>ローマ字の早見表は、受講生への配布や、ご自宅でパソコンの横に置く用にお使いください。</li>
     <li>登録も名前の入力もいりません。記録はその端末のブラウザの中にだけ残ります。</li>
@@ -1332,14 +1346,14 @@ details.chart-wrap{border-radius:0}
   <h2>よくある質問</h2>
   <details><summary>無料ですか？登録は必要ですか？</summary><p>完全無料・登録不要です。ページを開いてすぐ練習を始められます。広告は表示されますが、機能に制限はありません。</p></details>
   <details><summary>時間制限が本当にないのですか？</summary><p>ありません。制限時間で急かされると手元が乱れ、変な癖がつきやすくなります。このサイトは1問ずつ、納得できるまでゆっくり打てる設計です。</p></details>
-  <details><summary>どの難しさから始めればいいですか？</summary><p>キーボードにまだ慣れていない方は「はじめて」（短い単語）から。あいさつ文が打てるようになったら「ふつう」、文章の速さを上げたい方は「むずかしい」へ進んでください。</p></details>
+  <details><summary>どの難しさから始めればいいですか？</summary><p>キーボードに初めてさわる方は「ホームポジション」（F・J に指を置いて、まん中の段だけ）から。つぎに「はじめて」（短い単語）、「すこし長い言葉」（短い文）、「ふつう」（あいさつ文）、「むずかしい」（ことわざ・長い文章）の順です。正確さ95%以上が3回つづくと、結果の画面でひとつ上の段をおすすめします。</p></details>
   <details><summary>ローマ字がうろ覚えでも大丈夫ですか？</summary><p>画面にローマ字ガイドが出るので、見ながら打てば自然に覚えられます。「っ」「ん」など迷いやすい入力は上の「「っ」「ん」の打ち方とローマ字の表」にまとめてあります。</p></details>
   <details><summary>どのキーをどの指で打つか分かりません。</summary><p>練習画面の下にキーボードの図が出ます。つぎに打つキーに色がつき、「左手の人差し指で F」のように使う指も文字で表示します。慣れてきたら「キーボードの図をかくす」で消して、手元を見ない練習に進めます。</p></details>
   <details><summary>60代・70代からでも、手元を見ずに打てるようになりますか？</summary><p>年齢で決まるものではありません。ただ、急ぐと手元を見る癖が戻りやすいので、時間制限のない練習でゆっくり進めるのが向いています。人差し指を F と J に置き、練習画面のキーボードの図で光るキーと使う指を確かめながら打つと、キーの場所を少しずつ覚えられます。慣れたら図をかくして練習してください。</p></details>
   <details><summary>ローマ字の表を印刷できますか？</summary><p>できます。<a href="/romaji/">ローマ字入力の早見表</a>のページの「この表を印刷する」で、大きな文字の表がA4用紙1枚に印刷されます。</p></details>
   <details><summary>スマホでも練習できますか？</summary><p>できますが、このサイトは物理キーボードでの練習を想定しています。パソコンや、タブレット＋外付けキーボードでの利用をおすすめします。</p></details>
-  <details><summary>同じお題ばかり出ませんか？</summary><p>お題は全部で193問あり、一周するまで同じお題は出ません。どこまで出したかは、この端末のブラウザ内に覚えています。</p></details>
-  <details><summary>成績は保存されますか？</summary><p>直近5回の成績と最高記録を、この端末のブラウザ内に保存します。名前やメールアドレスなどの個人情報は必要ありません。</p></details>
+  <details><summary>同じお題ばかり出ませんか？</summary><p>お題は全部で269問あり、一周するまで同じお題は出ません。どこまで出したかは、この端末のブラウザ内に覚えています。</p></details>
+  <details><summary>成績は保存されますか？</summary><p>練習ごとの記録（正確さ・1分あたりのキー数・練習した日）を、この端末のブラウザ内に保存します。「練習の記録を見る」で見られます。名前やメールアドレスなどの個人情報は必要ありません。</p></details>
 </section>
 
 <!-- WEBNINJA_RELATED_APPS -->
@@ -1367,6 +1381,26 @@ details.chart-wrap{border-radius:0}
 <script>
 // ==================== SENTENCE DATA ====================
 const SENTENCES = {
+  // ホームポジション（2026-10-25）: F・J に人差し指を置いたまま、まん中の段（A S D F J K L ;）だけで打てるもの。
+  // 1つのキー → 2〜3キー → 4キー → かなの言葉（あさ・かさ＝a s k だけ）の順。
+  // じゃ・しゃ のように打ち方が3つあるかなは、案内が2段になり 1366×650 からはみ出すので入れない。1回の中は短いものから出す（pickSentences）
+  home: [
+    'F', 'J', 'D', 'K', 'S', 'L', 'A', ';',
+    'FJ', 'JF', 'FF', 'JJ', 'DK', 'KD', 'SL', 'LS', 'A;', ';A',
+    'FJF', 'JFJ', 'FDF', 'JKJ', 'FDS', 'JKL', 'DSA', 'KL;', 'ASD', 'L;J',
+    'ASDF', 'JKL;', 'FDSA', ';LKJ',
+    'あさ', 'かさ', 'あか', 'さか', 'ささ', 'さかさ',
+  ],
+  // すこし長い言葉（2026-10-25）: 「はじめて」と「ふつう」の間。暮らしの短い文で、「、」「。」「ー」を少し
+  mid: [
+    'あさのさんぽ', 'おちゃがおいしい', 'はれたひのにわ', 'まごからのてがみ', 'あたらしいほん', 'ゆうやけがきれい',
+    'こーひーをいれる', 'けーきをやく', 'すーぷがあたたかい', 'らじおたいそう', 'えきまでのみち', 'あきのくだもの',
+    'ひなたぼっこ', 'はるのそよかぜ', 'なつのはなび', 'ふゆのこたつ', 'かぞくでごはん', 'ゆっくりすすむ',
+    'はなに、みずをやる。', 'そらが、あおい。', 'ゆきが、ふった。', 'おふろで、あたたまる。', 'てがみを、かいた。',
+    'ほんを、よんだ。', 'くつを、みがく。', 'めーるが、とどいた。', 'かれーを、つくる。', 'のーとに、かく。',
+    'よくねむれた。', 'きょうも、げんき。', 'あめのひの、どくしょ。', 'ともだちと、おしゃべり。', 'たのしい、いちにち。',
+    'ばすで、でかける。', 'すこし、なれてきた。', 'あったかい、まふらー。', 'きれいな、つき。', 'また、あした。',
+  ],
   // はじめて: 短い言葉。季節・暮らし・家族と、のばす音「ー」に慣れるカタカナ語
   easy: [
     'あさひ', 'きれい', 'おそら', 'たのしい', 'やさしい', 'あたたかい', 'しずかなよる', 'あおいうみ', 'たかいやま', 'さわやかなかぜ',
@@ -1615,6 +1649,8 @@ function pickSentences(level, count) {
   let rest = src.filter(w => !done.includes(w));
   if (rest.length < count) { done = []; rest = src.slice(); }   // 一周したら最初から
   const picked = rest.sort(() => Math.random() - 0.5).slice(0, count);
+  // ホームポジションは、1つのキー → 2〜3キー → 言葉 の順に出す（短いものから）
+  if (level === 'home') picked.sort((a, b) => a.length - b.length);
   seen[level] = done.concat(picked);
   try { localStorage.setItem(SEEN_KEY, JSON.stringify(seen)); } catch (_) {}
   return picked;
@@ -1959,6 +1995,9 @@ function showTypeHint(tok, k) {
     msg = '「ん」のあとの <b>' + tok.kana + '</b> は、もう一度 <b>N</b> からです（' + prev.kana + tok.kana + '＝NN' + tok.opts[0].toUpperCase() + '）';
   } else if (tok.smallTsu) {
     msg = '「っ」は、つぎの文字の最初のキーを <b>1回多く</b> 打ちます';
+  } else if (typed === '' && /^[a-z;]$/i.test(tok.kana)) {
+    // ホームポジションの段（かなでなくキーそのもの）
+    msg = 'つぎは <b>' + tok.kana.toUpperCase() + '</b> のキーです。キーボードの図で光っているキーを押します';
   } else if (typed === '') {
     msg = '<b>' + tok.kana + '</b> は <b>' + tok.opts[0].toUpperCase() + '</b> です';
   }
@@ -2026,8 +2065,9 @@ document.addEventListener('keydown', e => {
 // 1回の練習ごとに1件。日ごとの回数・はじめての記録との比べ・カレンダーに使う。
 const LOG_KEY = 'yukkuriTypingLogV1';
 const LAST_VISIT_KEY = 'yukkuriTypingLastVisit';
-const LEVEL_NAME = {easy: 'はじめて', normal: 'ふつう', hard: 'むずかしい'};
-const LEVEL_NEXT = {easy: 'normal', normal: 'hard'};
+// 2026-10-25 段を5つに: ホームポジション → はじめて → すこし長い言葉 → ふつう → むずかしい
+const LEVEL_NAME = {home: 'ホームポジション', easy: 'はじめて', mid: 'すこし長い言葉', normal: 'ふつう', hard: 'むずかしい'};
+const LEVEL_NEXT = {home: 'easy', easy: 'mid', mid: 'normal', normal: 'hard'};
 function dayStr(d) {
   d = d || new Date();
   const z = n => String(n).padStart(2, '0');
@@ -2163,7 +2203,7 @@ function renderRecord() {
 
   // 難しさごと：回数・はじめて・最近5回の平均・いちばん良い
   let lv = '<thead><tr><th scope="col">難しさ</th><th scope="col">回数</th><th scope="col">はじめての記録</th><th scope="col">最近5回の平均</th><th scope="col">いちばん速い</th></tr></thead><tbody>';
-  ['easy', 'normal', 'hard'].forEach(k => {
+  ['home', 'easy', 'mid', 'normal', 'hard'].forEach(k => {
     const a = log.filter(x => x.level === k);
     if (!a.length) { lv += '<tr><th scope="row">' + LEVEL_NAME[k] + '</th><td>0回</td><td>—</td><td>—</td><td>—</td></tr>'; return; }
     const r = a.slice(-5);
