@@ -892,6 +892,8 @@ table.record-table small{display:block;font-size:.9rem;color:#555}
   .kb-wrap{margin-top:2px}
   .kb-finger{margin-bottom:2px}
   .kb-key{height:33px}
+  /* 2026-10-25「文字を大きく」でもキーの高さは同じ（48pxだと図が75px高くなり 650px を超えた）。キーの字だけ大きく */
+  body.large-text .kb-key{height:33px}
   .kb-fingers{margin-top:0}
   .kb-note{margin-top:2px}
   .kb-tools{margin-top:4px}
