@@ -1048,8 +1048,8 @@ details.chart-wrap{border-radius:0}
     <section class="practice-settings" aria-labelledby="count-heading">
       <h2 id="count-heading">問題数</h2>
       <div class="count-btns">
-        <button class="count-btn" type="button" aria-pressed="false" onclick="setPracticeCount(5,this)">5問</button>
-        <button class="count-btn" type="button" aria-pressed="true" onclick="setPracticeCount(10,this)">10問</button>
+        <button class="count-btn" type="button" aria-pressed="true" onclick="setPracticeCount(5,this)">5問</button>
+        <button class="count-btn" type="button" aria-pressed="false" onclick="setPracticeCount(10,this)">10問</button>
         <button class="count-btn" type="button" aria-pressed="false" onclick="setPracticeCount(20,this)">20問</button>
       </div>
     </section>
@@ -1598,7 +1598,7 @@ let totalMiss = 0;
 let sentMiss = 0;
 let totalKeys = 0;
 let startTime = null;
-let practiceCount = 10;
+let practiceCount = 5; // 2026-11-08 案内（毎日5問から）にそろえて初期は5問
 let lastResultText = '';
 let resultShown = false;   // 1回の練習で結果を2回保存しないための目印
 const HISTORY_KEY = 'yukkuriTypingHistoryV2';
