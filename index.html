@@ -756,6 +756,7 @@ header{background:#c2451a;padding:10px 20px}
 .yt-links a{font-size:.95rem;border-radius:6px;background:#fff;border:1px solid #9bbfa6;color:#22603a;padding:8px 14px}
 .yt-pr{font-size:.875rem;color:#666;text-align:left}
 .yt-item{border-top-color:#e0d5c3}
+.result-note{margin:6px 0 0;font-size:.95rem;color:#555;text-align:left}
 .chart-print{margin:0 0 10px;font-size:1.05rem}
 .chart-print a{color:#1a5fb4;text-decoration:underline;font-weight:bold}
 .seo-guide a{color:#1a5fb4;text-decoration:underline}
@@ -1173,7 +1174,7 @@ details.chart-wrap{border-radius:0}
       <div class="kb" id="kb" aria-hidden="true"></div>
       <div class="kb-fingers" id="kb-fingers" aria-hidden="true"></div>
       <p class="kb-note"><span class="kb-note-key">オレンジのキー</span>を、<span class="kb-note-finger">濃くなった指</span>で押します。打ったら人差し指を <b class="kb-note-home">F</b>・<b class="kb-note-home">J</b> に戻します。</p>
-      <div class="kb-tools"><button class="kb-toggle" type="button" id="kb-toggle" onclick="toggleKeyboard()">キーボードの図をかくす</button></div>
+      <div class="kb-tools"><button class="kb-toggle" type="button" id="snd-toggle" aria-pressed="false" onclick="toggleSound()">音：なし</button> <button class="kb-toggle" type="button" id="kb-toggle" onclick="toggleKeyboard()">キーボードの図をかくす</button></div>
     </div>
   </div>
 
@@ -1191,6 +1192,7 @@ details.chart-wrap{border-radius:0}
           <tr><th scope="row">1分あたり</th><td><span id="r-kpm">0</span> キー</td><td id="p-kpm">—</td></tr>
         </tbody>
       </table>
+      <p class="result-note">「1分あたり」は、考えている時間もふくめた数です。ゆっくりでも、正確に打てていれば十分です。</p>
       <p class="result-growth" id="result-growth"></p>
       <div class="result-btns">
         <button class="btn-retry" onclick="retryGame()">もういちど</button>
@@ -1735,12 +1737,12 @@ function processKey(key) {
   // 「ん」を n 1回でも nn でも打てるようにする（日本語入力と同じ）。
   // n を1回打った時点では確定させず、つぎのキーで決める
   if (tok.kana === 'ん' && tok.opts.includes('n')) {
-    if (typed === '' && k === 'n') { typed = 'n'; totalKeys++; renderTokens(); updateRomajiBar(); return; }
+    if (typed === '' && k === 'n') { typed = 'n'; totalKeys++; renderTokens(); updateRomajiBar(); playSound('key'); return; }
     if (typed === 'n') {
       typedHistory += (k === 'n') ? 'nn' : 'n';
       typed = '';
       tokIdx++;
-      if (k === 'n') { totalKeys++; renderTokens(); updateRomajiBar(); if (tokIdx >= tokens.length) onDone(); return; }
+      if (k === 'n') { totalKeys++; renderTokens(); updateRomajiBar(); playSound('key'); if (tokIdx >= tokens.length) onDone(); return; }
       renderTokens(); updateRomajiBar();
       if (tokIdx >= tokens.length) { onDone(); return; }
       processKey(k);
@@ -1758,6 +1760,7 @@ function processKey(key) {
       totalKeys++;
       renderTokens();
       updateRomajiBar();
+      playSound('key');
       if (tokIdx >= tokens.length) onDone();
       return;
     }
@@ -1770,11 +1773,13 @@ function processKey(key) {
       totalKeys++;
       renderTokens();
       updateRomajiBar();
+      playSound('key');
       return;
     }
   }
 
   // Miss
+  playSound('miss');
   showTypeHint(tok, k);
   flashMissKey(k);
   totalMiss++;
@@ -1802,6 +1807,58 @@ function onDone() {
   btn.classList.add('ready');
   btn.focus();
   document.getElementById('enter-hint').classList.add('show');
+  playSound('done');
+  showNextHint();
+}
+
+// 2026-11-08 はじめての人が「つぎへ」で止まらないよう、1問目ができた時に3回まで案内する
+const NEXT_HINT_KEY = 'yukkuriTypingNextHintN';
+function showNextHint() {
+  if (sentIdx !== 0) return;
+  let n = 0;
+  try { n = Number(localStorage.getItem(NEXT_HINT_KEY) || 0); } catch (_) {}
+  if (n >= 3) return;
+  const el = document.getElementById('type-hint');
+  if (el) el.innerHTML = 'できました。<b>Enter</b>キーか、下の<b>「つぎへ」</b>ボタンで、つぎの問題に進みます。';
+  try { localStorage.setItem(NEXT_HINT_KEY, String(n + 1)); } catch (_) {}
+}
+
+// 2026-11-08 打った音・正解の音（既定はなし。ボタンで切り替え、この端末に覚える）
+const SOUND_KEY = 'yukkuriTypingSound';
+let soundOn = false, audioCtx = null;
+function toggleSound() {
+  soundOn = !soundOn;
+  try { localStorage.setItem(SOUND_KEY, soundOn ? '1' : '0'); } catch (_) {}
+  applySound();
+  if (soundOn) playSound('key');
+  trackEvent('typing_sound_toggle', {state: soundOn ? 'on' : 'off'});
+}
+function applySound() {
+  const b = document.getElementById('snd-toggle');
+  if (b) { b.textContent = soundOn ? '音：あり' : '音：なし'; b.setAttribute('aria-pressed', String(soundOn)); }
+}
+function restoreSound() {
+  try { soundOn = localStorage.getItem(SOUND_KEY) === '1'; } catch (_) {}
+  applySound();
+}
+function playSound(kind) {
+  if (!soundOn) return;
+  try {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const notes = kind === 'miss' ? [[196, 0, .16]] : kind === 'done' ? [[660, 0, .12], [880, .12, .2]] : [[1200, 0, .035]];
+    const t0 = audioCtx.currentTime;
+    notes.forEach(([f, at, len]) => {
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+      o.type = kind === 'miss' ? 'triangle' : 'sine';
+      o.frequency.value = f;
+      const vol = kind === 'key' ? .05 : .12;
+      g.gain.setValueAtTime(vol, t0 + at);
+      g.gain.exponentialRampToValueAtTime(.0001, t0 + at + len);
+      o.connect(g); g.connect(audioCtx.destination);
+      o.start(t0 + at); o.stop(t0 + at + len + .02);
+    });
+  } catch (_) {}
 }
 
 function nextSentence() {
@@ -2373,6 +2430,7 @@ window.addEventListener('pagehide', adStopWaiting);
 
 restoreTextSize();
 restoreKeyboard();
+restoreSound();
 renderStartStats();
 noteVisit();
 adFirst();
