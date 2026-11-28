@@ -1023,6 +1023,99 @@ details.chart-wrap{border-radius:0}
 .tok.done .rguide{color:#6b6b6b}
 .kb-note-key{background:#c2410c}
 </style>
+<style id="yk-2026-11-28">
+/* ===== 2026-11-28 砦 /block/ と同じ方向の改良: 音の切り替えを見える所に・指ごとの色分け・キーボードでの操作・PC横長とタブレットの使い方 =====
+   高齢者向けの決まり（本文17〜18px・濃い文字・押す所44px以上・1366×650 で練習画面が1画面）は崩さない。広告・アフィリの位置は不変 */
+.header-tools{display:flex;align-items:center;gap:8px}
+.snd-btn{display:inline-flex;align-items:center;gap:4px;min-height:40px;padding:0 12px;font-family:inherit;font-size:14px;font-weight:800;background:var(--k-surface);color:#6b5e4e;border:var(--k-bw-s) solid var(--k-sumi);border-radius:var(--k-r);box-shadow:var(--k-sh-s);cursor:pointer;white-space:nowrap}
+.snd-btn .snd-ico{flex:none}
+.snd-btn .w{opacity:.22}
+.snd-btn[aria-pressed="true"]{background:#fff4ea;color:#b0391a}
+.snd-btn[aria-pressed="true"] .w{opacity:1}
+.snd-btn:active{transform:translate(3px,3px);box-shadow:none}
+.snd-btn:focus-visible,.text-size-btn:focus-visible,.btn-retry:focus-visible{outline:3px solid #1a5fb4;outline-offset:2px}
+.kb-toggle.snd-btn{min-height:44px;font-size:.95rem;vertical-align:middle}
+@media (max-width:640px){#snd-head{display:none}}
+
+/* キーボードで操作: 段のボタンの右上に数字（1〜5）、結果は Enter で「もういちど」。マウスだけの端末（タッチ）では出さない */
+.btn-lv{position:relative}
+.lv-key{position:absolute;top:8px;right:10px;min-width:26px;height:26px;padding:0 4px;display:grid;place-items:center;font-family:inherit;font-size:.95rem;font-weight:800;color:var(--k-sumi);background:#fff;border:1.5px solid var(--k-sumi);border-bottom-width:3px;border-radius:5px;line-height:1}
+.btn-lv .lv-name{padding-right:30px}
+.key-tip{display:inline-block;margin-left:12px;font-size:.95rem;font-weight:normal;color:#444}
+.key-tip kbd{display:inline-block;min-width:1.7em;padding:0 6px;margin:0 2px;font-family:inherit;font-weight:800;text-align:center;color:var(--k-sumi);background:#fff;border:1.5px solid var(--k-sumi);border-bottom-width:3px;border-radius:5px;line-height:1.5}
+.key-tip-result{display:block;margin:10px 0 0}
+@media (hover:none),(max-width:640px){.lv-key,.key-tip{display:none}.btn-lv .lv-name{padding-right:0}}
+
+/* スマホ・タブレット（キーボードのない端末）: 打てずに止まらないよう、最初に1行だけ案内。キーを1つでも打ったら消す */
+.touch-note{display:none;margin:6px 0 12px;padding:8px 12px;background:#fff;border-left:4px solid #1f5f9e;font-size:1rem;line-height:1.6;color:#222}
+.touch-note a{color:#1a5fb4;text-decoration:underline;font-weight:bold}
+@media (hover:none) and (pointer:coarse){.touch-note{display:block}}
+body.has-kbd .touch-note{display:none}
+
+/* キーを指ごとにうすく色分け（下に並ぶ指と同じ色）。いま打つキー（オレンジ）と打ち間違い（赤）はそのまま */
+.kb-key.kb-f-p:not(.kb-next):not(.kb-miss){background:#e3ecf8}
+.kb-key.kb-f-r:not(.kb-next):not(.kb-miss){background:#e2f0de}
+.kb-key.kb-f-m:not(.kb-next):not(.kb-miss){background:#faf0c8}
+.kb-key.kb-f-i:not(.kb-next):not(.kb-miss){background:#f8e3ec}
+.kb-fg.kb-f-p:not(.on){background:#c9d9ef;border-color:#9fb5d6}
+.kb-fg.kb-f-r:not(.on){background:#c8e2c1;border-color:#9fc496}
+.kb-fg.kb-f-m:not(.on){background:#f1df9a;border-color:#d4bd6a}
+.kb-fg.kb-f-i:not(.on){background:#efc6d8;border-color:#d39ab3}
+.kb-fg.on{box-shadow:0 0 0 3px rgba(217,83,31,.25)}
+
+/* 縦に余裕のある画面（タブレット縦・PCの大きい画面）はキーを高く。1366×650 は今のまま */
+@media (min-width:641px) and (min-height:860px){
+  .kb-key,body.large-text .kb-key{height:44px}
+  .kb-row{gap:4px;margin-bottom:4px}
+  #scr-prac .sentence-card{padding:14px 18px 12px}
+  #scr-prac .tok .kana{font-size:3rem}
+}
+/* PC横長（1200px以上）: 左右の空きを使い、問題とキーボードの図を横に広げる。スタート画面は段を横1列（やさしい順に左から） */
+@media (min-width:1200px){
+  main:has(#scr-prac:not(.hidden)),main:has(#scr-start:not(.hidden)){max-width:1120px}
+  .kb-wrap{max-width:1040px}
+  .kb-key{font-size:1.2rem}
+  #scr-start{max-width:1080px}
+  #scr-start .level-btns{grid-template-columns:repeat(5,1fr)}
+  #scr-start .btn-lv{padding:12px 12px 14px 14px}
+  #scr-start .btn-lv .lv-name{font-size:1.2rem;white-space:nowrap;padding-right:0}
+  #scr-start .lv-key{position:static;margin-bottom:6px}
+  #scr-start .k-aff,#scr-start .chart-wrap{max-width:760px}
+}
+/* ===== 2026-11-28 PC横長（1200px以上）だけ3列: 左＝いまの練習（進み具合・ミス・時間）／まん中＝問題とキーボードの図／右＝操作のヒント・音・図の切り替え。
+   スタート画面は右の空きに記録の要約（記録が無い人には出さない）。1200px未満は今までと同じ（左右の列も要約も出さない） ===== */
+.prac-side,.rec-sum{display:none}
+.ps-h{margin:0 0 8px;padding-top:8px;border-top:3px solid var(--k-sumi);font-size:1.05rem;font-weight:800;color:#222}
+.ps-stats{margin:0 0 10px}
+.ps-stats dt{font-size:.95rem;color:#555;margin:0}
+.ps-stats dd{margin:0 0 10px;font-size:1.1rem;color:#222;line-height:1.5}
+.ps-stats dd b{font-size:1.6rem;line-height:1.2}
+.ps-bar{height:10px;background:#e4ddd0;border-radius:5px;overflow:hidden;margin:0 0 10px}
+.ps-bar-in{height:100%;width:0;background:#d9531f;transition:width .3s}
+.ps-note{margin:0;font-size:.95rem;color:#444;line-height:1.6}
+.ps-keys{margin:0 0 12px;padding-left:1.1em;font-size:1rem;line-height:1.6;color:#222}
+.ps-keys li{margin-bottom:6px}
+.ps-keys kbd{display:inline-block;padding:0 6px;font-family:inherit;font-weight:800;color:var(--k-sumi);background:#fff;border:1.5px solid var(--k-sumi);border-bottom-width:3px;border-radius:5px;line-height:1.5}
+.ps-tools{display:flex;flex-direction:column;gap:10px;align-items:stretch}
+.ps-tools .kb-toggle{justify-content:center;text-align:center;padding:8px 10px;white-space:nowrap}
+.rec-sum .btn-record{min-height:44px;width:100%}
+@media (min-width:1200px){
+  main:has(#scr-prac:not(.hidden)){max-width:1440px}
+  #scr-prac:not(.hidden){display:flex;align-items:flex-start;gap:24px}
+  .prac-main{flex:1 1 auto;min-width:0;position:relative}
+  .prac-side{display:block;flex:0 0 220px;margin-top:30px}
+  #scr-prac .prac-header{justify-content:flex-end}
+  #scr-prac .prog-text,#scr-prac .prog-bar-outer,#scr-prac .miss-count{display:none}
+  .kb-wrap{max-width:none}
+  .kb-wrap .kb-tools{display:none}
+  #scr-start{display:grid;grid-template-columns:minmax(0,1fr) 300px;column-gap:28px;grid-auto-flow:row dense;align-items:start}
+  #scr-start > *{grid-column:1 / -1;margin-left:0;margin-right:0}
+  #scr-start > .k-aff,#scr-start > .chart-wrap{grid-column:1;max-width:none}
+  #scr-start > .rec-sum{grid-column:2;grid-row:span 2;display:block;margin-top:14px}
+  /* 右の要約が出ているときだけ、上の「練習した日：これまで n日」と記録ボタンの行を消す（同じ中身が右にある）。1200px未満は今までどおり上に出す */
+  #scr-start:has(#rec-sum:not(.hidden)) .today-stats{display:none}
+}
+</style>
 <!-- kkp-rel-d4:end -->
 </head>
 <body>
@@ -1030,7 +1123,7 @@ details.chart-wrap{border-radius:0}
 
 <header>
   <span class="site-name">ゆっくりタイピング</span>
-  <div class="header-tools"><button class="text-size-btn" type="button" id="text-size-btn" onclick="toggleLargeText()" aria-pressed="false">文字を大きく</button></div>
+  <div class="header-tools"><button class="snd-btn" type="button" id="snd-head" data-snd aria-pressed="false" onclick="toggleSound()"><svg class="snd-ico" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path class="w" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="snd-t">音なし</span></button><button class="text-size-btn" type="button" id="text-size-btn" onclick="toggleLargeText()" aria-pressed="false">文字を大きく</button></div>
 </header>
 
 <main id="main-content">
@@ -1038,6 +1131,7 @@ details.chart-wrap{border-radius:0}
   <!-- ======= START SCREEN ======= -->
   <div id="scr-start">
     <h1 class="hero-title">ゆっくりタイピング</h1>
+    <p class="touch-note">パソコンのキーボードで練習するサイトです。スマホ・タブレットの画面の文字入力は <a href="https://yukkuri-flick.kkpwebninja.com/">ゆっくりフリック入力</a> で練習できます。</p>
 
     <div class="today-box hidden" id="today-box">
       <div class="today-row">
@@ -1059,26 +1153,26 @@ details.chart-wrap{border-radius:0}
         <button class="count-btn" type="button" aria-pressed="false" onclick="setPracticeCount(20,this)">20問</button>
       </div>
     </section>
-    <p class="level-heading">押すと、すぐ始まります</p>
+    <p class="level-heading">押すと、すぐ始まります<span class="key-tip">キーボードの <kbd>1</kbd>〜<kbd>5</kbd> でも始められます</span></p>
     <div class="level-btns">
       <button class="btn-lv lv-home" onclick="startGame('home')">
-        <span class="lv-name">ホームポジション</span>
+        <kbd class="lv-key" aria-hidden="true">1</kbd><span class="lv-name">ホームポジション</span>
         <span class="lv-desc">F・J とまん中の段</span>
       </button>
       <button class="btn-lv lv-easy" onclick="startGame('easy')">
-        <span class="lv-name">はじめて</span>
+        <kbd class="lv-key" aria-hidden="true">2</kbd><span class="lv-name">はじめて</span>
         <span class="lv-desc">短い単語・大きな文字</span>
       </button>
       <button class="btn-lv lv-mid" onclick="startGame('mid')">
-        <span class="lv-name">すこし長い言葉</span>
+        <kbd class="lv-key" aria-hidden="true">3</kbd><span class="lv-name">すこし長い言葉</span>
         <span class="lv-desc">短い文・「、」「。」</span>
       </button>
       <button class="btn-lv lv-normal" onclick="startGame('normal')">
-        <span class="lv-name">ふつう</span>
+        <kbd class="lv-key" aria-hidden="true">4</kbd><span class="lv-name">ふつう</span>
         <span class="lv-desc">日常のあいさつ文</span>
       </button>
       <button class="btn-lv lv-hard" onclick="startGame('hard')">
-        <span class="lv-name">むずかしい</span>
+        <kbd class="lv-key" aria-hidden="true">5</kbd><span class="lv-name">むずかしい</span>
         <span class="lv-desc">ことわざ・長い文章</span>
       </button>
     </div>
@@ -1150,10 +1244,29 @@ details.chart-wrap{border-radius:0}
         </table>
       </div>
     </details>
+
+    <!-- 2026-11-28 PC横長（1200px以上）だけ：右の空きに練習の記録の要約（記録が無い人には出さない。記録は読むだけ） -->
+    <aside class="rec-sum hidden" id="rec-sum" aria-labelledby="rec-sum-h">
+      <p class="ps-h" id="rec-sum-h">これまでの練習</p>
+      <dl class="ps-stats" id="rec-sum-list"></dl>
+      <button class="btn-record" type="button" onclick="openRecord('start')">くわしい記録を見る</button>
+    </aside>
   </div>
 
   <!-- ======= PRACTICE SCREEN ======= -->
   <div id="scr-prac" class="hidden">
+    <!-- 2026-11-28 PC横長（1200px以上）だけの左の列：進み具合・ミス・時間（狭い画面では出さない） -->
+    <aside class="prac-side prac-side-l" aria-label="いまの練習">
+      <p class="ps-h">いまの練習</p>
+      <dl class="ps-stats">
+        <dt>進み具合</dt><dd><b id="ps-prog">1</b> / <span id="ps-total">5</span> 問</dd>
+        <dt>ミス</dt><dd><b id="ps-miss">0</b> 回</dd>
+        <dt>練習した時間</dt><dd><b id="ps-time">0:00</b></dd>
+      </dl>
+      <div class="ps-bar" aria-hidden="true"><div class="ps-bar-in" id="ps-bar"></div></div>
+      <p class="ps-note">時間は気にせず、ゆっくりで大丈夫です。</p>
+    </aside>
+    <div class="prac-main">
     <div class="prac-header">
       <span class="prog-text" id="prog-text">1 / 10</span>
       <div class="prog-bar-outer">
@@ -1162,6 +1275,7 @@ details.chart-wrap{border-radius:0}
       <button class="btn-change" onclick="goStart()">レベル変更</button>
     </div>
 
+    <p class="touch-note">この練習は、キーボードで打ちます。タブレットはキーボードをつなぐと練習できます。画面の文字入力の練習は <a href="https://yukkuri-flick.kkpwebninja.com/">ゆっくりフリック入力</a> へ。</p>
     <div class="praise" id="praise" role="status" aria-live="polite"></div>
 
     <div class="sentence-card">
@@ -1190,8 +1304,22 @@ details.chart-wrap{border-radius:0}
       <div class="kb" id="kb" aria-hidden="true"></div>
       <div class="kb-fingers" id="kb-fingers" aria-hidden="true"></div>
       <p class="kb-note"><span class="kb-note-key">オレンジのキー</span>を、<span class="kb-note-finger">濃くなった指</span>で押します。打ったら人差し指を <b class="kb-note-home">F</b>・<b class="kb-note-home">J</b> に戻します。</p>
-      <div class="kb-tools"><button class="kb-toggle" type="button" id="snd-toggle" aria-pressed="false" onclick="toggleSound()">音：なし</button> <button class="kb-toggle" type="button" id="kb-toggle" onclick="toggleKeyboard()">キーボードの図をかくす</button></div>
+      <div class="kb-tools"><button class="kb-toggle snd-btn" type="button" id="snd-toggle" data-snd aria-pressed="false" onclick="toggleSound()"><svg class="snd-ico" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path class="w" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="snd-t">音なし</span></button> <button class="kb-toggle" type="button" id="kb-toggle" onclick="toggleKeyboard()">キーボードの図をかくす</button></div>
     </div>
+    </div>
+    <!-- 2026-11-28 PC横長（1200px以上）だけの右の列：操作のヒント・音・図の切り替え -->
+    <aside class="prac-side prac-side-r" aria-label="操作のヒント">
+      <p class="ps-h">キーボードでの操作</p>
+      <ul class="ps-keys">
+        <li>画面のかなを、<b>ローマ字</b>で打ちます</li>
+        <li>打ち終わったら <kbd>Enter</kbd> でつぎへ</li>
+        <li>まちがえても、正しいキーを打てば進みます</li>
+      </ul>
+      <div class="ps-tools">
+        <button class="kb-toggle snd-btn" type="button" data-snd aria-pressed="false" onclick="toggleSound()"><svg class="snd-ico" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path class="w" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="snd-t">音なし</span></button>
+        <button class="kb-toggle" type="button" data-kbt onclick="toggleKeyboard()">キーボードの図をかくす</button>
+      </div>
+    </aside>
   </div>
 
   <!-- ======= RESULT SCREEN ======= -->
@@ -1216,6 +1344,7 @@ details.chart-wrap{border-radius:0}
         <button class="btn-record" type="button" onclick="openRecord('result')">練習の記録</button>
         <button class="btn-share" onclick="shareResult()">結果を共有</button>
       </div>
+      <p class="key-tip key-tip-result"><kbd>Enter</kbd> キーでも「もういちど」を始められます</p>
       <div class="next-step" id="next-step">
         <p class="next-step-text" id="next-step-text"></p>
         <button class="btn-next-step hidden" type="button" id="btn-next-step" onclick="startNextStep()"></button>
@@ -1657,11 +1786,13 @@ function renderStartStats() {
   const todayBox = document.getElementById('today-box');
   if (!box) return;
   if (!log.length) {
+    renderRecSum(log);
     box.textContent = '';
     recBtn.classList.add('hidden');
     todayBox.classList.add('hidden');
     return;
   }
+  renderRecSum(log);
   const today = log.filter(x => x.d === dayStr()).length;
   box.textContent = '練習した日：これまで ' + practiceDays(log) + '日' + (today ? '（きょう ' + today + '回）' : '');
   recBtn.classList.remove('hidden');
@@ -1670,6 +1801,25 @@ function renderStartStats() {
   document.getElementById('btn-today').textContent = 'きょうの練習をはじめる（' + LEVEL_NAME[plan.level] + '・5問）';
   document.getElementById('today-desc').textContent = plan.why;
   todayBox.classList.remove('hidden');
+}
+// 2026-11-28 スタート画面の右の列（PC横長だけ CSS で出す）：記録を読むだけ。記録が無ければ枠ごと出さない
+function renderRecSum(log) {
+  const el = document.getElementById('rec-sum'), list = document.getElementById('rec-sum-list');
+  if (!el || !list) return;
+  if (!log.length) { el.classList.add('hidden'); return; }
+  const now = Date.now(), week = log.filter(x => now - (x.t || 0) < 7 * 864e5).length;
+  const last = log[log.length - 1];
+  const sameLv = log.filter(x => x.level === last.level && typeof x.acc === 'number');
+  const bestAcc = sameLv.length ? Math.max.apply(null, sameLv.map(x => x.acc)) : null;
+  const esc = v => String(v == null ? '' : v).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+  const rows = [
+    ['練習した日', practiceDays(log) + '日（合計 ' + log.length + '回）'],
+    ['この7日間', week + '回'],
+    ['前回', (last.d ? dayLabel(last.d) + '・' : '') + (LEVEL_NAME[last.level] || '') + '<br>正確さ ' + esc(last.acc) + '%・' + esc(last.sec) + '秒'],
+  ];
+  if (bestAcc !== null) rows.push(['「' + (LEVEL_NAME[last.level] || '') + '」でいちばん正確', bestAcc + '%']);
+  list.innerHTML = rows.map(r => '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>').join('');
+  el.classList.remove('hidden');
 }
 function trackEvent(name, params) {
   if (typeof gtag === 'function') gtag('event', name, params || {});
@@ -1706,6 +1856,7 @@ function startGame(level) {
   resultShown = false;
   adStopWaiting();
   showScreen('prac');
+  sideStart();
   loadSentence();
 }
 
@@ -1839,6 +1990,11 @@ function showNextHint() {
   if (n >= 3) return;
   const el = document.getElementById('type-hint');
   if (el) el.innerHTML = 'できました。<b>Enter</b>キーか、下の<b>「つぎへ」</b>ボタンで、つぎの問題に進みます。';
+  // 2026-11-28 同じ案内が2か所に出ないよう、この3回はボタンの横（enter-hint）と図の上（kb-finger）の文を出さない。図の Enter キーは光ったまま
+  const eh = document.getElementById('enter-hint');
+  if (eh) eh.classList.remove('show');
+  const kf = document.getElementById('kb-finger');
+  if (kf) kf.textContent = '';
   try { localStorage.setItem(NEXT_HINT_KEY, String(n + 1)); } catch (_) {}
 }
 
@@ -1853,30 +2009,58 @@ function toggleSound() {
   trackEvent('typing_sound_toggle', {state: soundOn ? 'on' : 'off'});
 }
 function applySound() {
-  const b = document.getElementById('snd-toggle');
-  if (b) { b.textContent = soundOn ? '音：あり' : '音：なし'; b.setAttribute('aria-pressed', String(soundOn)); }
+  // 2026-11-28 上の帯（どの画面でも見える）と練習画面の2か所。同じ状態を出す
+  document.querySelectorAll('[data-snd]').forEach(b => {
+    b.setAttribute('aria-pressed', String(soundOn));
+    const t = b.querySelector('.snd-t');
+    if (t) t.textContent = soundOn ? '音あり' : '音なし';
+    b.title = soundOn ? '押すと音を消します' : '押すと、キーを打ったときに音が鳴ります';
+  });
 }
 function restoreSound() {
   try { soundOn = localStorage.getItem(SOUND_KEY) === '1'; } catch (_) {}
   applySound();
 }
+// 2026-11-28 音を作り直し（耳に刺さらないよう sine/triangle だけ・音量をそろえる圧縮つき・音の部品は1つを使い回す）
+// key＝打つたびの小さな「コッ」／miss＝低く短い「ポッ」／done＝1問できた（2音）／finish＝ぜんぶ終わった（4音）
+let sndOut = null;
+function sndNote(f, at, len, vol, type, bend) {
+  const t0 = audioCtx.currentTime + at;
+  const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+  o.type = type || 'sine';
+  o.frequency.setValueAtTime(f, t0);
+  if (bend) o.frequency.exponentialRampToValueAtTime(f * bend, t0 + len);
+  g.gain.setValueAtTime(0.0001, t0);
+  g.gain.exponentialRampToValueAtTime(vol, t0 + 0.006);
+  g.gain.exponentialRampToValueAtTime(0.0001, t0 + len);
+  o.connect(g); g.connect(sndOut);
+  o.start(t0); o.stop(t0 + len + 0.03);
+}
 function playSound(kind) {
   if (!soundOn) return;
   try {
-    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const comp = audioCtx.createDynamicsCompressor();
+      sndOut = audioCtx.createGain(); sndOut.gain.value = 0.9;
+      sndOut.connect(comp); comp.connect(audioCtx.destination);
+    }
     if (audioCtx.state === 'suspended') audioCtx.resume();
-    const notes = kind === 'miss' ? [[196, 0, .16]] : kind === 'done' ? [[660, 0, .12], [880, .12, .2]] : [[1200, 0, .035]];
-    const t0 = audioCtx.currentTime;
-    notes.forEach(([f, at, len]) => {
-      const o = audioCtx.createOscillator(), g = audioCtx.createGain();
-      o.type = kind === 'miss' ? 'triangle' : 'sine';
-      o.frequency.value = f;
-      const vol = kind === 'key' ? .05 : .12;
-      g.gain.setValueAtTime(vol, t0 + at);
-      g.gain.exponentialRampToValueAtTime(.0001, t0 + at + len);
-      o.connect(g); g.connect(audioCtx.destination);
-      o.start(t0 + at); o.stop(t0 + at + len + .02);
-    });
+    if (kind === 'key') {            // 木のキーを軽くたたいた音
+      sndNote(1320, 0, 0.05, 0.07, 'triangle', 0.7);
+      sndNote(660, 0, 0.04, 0.04, 'sine');
+    } else if (kind === 'miss') {     // 低くやわらかい音（責める音にしない）
+      sndNote(262, 0, 0.16, 0.12, 'triangle', 0.85);
+    } else if (kind === 'done') {     // ド・ミ
+      sndNote(1047, 0, 0.32, 0.10, 'triangle');
+      sndNote(1319, 0.09, 0.42, 0.10, 'triangle');
+      sndNote(2638, 0.09, 0.30, 0.02, 'sine');
+    } else if (kind === 'finish') {   // ソ・ド・ミ・ソ
+      [[784, 0], [1047, .11], [1319, .22], [1568, .33]].forEach(([f, at], i) => {
+        sndNote(f, at, i === 3 ? 0.9 : 0.35, 0.10, 'triangle');
+        sndNote(f * 2, at, 0.25, 0.02, 'sine');
+      });
+    }
   } catch (_) {}
 }
 
@@ -1909,7 +2093,19 @@ function updateProgress() {
   const cur = sentIdx + 1;
   document.getElementById('prog-text').textContent = cur + ' / ' + total;
   document.getElementById('prog-bar').style.width = ((cur - 1) / total * 100) + '%';
+  sideSet('ps-prog', cur); sideSet('ps-total', total);
+  const pb = document.getElementById('ps-bar'); if (pb) pb.style.width = ((cur - 1) / total * 100) + '%';
 }
+// 2026-11-28 PC横長の左の列（進み具合・ミス・時間）。時間は1秒ごと、練習画面が出ている間だけ
+function sideSet(id, v) { const el = document.getElementById(id); if (el) el.textContent = v; }
+let sideTimer = null;
+function sideTick() {
+  if (document.getElementById('scr-prac').classList.contains('hidden') || resultShown) { clearInterval(sideTimer); sideTimer = null; return; }
+  const sec = Math.max(0, Math.floor((Date.now() - startTime) / 1000));
+  sideSet('ps-time', Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0'));
+  sideSet('ps-miss', totalMiss);
+}
+function sideStart() { if (sideTimer) clearInterval(sideTimer); sideSet('ps-time', '0:00'); sideSet('ps-miss', 0); sideTimer = setInterval(sideTick, 1000); }
 
 function renderTokens() {
   const row = document.getElementById('tokens-row');
@@ -1991,11 +2187,16 @@ const KB_SHIFTED = { '!': ['1','shiftr'], '?': ['/','shiftl'] };
 const KB_LABEL = { '-': '-（のばす音「ー」）', ',': ',（読点「、」）', '.': '.（句点「。」）' };
 const KB_OFF_KEY = 'yukkuriTypingKeyboardOff';
 
+// 2026-11-28 キーを指ごとにうすく色分け（下の指の色と同じ）。表にない記号のキー（^ ¥ @ [ : ] \）は右手の小指
+function kbFingerType(id) {
+  const n = KB_FINGER[id] || '右手の小指';
+  return /小指/.test(n) ? 'p' : /薬指/.test(n) ? 'r' : /中指/.test(n) ? 'm' : 'i';
+}
 function buildKeyboard() {
   const kb = document.getElementById('kb');
   if (!kb || kb.childElementCount) return;
   kb.innerHTML = KB_ROWS.map(row => '<div class="kb-row">' + row.map(([id, label, w, kind]) =>
-    '<span class="kb-key' + (kind === 'fn' ? ' kb-fn' : '') + (id === 'f' || id === 'j' ? ' kb-home' : '') +
+    '<span class="kb-key' + (kind === 'fn' ? ' kb-fn' : ' kb-f-' + kbFingerType(id)) + (id === 'f' || id === 'j' ? ' kb-home' : '') +
     (id === 'enter' ? (label ? ' kb-enter-a' : ' kb-enter-b') : '') +
     '" data-k="' + id.replace(/"/g, '&quot;') + '" style="flex-grow:' + (w || 1) + '">' + label + '</span>').join('') + '</div>').join('');
 }
@@ -2040,7 +2241,7 @@ function drawHands(activeNames) {
   const row = document.getElementById('kb-fingers');
   if (!kb || !row || !kb.offsetWidth) return;
   if (row.childElementCount !== HAND_FINGERS.length) {
-    row.innerHTML = HAND_FINGERS.map(([name]) => '<span class="kb-fg' + (/人差し指/.test(name) ? ' kb-fg-home' : '') + '" data-n="' + name + '"></span>').join('');
+    row.innerHTML = HAND_FINGERS.map(([name]) => '<span class="kb-fg' + (/人差し指/.test(name) ? ' kb-fg-home' : '') + (/親指/.test(name) ? '' : ' kb-f-' + (/小指/.test(name) ? 'p' : /薬指/.test(name) ? 'r' : /中指/.test(name) ? 'm' : 'i')) + '" data-n="' + name + '"></span>').join('');
   }
   const box = kb.getBoundingClientRect();
   const space = kbKeys('space')[0];
@@ -2080,8 +2281,7 @@ function toggleKeyboard() {
 }
 function applyKeyboardOff(off) {
   document.body.classList.toggle('kb-off', off);
-  const btn = document.getElementById('kb-toggle');
-  if (btn) btn.textContent = off ? 'キーボードの図を出す' : 'キーボードの図をかくす';
+  document.querySelectorAll('#kb-toggle,[data-kbt]').forEach(btn => { btn.textContent = off ? 'キーボードの図を出す' : 'キーボードの図をかくす'; });
 }
 function restoreKeyboard() {
   let off = false;
@@ -2095,6 +2295,7 @@ function updateInputBox() {
 
 function updateMissCount() {
   document.getElementById('miss-count').textContent = sentMiss > 0 ? 'ミス: ' + sentMiss + '回' : '';
+  sideSet('ps-miss', totalMiss);
 }
 
 // 打ち間違えたときに、その場で理由を出す（「ん」のつまずきが多い）
@@ -2148,6 +2349,12 @@ function showResult() {
   log.push(entry);
   writeLog(log);
   renderResultExtras(entry, log);
+  playSound('finish');
+  // 2026-11-28 Enter（またはスペース）で「もういちど」。最後の Enter を押し続けても始まらないよう少し待ってから
+  setTimeout(() => {
+    const r = document.querySelector('#scr-result .btn-retry');
+    if (r && !document.getElementById('scr-result').classList.contains('hidden')) { try { r.focus({preventScroll: true}); } catch (_) { r.focus(); } }
+  }, 700);
   if (firstToday) trackEvent('typing_daily_first_complete', {practice_days: practiceDays(log), level: curLevel});
   adAfterPractice();
   lastResultText = 'ゆっくりタイピングで' + sentences.length + '問練習しました。正確さ' + acc + '%、1分あたり' + kpm + 'キー！';
@@ -2166,9 +2373,21 @@ async function shareResult() {
 }
 
 // ==================== KEY EVENTS ====================
+// 2026-11-28 スタート画面は 1〜5 で段を選んですぐ始める（ボタンの左上の数字と同じ）
+const LEVEL_KEYS = {'1': 'home', '2': 'easy', '3': 'mid', '4': 'normal', '5': 'hard'};
 document.addEventListener('keydown', e => {
   const prac = document.getElementById('scr-prac');
-  if (prac.classList.contains('hidden')) return;
+  if (e.key && e.key.length === 1) document.body.classList.add('has-kbd');
+  if (prac.classList.contains('hidden')) {
+    const t = e.target;
+    if (e.ctrlKey || e.altKey || e.metaKey || e.repeat) return;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    if (LEVEL_KEYS[e.key] && !document.getElementById('scr-start').classList.contains('hidden')) {
+      e.preventDefault();
+      startGame(LEVEL_KEYS[e.key]);
+    }
+    return;
+  }
   if (e.key.length !== 1) {
     // Enter は「つぎへ」ボタンにも届くので、ボタン側の動作は止める（止めないと2回進み、結果が2回保存される）
     if (e.key === 'Enter' && tokIdx >= tokens.length) { e.preventDefault(); nextSentence(); }
